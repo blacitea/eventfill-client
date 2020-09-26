@@ -8,6 +8,7 @@ const PreviewsList = ({ array, title }) => {
 			<ul className="previewsList-list">
 				{array.map(item => (
 					<Preview
+						key={item.id}
 						name={item.name}
 						imageURL={item.imageURL}
 						description={item.description}
