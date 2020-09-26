@@ -4,6 +4,7 @@ import PreviewsList from './PreviewsList';
 export default {
 	title: 'Components/PreviewsList',
 	component: PreviewsList,
+	argTypes: { onClick: { action: 'clicked' } },
 };
 
 const event = [

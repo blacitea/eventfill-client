@@ -8,7 +8,7 @@ const HighlightsList = props => {
 			<ul className="highlightslist-list">
 				{props.array.map(item => {
 					return (
-						<figure onClick={item.onClick}>
+						<figure onClick={props.onClick} key={item.id}>
 							<img
 								className="highlightslist-image"
 								src={item.imageURL}
