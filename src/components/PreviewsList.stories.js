@@ -4,11 +4,13 @@ import PreviewsList from './PreviewsList';
 export default {
 	title: 'Components/PreviewsList',
 	component: PreviewsList,
+	argTypes: { onClick: { action: 'clicked' } },
 };
 
 const event = [
 	{
 		name: 'Event 1',
+		id: 1,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
 		imageURL:
@@ -17,6 +19,7 @@ const event = [
 	},
 	{
 		name: 'Event 2',
+		id: 2,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
 		imageURL:
@@ -25,6 +28,7 @@ const event = [
 	},
 	{
 		name: 'Event 3',
+		id: 3,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
 		imageURL:
@@ -33,6 +37,7 @@ const event = [
 	},
 	{
 		name: 'Event 4',
+		id: 4,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
 		imageURL:
@@ -41,6 +46,7 @@ const event = [
 	},
 	{
 		name: 'Event 5',
+		id: 5,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
 		imageURL:
@@ -49,6 +55,7 @@ const event = [
 	},
 	{
 		name: 'Event 6',
+		id: 6,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
 		imageURL:

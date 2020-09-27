@@ -9,6 +9,7 @@ const Preview = props => {
 				className="preview-cover"
 				src={props.imageURL}
 				alt={props.name}
+				onClick={props.onClick}
 			></img>
 			<div className="preview-info">
 				<h3>{props.name}</h3>
