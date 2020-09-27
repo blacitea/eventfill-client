@@ -24,6 +24,7 @@ const NavBar = props => {
 				)}
 				{user === false && (
 					<ul>
+						<span>Login: </span>
 						<button onClick={() => setUser('organizer')}>organizer</button>
 						<button onClick={() => setUser('talent')}>talent</button>
 						<button onClick={() => setUser('organizer')}>event goer</button>
