@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import NavBar from './components/NavBar';
 
 const App = props => {
 	const [message, setMessage] = useState('Click the button to load data!');
@@ -18,6 +19,7 @@ const App = props => {
 
 	return (
 		<div className="App">
+			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
 		</div>
