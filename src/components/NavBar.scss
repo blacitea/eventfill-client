@@ -2,6 +2,10 @@ nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	.logo-image {
+		height: 50px;
+		width: 50px;
+	}
 	ul {
 		display: flex;
 		align-items: center;
