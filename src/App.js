@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 const App = props => {
 	const [message, setMessage] = useState('Click the button to load data!');
@@ -22,6 +23,7 @@ const App = props => {
 			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
+			<Footer />
 		</div>
 	);
 };
