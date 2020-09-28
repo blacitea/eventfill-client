@@ -1,18 +1,23 @@
 nav {
   display: flex;
+	justify-content: space-between;
+	align-items: center;
   position: fixed;
   top: 0;
   width: 100%;
-	align-items: center;
-	justify-content: space-between;
+  background-color: #FFF;
+  z-index: 10;
+
 	.logo-image {
 		height: 50px;
-		width: 50px;
-	}
+  }
+  
 	ul {
 		display: flex;
 		align-items: center;
-		justify-content: space-evenly;
+    justify-content: space-evenly;
+    margin: 0;
+
 		li {
 			margin: 0 1em;
 			list-style: none;
