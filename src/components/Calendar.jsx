@@ -30,6 +30,19 @@ const Calendar = props => {
 				initialEvents={props.events}
 				eventClick={props.onClick}
 				eventContent={renderEventContent}
+				headerToolbar={{
+					start: 'prev,next today',
+					center: 'title',
+					end: 'customs',
+				}}
+				customButtons={{
+					customs: {
+						text: 'Customs button',
+						click: () => alert('You clicked a customs button!'),
+					},
+					...props.customButtons,
+				}}
+				// customButtons={props.customButtons}
 			/>
 		</section>
 	);
