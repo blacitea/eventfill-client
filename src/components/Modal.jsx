@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 
+import './Modal.scss'
+
 const Modal = ({isOpen}) => {
   return (
     <ReactModal

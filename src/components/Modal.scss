@@ -1,0 +1,37 @@
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+  opacity: 0;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-container {
+  display: flex;
+  justify-content: end;
+  align-items: flex-start;
+  background-color: white;
+  position: relative;
+  inset: 10%;
+  width: 80%;
+  height: 80%;
+  border-radius: 10px;
+  animation: slidedown;
+  animation-duration: 0.5s;
+}
+
+@keyframes slidedown {
+  from {top: 0}
+  to {top: 10%}
+}
