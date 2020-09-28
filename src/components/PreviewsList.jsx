@@ -1,5 +1,6 @@
 import React from 'react';
 import Preview from './Preview';
+import './PreviewsList.scss';
 
 const PreviewsList = ({ array, title, onClick }) => {
 	return (
