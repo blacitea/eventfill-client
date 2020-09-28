@@ -3,6 +3,8 @@ import axios from 'axios';
 import './App.css';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import Calendar from './components/Calendar';
+import events from './components/mockData';
 
 const App = props => {
 	const [message, setMessage] = useState('Click the button to load data!');
@@ -23,6 +25,10 @@ const App = props => {
 			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
+			<Calendar
+				events={events}
+				onClick={() => alert('Event clicked! pending url')}
+			/>
 			<Footer />
 		</div>
 	);
