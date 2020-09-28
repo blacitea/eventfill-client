@@ -1,15 +1,26 @@
 nav {
-	display: flex;
-	align-items: center;
+  display: flex;
 	justify-content: space-between;
-	.logo-image {
-		height: 50px;
-		width: 50px;
-	}
+	align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #FFF;
+  z-index: 10;
+
+	.logo {
+    font-family: eventLogo;
+    font-size: 2em;
+    font-weight: 800;
+    padding: 0.2em 0.4em;
+  }
+  
 	ul {
 		display: flex;
 		align-items: center;
-		justify-content: space-evenly;
+    justify-content: space-evenly;
+    margin: 0;
+
 		li {
 			margin: 0 1em;
 			list-style: none;
