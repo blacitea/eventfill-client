@@ -4,6 +4,9 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
+import Calendar from './components/Calendar';
+import events from './components/mockData';
+
 
 const App = props => {
   const [message, setMessage] = useState('Click the button to load data!');
@@ -41,6 +44,10 @@ const App = props => {
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
       <button onClick={openModal}>Open Modal</button>
+			<Calendar
+				events={events}
+				onClick={() => alert('Event clicked! pending url')}
+			/>
 			<Footer />
 		</div>
 	);
