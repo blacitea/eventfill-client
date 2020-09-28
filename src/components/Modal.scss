@@ -46,8 +46,10 @@
 @keyframes slidein {
   from {
     top: 25%;
+    transform: translate(-50%, -50%) scale(0,0);
   }
   to {
     top: 50%;
+    transform: translate(-50%, -50%) scale(1,1);
   }
 }
