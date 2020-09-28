@@ -28,6 +28,12 @@ const App = props => {
 			<Calendar
 				events={events}
 				onClick={() => alert('Event clicked! pending url')}
+				customButtons={{
+					customs: {
+						text: 'Add event',
+						click: () => alert('You try to add an event!'),
+					},
+				}}
 			/>
 			<Footer />
 		</div>
