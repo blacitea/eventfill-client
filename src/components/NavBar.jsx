@@ -6,13 +6,7 @@ const NavBar = props => {
 	console.log(user);
 	return (
 		<nav>
-			<section className="logo">
-				<img
-					className="logo-image"
-					src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJc8NQqwyAyK6DMH27BiqdxvVIjmue3XoHyQ&usqp=CAU"
-					alt="Logo"
-				></img>
-			</section>
+			<section className="logo">EVENTFILL</section>
 			<ul className="links">
 				<li>Events</li>
 				<li>Talents</li>
