@@ -1,0 +1,55 @@
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+  opacity: 0;
+}
+
+.modal-overlay {
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-container {
+  display: inline-flex;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: white;
+  border-radius: 10px;
+  animation: slidein;
+  animation-duration: 0.5s;
+
+  .modal-content {
+    padding: 0 1em 1em;
+  }
+
+  .modal-close {
+    cursor: pointer;
+    padding: 0 0.5em;
+  }
+}
+
+@keyframes slidein {
+  from {
+    top: 25%;
+    transform: translate(-50%, -50%) scale(0,0);
+  }
+  to {
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1,1);
+  }
+}
