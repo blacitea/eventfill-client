@@ -5,6 +5,8 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Calendar from './components/Calendar';
 import events from './components/mockData';
+import PreviewsList from './components/PreviewsList';
+import HighlightsList from './components/HighlightsList';
 
 const App = props => {
 	const [message, setMessage] = useState('Click the button to load data!');
@@ -38,6 +40,8 @@ const App = props => {
 					},
 				}}
 			/>
+			<PreviewsList />
+			<HighlightsList />
 			<Footer />
 		</div>
 	);
