@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 
 import './Modal.scss'
 
-const Modal = ({isOpen, ...props}) => {
+const Modal = ({isOpen, close, ...props}) => {
   return (
     <ReactModal
       isOpen={isOpen}
@@ -11,7 +11,10 @@ const Modal = ({isOpen, ...props}) => {
       className='modal-container'
       overlayClassName='modal-overlay'
     >
-      {props.children}
+      <span className='modal-close' onClick={close}>x</span>
+      <section className='modal-content'>
+        {props.children}
+      </section>
     </ReactModal>
   )
 }

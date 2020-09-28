@@ -31,8 +31,11 @@ const App = props => {
 
 	return (
 		<div className="App">
-      <Modal isOpen={modalIsOpen}>
-        <button onClick={closeModal}>Close</button>
+      <Modal 
+        isOpen={modalIsOpen}
+        close={closeModal}
+      >
+        Some cool modal content can go here!
       </Modal>
 			<NavBar />
 			<h1>{message}</h1>

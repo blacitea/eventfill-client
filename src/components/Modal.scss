@@ -12,6 +12,9 @@
 }
 
 .modal-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
@@ -19,19 +22,25 @@
 
 .modal-container {
   display: flex;
-  justify-content: end;
-  align-items: flex-start;
-  background-color: white;
   position: relative;
-  inset: 10%;
-  width: 80%;
-  height: 80%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: white;
   border-radius: 10px;
-  animation: slidedown;
+  animation: grow;
   animation-duration: 0.5s;
+
+  .modal-content {
+    padding: 1em;
+  }
+
+  .modal-close {
+    cursor: pointer;
+    padding: 0 0.5em;
+  }
 }
 
-@keyframes slidedown {
-  from {top: 0}
-  to {top: 10%}
+@keyframes grow {
+  
 }
