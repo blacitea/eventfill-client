@@ -30,16 +30,19 @@ const Calendar = props => {
 				initialEvents={props.events}
 				eventClick={props.onClick}
 				eventContent={renderEventContent}
+				// setup (https://fullcalendar.io/docs/headerToolbar)
 				headerToolbar={{
 					start: 'prev,next today',
 					center: 'title',
-					end: 'customs',
+					end: `${props.buttonName || 'customs'}`,
 				}}
+				// setup (https://fullcalendar.io/docs/customButtons)
 				customButtons={{
 					customs: {
 						text: 'Customs button',
 						click: () => alert('You clicked a customs button!'),
 					},
+					// enable overwrite from props
 					...props.customButtons,
 				}}
 				// customButtons={props.customButtons}
