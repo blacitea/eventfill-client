@@ -8,11 +8,11 @@ const Calendar = props => {
 	function renderEventContent(eventInfo) {
 		return (
 			<article className="calendar-grid">
-				<p>{eventInfo.event.title}</p>
+				<p>{eventInfo.event.name}</p>
 				{/* <p>{eventInfo.event.extendedProps.description}</p> */}
 				<img
 					className="calendar-grid-thumbnail"
-					src={eventInfo.event.extendedProps.thumbnail}
+					src={eventInfo.event.extendedProps.imageURL}
 					alt="event thumbnail"
 				/>
 			</article>

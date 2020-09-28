@@ -5,20 +5,21 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
 import Calendar from './components/Calendar';
-import events from './components/mockData';
-
+import { talents, events } from './components/mockData';
+import PreviewsList from './components/PreviewsList';
+import HighlightsList from './components/HighlightsList';
 
 const App = props => {
-  const [message, setMessage] = useState('Click the button to load data!');
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [message, setMessage] = useState('Click the button to load data!');
+	const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  }
+	const openModal = () => {
+		setModalIsOpen(true);
+	};
 
-  const closeModal = () => {
-    setModalIsOpen(false);
-  }
+	const closeModal = () => {
+		setModalIsOpen(false);
+	};
 
 	const fetchData = () => {
 		axios
@@ -34,20 +35,28 @@ const App = props => {
 
 	return (
 		<div className="App">
-      <Modal 
-        isOpen={modalIsOpen}
-        close={closeModal}
-      >
-        Some cool modal content can go here!
-      </Modal>
+			<Modal isOpen={modalIsOpen} close={closeModal}>
+				Some cool modal content can go here!
+			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
-      <button onClick={openModal}>Open Modal</button>
+			<button onClick={openModal}>Open Modal</button>
 			<Calendar
 				events={events}
 				onClick={() => alert('Event clicked! pending url')}
+				buttonName={'Whatever'}
+				customButtons={{
+					Whatever: {
+						text: 'Whatever button you want',
+						click: () => {
+							alert('add logic for button click');
+						},
+					},
+				}}
 			/>
+			<PreviewsList title={'Events Highlights'} array={events} />
+			<HighlightsList title={'Our hottest talents'} array={talents} />
 			<Footer />
 		</div>
 	);
