@@ -11,20 +11,8 @@ const NavBar = props => {
 				<li>Events</li>
 				<li>Talents</li>
 				<li>My Profile</li>
+        <li>Log Out</li>
 			</ul>
-			<section className="user-login">
-				{user !== false && (
-					<button onClick={() => setUser(false)}>Logout</button>
-				)}
-				{user === false && (
-					<ul>
-						<span>Login: </span>
-						<button onClick={() => setUser('organizer')}>organizer</button>
-						<button onClick={() => setUser('talent')}>talent</button>
-						<button onClick={() => setUser('organizer')}>event goer</button>
-					</ul>
-				)}
-			</section>
 		</nav>
 	);
 };
