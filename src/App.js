@@ -36,25 +36,24 @@ const App = props => {
 	return (
 		<div className="App">
 			<Modal isOpen={modalIsOpen} close={closeModal}>
-				Some cool modal content can go here!
+        <Calendar
+          events={events}
+          onClick={() => alert('Event clicked! pending url')}
+          buttonName={'Whatever'}
+          customButtons={{
+            Whatever: {
+              text: 'Whatever button you want',
+              click: () => {
+                alert('add logic for button click');
+              },
+            },
+          }}
+        />
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
-			<Calendar
-				events={events}
-				onClick={() => alert('Event clicked! pending url')}
-				buttonName={'Whatever'}
-				customButtons={{
-					Whatever: {
-						text: 'Whatever button you want',
-						click: () => {
-							alert('add logic for button click');
-						},
-					},
-				}}
-			/>
 			<PreviewsList title={'Events Highlights'} array={events} />
 			<HighlightsList title={'Our hottest talents'} array={talents} />
 			<Footer />
