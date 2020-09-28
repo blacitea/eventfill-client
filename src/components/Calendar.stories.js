@@ -24,8 +24,9 @@ export const AddEvent = props => (
 	<Calendar
 		events={events}
 		onClick={action('clicked')}
+		buttonName={'addEvent'}
 		customButtons={{
-			customs: {
+			addEvent: {
 				text: 'Add an event',
 				click: () => alert('You try to add an event!'),
 			},
