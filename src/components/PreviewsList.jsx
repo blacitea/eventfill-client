@@ -12,7 +12,7 @@ const PreviewsList = ({ array, title, onClick }) => {
 						onClick={onClick}
 						key={item.id}
 						name={item.name}
-						imageURL={item.imageURL}
+						image_url={item.image_url}
 						description={item.description}
 						url={item.url}
 					/>

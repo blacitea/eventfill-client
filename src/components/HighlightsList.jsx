@@ -11,7 +11,7 @@ const HighlightsList = props => {
 						<figure onClick={props.onClick} key={item.id}>
 							<img
 								className="highlightslist-image"
-								src={item.imageURL}
+								src={item.image_url}
 								alt={item.name}
 							/>
 							<figcaption className="highlightslist-cap">

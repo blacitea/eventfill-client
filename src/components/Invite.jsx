@@ -25,7 +25,7 @@ const Invite = props => {
 		<form onSubmit={formSubmit}>
 			<img
 				className="invite-talent-img"
-				src={props.talent.imageURL}
+				src={props.talent.image_url}
 				alt={props.talent.name}
 			></img>
 			<h3>

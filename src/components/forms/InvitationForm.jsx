@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, useFormik } from 'formik';
+import { useFormik } from 'formik';
 
 const InvitationForm = props => {
 	const formik = useFormik({
@@ -26,17 +26,29 @@ const InvitationForm = props => {
 				to your event!
 			</p>
 			<label htmlFor="event">Event</label>
-			<Field
-				component="select"
+			<select
 				name="event"
 				id="event"
 				onChange={formik.handleChange}
 				value={formik.values.event}
 			>
-				{props.event.map(event => (
-					<option value={event.id}>{event.name}</option>
+				<option value="" disabled selected>
+					Pick an Event
+				</option>
+				{props.events.map(event => (
+					<option value={event.id} key={event.id}>
+						{event.name}
+					</option>
 				))}
-			</Field>
+			</select>
+			<label htmlFor="message">Message (Optional)</label>
+			<textarea
+				name="message"
+				id="message"
+				onChange={formik.handleChange}
+				value={formik.values.message}
+			/>
+			<button type="submit">Send Invitation</button>
 		</form>
 	);
 };

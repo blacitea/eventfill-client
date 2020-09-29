@@ -12,7 +12,7 @@ import HighlightsList from './components/HighlightsList';
 import Calendar from './components/Calendar';
 import Invite from './components/Invite';
 */
-import EventForm from './components/EventForm';
+import InvitationForm from './components/forms/InvitationForm';
 
 const App = props => {
 	const [message, setMessage] = useState('Click the button to load data!');
@@ -58,7 +58,10 @@ const App = props => {
 					talent={talents[1]}
 					options={events.filter(event => event.user_id === 1)}
 				/> */}
-				<EventForm />
+				<InvitationForm
+					talent={talents[1]}
+					events={events.filter(event => event.user_id === 1)}
+				/>
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
