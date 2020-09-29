@@ -18,8 +18,12 @@ const InvitationForm = props => {
 		},
 		validate,
 		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-			formik.resetForm();
+			if (formik.errors) {
+				alert('Incomplete form');
+			} else {
+				alert(JSON.stringify(values, null, 2));
+				formik.resetForm();
+			}
 		},
 	});
 	return (
