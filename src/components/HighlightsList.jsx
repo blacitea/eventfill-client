@@ -5,6 +5,7 @@ import './HighlightsList.scss';
 const HighlightsList = props => {
 	return (
 		<section className="highlightslist">
+			<h2>{props.title}</h2>
 			<ul className="highlightslist-list">
 				{props.array.map(item => {
 					return (
