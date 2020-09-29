@@ -7,7 +7,7 @@ const Preview = props => {
 		<article className="preview-card">
 			<img
 				className="preview-cover"
-				src={props.imageURL}
+				src={props.image_url}
 				alt={props.name}
 				onClick={props.onClick}
 			></img>

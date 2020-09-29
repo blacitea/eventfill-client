@@ -8,11 +8,11 @@ const HighlightsList = props => {
 			<ul className="highlightslist-list">
 				{props.array.map(item => {
 					return (
-            <Highlight
-              name={item.name}
-              imageURL={item.imageURL}
-              onClick={props.onClick}
-            />
+						<Highlight
+							name={item.name}
+							imageURL={item.imageURL}
+							onClick={props.onClick}
+						/>
 					);
 				})}
 			</ul>

@@ -13,7 +13,7 @@ const event = [
 		id: 1,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
-		imageURL:
+		image_url:
 			'https://www.tourismsaskatchewan.com/-/media/things-to-do/events/sasktel-centre-concert-events.ashx',
 		url: '#',
 	},
@@ -22,7 +22,7 @@ const event = [
 		id: 2,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
-		imageURL:
+		image_url:
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQdIwF9ekDWQOzjwDqNwr7woYHVFjf_twc0FA&usqp=CAU',
 		url: '#',
 	},
@@ -31,7 +31,7 @@ const event = [
 		id: 3,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
-		imageURL:
+		image_url:
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJc8NQqwyAyK6DMH27BiqdxvVIjmue3XoHyQ&usqp=CAU',
 		url: '#',
 	},
@@ -40,7 +40,7 @@ const event = [
 		id: 4,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
-		imageURL:
+		image_url:
 			'https://www.tourismsaskatchewan.com/-/media/things-to-do/events/sasktel-centre-concert-events.ashx',
 		url: '#',
 	},
@@ -49,7 +49,7 @@ const event = [
 		id: 5,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
-		imageURL:
+		image_url:
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQdIwF9ekDWQOzjwDqNwr7woYHVFjf_twc0FA&usqp=CAU',
 		url: '#',
 	},
@@ -58,7 +58,7 @@ const event = [
 		id: 6,
 		description:
 			'The perfect event to join on this Oct if you love music as much as we do!',
-		imageURL:
+		image_url:
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJc8NQqwyAyK6DMH27BiqdxvVIjmue3XoHyQ&usqp=CAU',
 		url: '#',
 	},

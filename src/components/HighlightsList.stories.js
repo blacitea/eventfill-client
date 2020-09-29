@@ -16,29 +16,29 @@ TalentHighligths.args = {
 		{
 			id: 1,
 			name: 'Nicol Bolas',
-			imageURL:
+			image_url:
 				'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNMSYTAILIUcNLVGZ7JNz4xt96spL4zpv3nQ&usqp=CAU',
 		},
 		{
 			id: 2,
 			name: 'Nahiri',
-			imageURL:
+			image_url:
 				'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgy3Wp1EbrYefjQnpJ3w9RWkVe3P-bQsepDA&usqp=CAU',
 		},
 		{
 			id: 3,
 			name: 'Liliana',
-			imageURL: 'https://i.imgur.com/TRrV9e6.jpg',
+			image_url: 'https://i.imgur.com/TRrV9e6.jpg',
 		},
 		{
 			id: 4,
 			name: 'Nissa',
-			imageURL: 'https://i.imgur.com/59LE47m.jpg',
+			image_url: 'https://i.imgur.com/59LE47m.jpg',
 		},
 		{
 			id: 5,
 			name: 'Jace',
-			imageURL: 'https://i.imgur.com/kCv2rRe.jpg',
+			image_url: 'https://i.imgur.com/kCv2rRe.jpg',
 		},
 	],
 };

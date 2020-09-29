@@ -12,7 +12,7 @@ const Calendar = props => {
 				{/* <p>{eventInfo.event.extendedProps.description}</p> */}
 				<img
 					className="calendar-grid-thumbnail"
-					src={eventInfo.event.extendedProps.imageURL}
+					src={eventInfo.event.extendedProps.image_url}
 					alt="event thumbnail"
 				/>
 			</article>
