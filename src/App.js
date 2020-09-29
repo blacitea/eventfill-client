@@ -8,6 +8,9 @@ import { talents, events, locations, categories } from './components/mockData';
 import Index from './components/views/Index';
 import ExploreEvents from './components/views/ExploreEvents';
 
+// React router
+import { Switch, Route } from 'react-router-dom';
+
 /* Modal test
 import Calendar from './components/Calendar';
 import Invite from './components/Invite';
@@ -67,26 +70,26 @@ const App = props => {
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
-			{/* <PreviewsList
-				title={'Events Highlights'}
-				message="Check out these events and plan your attendance!"
-				array={events}
-			/>
+			<Switch>
+				<Route path="/events">
+					<ExploreEvents
+						events={events}
+						onClick={() =>
+							alert('Clicked! I do not know what do to about the click yet')
+						}
+					/>
+				</Route>
+				<Route path="/">
+					<Index
+						events={events}
+						talents={talents}
+						onClick={() =>
+							alert('Clicked! I do not know what do to about the click yet')
+						}
+					/>
+				</Route>
+			</Switch>
 
-			<HighlightsList title="Our hottest Talent profiles!" array={talents} /> */}
-			<Index
-				events={events}
-				talents={talents}
-				onClick={() =>
-					alert('Clicked! I do not know what do to about the click yet')
-				}
-			/>
-			<ExploreEvents
-				events={events}
-				onClick={() =>
-					alert('Clicked! I do not know what do to about the click yet')
-				}
-			/>
 			<Footer />
 		</div>
 	);
