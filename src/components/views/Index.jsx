@@ -24,17 +24,11 @@ const Index = props => {
 					/>
 				</aside>
 			</section>
-			<PreviewsList
-				title="Upcoming Events Near You"
-				message="Check out these events and plan your attendance!"
-				array={props.events}
-				onClick={props.onClick}
-			/>
-			<HighligthsList
-				title="Our hottest Talent profiles!"
-				array={props.talents}
-				onClick={props.onClick}
-			/>
+			<h2>Upcoming Events Near You</h2>
+			<h4>Check out these events and plan your attendance!</h4>
+			<PreviewsList array={props.events} onClick={props.onClick} />
+			<h2>Our hottest Talent profiles!</h2>
+			<HighligthsList array={props.talents} onClick={props.onClick} />
 		</main>
 	);
 };
