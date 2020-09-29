@@ -5,8 +5,8 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
 import { talents, events, locations, categories } from './components/mockData';
-import PreviewsList from './components/PreviewsList';
-import HighlightsList from './components/HighlightsList';
+import Index from './components/views/Index';
+import ExploreEvents from './components/views/ExploreEvents';
 
 /* Modal test
 import Calendar from './components/Calendar';
@@ -67,9 +67,26 @@ const App = props => {
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
-			<PreviewsList title={'Events Highlights'} array={events} />
-			<h2>Our hottest talents!</h2>
-			<HighlightsList array={talents} />
+			{/* <PreviewsList
+				title={'Events Highlights'}
+				message="Check out these events and plan your attendance!"
+				array={events}
+			/>
+
+			<HighlightsList title="Our hottest Talent profiles!" array={talents} /> */}
+			<Index
+				events={events}
+				talents={talents}
+				onClick={() =>
+					alert('Clicked! I do not know what do to about the click yet')
+				}
+			/>
+			<ExploreEvents
+				events={events}
+				onClick={() =>
+					alert('Clicked! I do not know what do to about the click yet')
+				}
+			/>
 			<Footer />
 		</div>
 	);
