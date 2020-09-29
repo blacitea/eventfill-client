@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SelectField from './SelectField';
 
 const Invite = props => {
 	const [textValue, setTextValue] = useState('');
@@ -13,7 +14,9 @@ const Invite = props => {
 	};
 	const formSubmit = event => {
 		event.preventDefault();
-		alert(`Form submited with ${textValue} and ${selectValue}`);
+		alert(
+			`Form submited with ${textValue} and ${selectValue} to user# ${props.talent.user_id}`
+		);
 		setTextValue('');
 		setSelectValue('');
 	};
@@ -34,12 +37,11 @@ const Invite = props => {
 			</h3>
 			<label>
 				Select an event
-				<select value={selectValue} onChange={changeSelect}>
-					<option value="grapefruit">Grapefruit</option>
-					<option value="lime">Lime</option>
-					<option value="coconut">Coconut</option>
-					<option value="mango">Mango</option>
-				</select>
+				<SelectField
+					value={selectValue}
+					onChange={changeSelect}
+					options={props.options}
+				/>
 			</label>
 			<label>
 				Message (Optional)
