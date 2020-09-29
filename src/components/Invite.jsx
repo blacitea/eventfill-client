@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 const Invite = props => {
+	const [textValue, setTextValue] = useState('');
+	const [selectValue, setSelectValue] = useState('');
+
+	const changeText = event => {
+		setTextValue(event.target.value);
+	};
+
+	const changeSelect = event => {
+		setSelectValue(event.target.value);
+	};
+	const formSubmit = event => {
+		event.preventDefault();
+		alert(`Form submited with ${textValue} and ${selectValue}`);
+		setTextValue('');
+		setSelectValue('');
+	};
+
 	return (
-		<form onSubmit={props.onSubmit}>
+		<form onSubmit={formSubmit}>
 			<img
 				className="invite-talent-img"
 				src={props.talent.imageURL}
@@ -16,7 +34,7 @@ const Invite = props => {
 			</h3>
 			<label>
 				Select an event
-				<select>
+				<select value={selectValue} onChange={changeSelect}>
 					<option value="grapefruit">Grapefruit</option>
 					<option value="lime">Lime</option>
 					<option value="coconut">Coconut</option>
@@ -25,7 +43,11 @@ const Invite = props => {
 			</label>
 			<label>
 				Message (Optional)
-				<textarea placeholder="Send them a personal note for faster response!" />
+				<textarea
+					placeholder="Send them a personal note for faster response!"
+					value={textValue}
+					onChange={changeText}
+				/>
 			</label>
 			<input type="submit" value="Send Invite" />
 		</form>
