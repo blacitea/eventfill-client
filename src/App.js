@@ -55,7 +55,8 @@ const App = props => {
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
 			<PreviewsList title={'Events Highlights'} array={events} />
-			<HighlightsList title={'Our hottest talents'} array={talents} />
+      <h2>Our hottest talents!</h2>
+			<HighlightsList array={talents} />
 			<Footer />
 		</div>
 	);
