@@ -1,6 +1,14 @@
 import React from 'react';
 import { useFormik } from 'formik';
 
+const validate = values => {
+	const errors = {};
+	if (!values.event) {
+		errors.event = 'Event required to send invitation.';
+	}
+	return errors;
+};
+
 const InvitationForm = props => {
 	const formik = useFormik({
 		initialValues: {
@@ -8,6 +16,7 @@ const InvitationForm = props => {
 			message: '',
 			talent: props.talent,
 		},
+		validate,
 		onSubmit: values => {
 			alert(JSON.stringify(values, null, 2));
 		},
@@ -41,6 +50,7 @@ const InvitationForm = props => {
 					</option>
 				))}
 			</select>
+			{formik.errors.event ? <div>{formik.errors.event}</div> : null}
 			<label htmlFor="message">Message (Optional)</label>
 			<textarea
 				name="message"
