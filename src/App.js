@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './App.css';
+import './App.scss';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
@@ -66,7 +66,8 @@ const App = props => {
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
 			<PreviewsList title={'Events Highlights'} array={events} />
-			<HighlightsList title={'Our hottest talents'} array={talents} />
+      <h2>Our hottest talents!</h2>
+			<HighlightsList array={talents} />
 			<Footer />
 		</div>
 	);
