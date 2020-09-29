@@ -120,10 +120,14 @@ export const users = [
 ];
 
 export const locations = [
-	'Vancouver',
-	'Victoria',
-	'North Vancouver',
-	'Richmond',
+	{ id: 1, name: 'Vancouver' },
+	{ id: 2, name: 'Victoria' },
+	{ id: 3, name: 'North Vancouver' },
+	{ id: 4, name: 'Richmond' },
 ];
 
-export const categories = ['Gaming', 'Anime', 'Craft'];
+export const categories = [
+	{ id: 1, name: 'Gaming' },
+	{ id: 2, name: 'Anime' },
+	{ id: 3, name: 'Craft' },
+];

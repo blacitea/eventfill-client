@@ -14,6 +14,8 @@ const validate = values => {
 	}
 	if (!values.start) {
 		errors.start = 'When will the event start?';
+	} else if (values.start < Date.now) {
+		errors.start = 'Please select a future date as start date';
 	}
 	if (!values.end) {
 		errors.end = 'When will the event end?';
@@ -64,9 +66,9 @@ const EventForm = props => {
 					Select a city
 				</option>
 				{props.locations
-					? props.locations.map((location, index) => (
-							<option key={index} value={location}>
-								{location}
+					? props.locations.map(location => (
+							<option key={location.id} value={location.id}>
+								{location.name}
 							</option>
 					  ))
 					: null}
@@ -84,9 +86,9 @@ const EventForm = props => {
 					Select a genre
 				</option>
 				{props.categories
-					? props.categories.map((category, index) => (
-							<option key={index} value={category}>
-								{category}
+					? props.categories.map(category => (
+							<option key={category.id} value={category.id}>
+								{category.name}
 							</option>
 					  ))
 					: null}
