@@ -118,3 +118,12 @@ export const users = [
 		updated_at: '2020-09-28 22:36:49',
 	},
 ];
+
+export const locations = [
+	'Vancouver',
+	'Victoria',
+	'North Vancouver',
+	'Richmond',
+];
+
+export const categories = ['Gaming', 'Anime', 'Craft'];
