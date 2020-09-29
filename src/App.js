@@ -67,9 +67,13 @@ const App = props => {
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
-			<PreviewsList title={'Events Highlights'} array={events} />
-			<h2>Our hottest talents!</h2>
-			<HighlightsList array={talents} />
+			<PreviewsList
+				title={'Events Highlights'}
+				message="Check out these events and plan your attendance!"
+				array={events}
+			/>
+
+			<HighlightsList title="Our hottest Talent profiles!" array={talents} />
 			<Footer />
 		</div>
 	);
