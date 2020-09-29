@@ -1,11 +1,14 @@
 .preview-card {
-	display: flex;
+  display: flex;
+  position: relative;
+  top: 0;
   flex-direction: column;
 	width: 15em;
   margin: 1em;
   border-radius: 5px;
-  box-shadow: 2px 2px 5px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
   cursor: pointer;
+  transition: top 0.2s, box-shadow 0.2s;
 
 	.preview-cover {
     position: relative;
@@ -29,4 +32,9 @@
       margin-bottom: 0em;
     }
 	}
+}
+
+.preview-card:hover {
+  top: -5px;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
 }
