@@ -4,10 +4,15 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
-import Calendar from './components/Calendar';
 import { talents, events } from './components/mockData';
 import PreviewsList from './components/PreviewsList';
 import HighlightsList from './components/HighlightsList';
+
+/* Modal test
+import Calendar from './components/Calendar';
+import Invite from './components/Invite';
+*/
+import EventForm from './components/EventForm';
 
 const App = props => {
 	const [message, setMessage] = useState('Click the button to load data!');
@@ -36,19 +41,24 @@ const App = props => {
 	return (
 		<div className="App">
 			<Modal isOpen={modalIsOpen} close={closeModal}>
-        <Calendar
-          events={events}
-          onClick={() => alert('Event clicked! pending url')}
-          buttonName={'Whatever'}
-          customButtons={{
-            Whatever: {
-              text: 'Whatever button you want',
-              click: () => {
-                alert('add logic for button click');
-              },
-            },
-          }}
-        />
+				{/* <Calendar
+					events={events}
+					onClick={() => alert('Event clicked! pending url')}
+					buttonName={'Whatever'}
+					customButtons={{
+						Whatever: {
+							text: 'Whatever button you want',
+							click: () => {
+								alert('add logic for button click');
+							},
+						},
+					}}
+				/> */}
+				{/* <Invite
+					talent={talents[1]}
+					options={events.filter(event => event.user_id === 1)}
+				/> */}
+				<EventForm />
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
