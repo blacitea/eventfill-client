@@ -2,21 +2,30 @@
 	display: flex;
   flex-direction: column;
 	width: 15em;
-	margin: 1em;
+  margin: 1em;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
 
 	.preview-cover {
     position: relative;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-		width: 100%;
+    width: 15em;
+    height: 15em;
+    object-fit: cover;
 	}
 
 	.preview-info {
-		display: flex;
+    display: flex;
+    padding: 0 1em 0.2em;
     flex-direction: column;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    background-color: #FFF;
 
-		background-color: grey;
+    h3 {
+      margin-top: 0.6em;
+      margin-bottom: 0em;
+    }
 	}
 }

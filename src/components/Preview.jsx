@@ -14,7 +14,6 @@ const Preview = props => {
 			<div className="preview-info">
 				<h3>{props.name}</h3>
 				<p>{props.description}</p>
-				<a href={props.url}>Read More</a>
 			</div>
 		</article>
 	);
