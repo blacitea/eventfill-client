@@ -34,10 +34,13 @@ const EventForm = props => {
 				<option value="" disabled selected>
 					Select a city
 				</option>
-				{props.locations.map(location => (
-					<option value={location.id}>{location.name}</option>
-				))}
+				{props.locations
+					? props.locations.map(location => (
+							<option value={location.id}>{location.name}</option>
+					  ))
+					: null}
 			</select>
+			<label htmlFor="category">Category</label>
 			<select
 				id="category"
 				name="category"
@@ -47,9 +50,11 @@ const EventForm = props => {
 				<option value="" disabled selected>
 					Select a genre
 				</option>
-				{props.categories.map(category => (
-					<option value={category.id}>{category.name}</option>
-				))}
+				{props.categories
+					? props.categories.map(category => (
+							<option value={category.id}>{category.name}</option>
+					  ))
+					: null}
 			</select>
 			<label htmlFor="start">Start Date</label>
 			<input
