@@ -4,7 +4,7 @@ export const events = [
 		user_id: 1,
 		name: 'Event 1',
 		start: '2020-09-22',
-		description: 'First even in Sept',
+		description: 'Our event is going to be the biggest ever so come and see it if you want to see the biggest event',
 		image_url:
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNMSYTAILIUcNLVGZ7JNz4xt96spL4zpv3nQ&usqp=CAU',
 		url: '#',
