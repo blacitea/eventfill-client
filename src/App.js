@@ -11,8 +11,9 @@ import HighlightsList from './components/HighlightsList';
 /* Modal test
 import Calendar from './components/Calendar';
 import Invite from './components/Invite';
-*/
 import InvitationForm from './components/forms/InvitationForm';
+*/
+import EventForm from './components/forms/EventForm';
 
 const App = props => {
 	const [message, setMessage] = useState('Click the button to load data!');
@@ -58,10 +59,7 @@ const App = props => {
 					talent={talents[1]}
 					options={events.filter(event => event.user_id === 1)}
 				/> */}
-				<InvitationForm
-					talent={talents[1]}
-					events={events.filter(event => event.user_id === 1)}
-				/>
+				<EventForm />
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
