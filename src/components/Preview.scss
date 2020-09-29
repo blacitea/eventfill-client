@@ -1,17 +1,21 @@
 .preview-card {
 	display: flex;
-	flex-direction: column;
+  flex-direction: column;
 	width: 15em;
 	margin: 1em;
 
 	.preview-cover {
-		position: relative;
+    position: relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 		width: 100%;
 	}
 
 	.preview-info {
 		display: flex;
-		flex-direction: column;
+    flex-direction: column;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
 		background-color: grey;
 	}
