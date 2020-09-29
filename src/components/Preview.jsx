@@ -3,6 +3,10 @@ import React from 'react';
 import './Preview.scss';
 
 const Preview = props => {
+  const shortenString = (string, maxChars) => {
+    return string.length <= maxChars ? string : string.slice(0, maxChars).trim().concat('...');
+  }
+
 	return (
 		<article className="preview-card">
 			<img
@@ -13,7 +17,7 @@ const Preview = props => {
 			></img>
 			<div className="preview-info">
 				<h3>{props.name}</h3>
-				<p>{props.description}</p>
+				<p>{shortenString(props.description, 54)}</p>
 			</div>
 		</article>
 	);
