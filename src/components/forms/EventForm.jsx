@@ -21,7 +21,9 @@ const EventForm = props => {
 			description: '',
 		},
 		validate,
-		onSubmit: values => alert(JSON.stringify(values, null, 2)),
+		onSubmit: values => {
+			alert(JSON.stringify(values, null, 2));
+		},
 	});
 	return (
 		<form onSubmit={formik.handleSubmit}>
