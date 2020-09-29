@@ -11,12 +11,27 @@
   }
   
   .highlight-caption {
-    font-size: 1em;
+    margin-top: -2.5em;
     align-self: center;
+    opacity: 0;
+    transform: scale(0,0);
+    transition: opacity 0.5s, transform 0.5s;
   }
 
   .highlight-image:hover {
     height: 120px;
     width: 120px;
+  }
+}
+
+.highlight:hover {
+  .highlight-image {
+    height: 120px;
+    width: 120px;
+  }
+
+  .highlight-caption {
+    opacity: 1;
+    transform: scale(1,1);
   }
 }
