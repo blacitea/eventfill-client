@@ -4,7 +4,7 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
-import { talents, events } from './components/mockData';
+import { talents, events, locations, categories } from './components/mockData';
 import PreviewsList from './components/PreviewsList';
 import HighlightsList from './components/HighlightsList';
 
@@ -59,7 +59,7 @@ const App = props => {
 					talent={talents[1]}
 					options={events.filter(event => event.user_id === 1)}
 				/> */}
-				<EventForm />
+				<EventForm locations={locations} categories={categories} />
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
