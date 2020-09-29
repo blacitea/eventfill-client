@@ -17,7 +17,7 @@ const Preview = props => {
 			></img>
 			<div className="preview-info">
 				<h3>{props.name}</h3>
-				<p>{shortenString(props.description, 54)}</p>
+				<p>{shortenString(props.description, 52)}</p>
 			</div>
 		</article>
 	);
