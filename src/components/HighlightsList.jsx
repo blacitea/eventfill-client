@@ -10,7 +10,7 @@ const HighlightsList = props => {
 					return (
 						<Highlight
 							name={item.name}
-							imageURL={item.imageURL}
+							imageURL={item.image_url}
 							onClick={props.onClick}
 						/>
 					);

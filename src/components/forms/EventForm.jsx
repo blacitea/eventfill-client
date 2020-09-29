@@ -14,8 +14,6 @@ const validate = values => {
 	}
 	if (!values.start) {
 		errors.start = 'When will the event start?';
-	} else if (values.start < Date.now) {
-		errors.start = 'Please select a future date as start date';
 	}
 	if (!values.end) {
 		errors.end = 'When will the event end?';
@@ -41,7 +39,10 @@ const EventForm = props => {
 			description: '',
 		},
 		validate,
-		onSubmit: values => alert(JSON.stringify(values, null, 2)),
+		onSubmit: values => {
+			alert(JSON.stringify(values, null, 2));
+			formik.resetForm();
+		},
 	});
 	return (
 		<form onSubmit={formik.handleSubmit}>
