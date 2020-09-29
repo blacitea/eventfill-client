@@ -1,10 +1,22 @@
-.highlight-image {
-	height: 50px;
-	width: 50px;
-	border-radius: 50%;
-}
+.highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.highlight-caption {
-	font-size: 1em;
-	align-self: center;
+  .highlight-image {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    transition: width 0.5s, height 0.5s;
+  }
+  
+  .highlight-caption {
+    font-size: 1em;
+    align-self: center;
+  }
+
+  .highlight-image:hover {
+    height: 120px;
+    width: 120px;
+  }
 }
