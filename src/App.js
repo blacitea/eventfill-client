@@ -12,8 +12,9 @@ import HighlightsList from './components/HighlightsList';
 import Calendar from './components/Calendar';
 import Invite from './components/Invite';
 import InvitationForm from './components/forms/InvitationForm';
-*/
 import EventForm from './components/forms/EventForm';
+*/
+import TalentForm from './components/forms/TalentForm';
 
 const App = props => {
 	const [message, setMessage] = useState('Click the button to load data!');
@@ -59,14 +60,15 @@ const App = props => {
 					talent={talents[1]}
 					options={events.filter(event => event.user_id === 1)}
 				/> */}
-				<EventForm locations={locations} categories={categories} />
+				{/* <EventForm locations={locations} categories={categories} /> */}
+				<TalentForm locations={locations} categories={categories} />
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
 			<PreviewsList title={'Events Highlights'} array={events} />
-      <h2>Our hottest talents!</h2>
+			<h2>Our hottest talents!</h2>
 			<HighlightsList array={talents} />
 			<Footer />
 		</div>
