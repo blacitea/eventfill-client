@@ -3,8 +3,26 @@ import { useFormik } from 'formik';
 
 const validate = values => {
 	const errors = {};
-	for (let value in values) {
-		value ? (errors.value = null) : (errors.value = 'required');
+	if (!values.eventName) {
+		errors.eventName = 'Please give us a name to promote your event.';
+	}
+	if (!values.location) {
+		errors.location = 'Where are you hosting this event?';
+	}
+	if (!values.category) {
+		errors.category = 'Please give us a category to promote your event.';
+	}
+	if (!values.start) {
+		errors.start = 'When will the event start?';
+	}
+	if (!values.end) {
+		errors.end = 'When will the event end?';
+	}
+	if (!values.image_url) {
+		errors.image_url = 'Pick a photo to show off your event!';
+	}
+	if (!values.description) {
+		errors.description = 'Description for your event is required.';
 	}
 	return errors;
 };
@@ -21,9 +39,7 @@ const EventForm = props => {
 			description: '',
 		},
 		validate,
-		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-		},
+		onSubmit: values => alert(JSON.stringify(values, null, 2)),
 	});
 	return (
 		<form onSubmit={formik.handleSubmit}>
