@@ -1,6 +1,7 @@
 import React from 'react';
 import HighlightsList from '../HighlightsList';
 import { useParams } from 'react-router-dom';
+import './Show.scss';
 
 const Show = ({ events, talents, genres, locations }) => {
 	let { resource, id } = useParams();
@@ -28,14 +29,14 @@ const Show = ({ events, talents, genres, locations }) => {
 
 	return (
 		<main>
-			<section>
-				<article>
-					<h1>{name}</h1>
+			<section className="show-display">
+				<article className="show-info">
+					<h1 className="show-info-title">{name}</h1>
 					<h2>{summarySentence}</h2>
 					<p>{description}</p>
 					{resource === 'events' && (
 						<>
-							<h4>
+							<h4 className="event-remaining-spots">
 								Remaining spots: {max_attendees}/{max_attendees}
 							</h4>
 							<button
@@ -51,7 +52,7 @@ const Show = ({ events, talents, genres, locations }) => {
 						</a>
 					)}
 				</article>
-				<article>
+				<article className="show-image">
 					<img src={image_url} alt={name} />
 				</article>
 			</section>
