@@ -1,6 +1,7 @@
 import React from 'react';
 import PreviewsList from '../PreviewsList';
 import { useParams, Link } from 'react-router-dom';
+import './Explore.scss';
 
 const ExploreEvents = props => {
 	let { id } = useParams();
@@ -15,7 +16,10 @@ const ExploreEvents = props => {
 						Location
 					</button>
 					<button onClick={() => alert('filter logic by genre')}>Genre</button>
-					<Link to={`/create/${id === 'events' ? 'event' : 'talent'}`}>
+					<Link
+						to={`/create/${id === 'events' ? 'event' : 'talent'}`}
+						className="create-button"
+					>
 						<button>Create</button>
 					</Link>
 				</section>
