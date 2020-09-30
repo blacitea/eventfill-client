@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import './form.scss';
 
 const validate = values => {
 	const errors = {};

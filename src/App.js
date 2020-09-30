@@ -60,7 +60,7 @@ const App = props => {
 					}}
 				/> */}
 				<EventForm locations={locations} genres={genres} />
-				<TalentForm locations={locations} categories={genres} />
+				{/* <TalentForm locations={locations} categories={genres} /> */}
         {/* <InvitationForm talent={talents[0]} events={events} /> */}
 			</Modal>
 			<NavBar />
