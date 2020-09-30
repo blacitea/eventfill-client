@@ -51,7 +51,7 @@ const TalentForm = props => {
           <Field name="name" />
           <ErrorMessage name="name" component="div" />
 
-          <label htmlFor="name">Location</label>
+          <label htmlFor="location">Location</label>
           <Field name="location" as="select">
             <option value="" disabled selected>
               Select a city
@@ -90,7 +90,7 @@ const TalentForm = props => {
           <ErrorMessage name="personal_link" component="div" />
 
           <label htmlFor="description">Description</label>
-          <Field name="description" as="textarea" />
+          <Field name="description" as="textarea" placeholder="Tell us about your skills!"/>
           <ErrorMessage name="description" component="div" />
 
           <label htmlFor="open_for_booking">Accepting Invitation?</label>
