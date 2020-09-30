@@ -10,6 +10,7 @@ const Messages = ({ messages, recipient }) => {
 			{messages &&
 				messages.map(message => (
 					<Message
+						key={message.id}
 						content={message.content}
 						sender={message.sender_id}
 						timeStamp={message.sent_at}
