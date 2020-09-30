@@ -20,6 +20,7 @@ import InvitationForm from './components/forms/InvitationForm';
 import EventForm from './components/forms/EventForm';
 */
 import TalentForm from './components/forms/TalentForm';
+import InvitationForm from './components/forms/InvitationForm';
 
 const App = props => {
 	const [message, setMessage] = useState('Click the button to load data!');
@@ -66,7 +67,8 @@ const App = props => {
 					options={events.filter(event => event.user_id === 1)}
 				/> */}
 				{/* <EventForm locations={locations} genres={genres} /> */}
-				<TalentForm locations={locations} genres={genres} />
+				{/* <TalentForm locations={locations} genres={genres} /> */}
+        <InvitationForm talent={talents[0]} events={events} />
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>

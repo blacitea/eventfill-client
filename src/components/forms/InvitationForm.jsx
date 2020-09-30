@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const validate = values => {
 	const errors = {};
@@ -10,51 +10,57 @@ const validate = values => {
 };
 
 const InvitationForm = ({ talent, events }) => {
-	const formik = useFormik({
-		initialValues: {
-			event: '',
-			message: '',
-		},
-		validate,
-		onSubmit: values => {
-			if (formik.errors) {
-				alert('Incomplete form');
-			} else {
-				alert(JSON.stringify(values, null, 2));
-				formik.resetForm();
-			}
-		},
-	});
 	return (
-		<form onSubmit={formik.handleSubmit}>
-			<img src={talent.image_url} alt={talent.name} />
-			<p>
-				Invite
-				<br />
-				<span>{talent.name}</span>
-				<br />
-				to your event!
-			</p>
-			<label htmlFor="event">Event</label>
-			<select id="event" {...formik.getFieldProps('event')}>
-				<option value="" disabled selected>
-					Pick an Event
-				</option>
-				{events.map(event => (
-					<option value={event.id} key={event.id}>
-						{event.name}
-					</option>
-				))}
-			</select>
-			{formik.errors.event && (
-				<div className="form-error">{formik.errors.event}</div>
-			)}
+    <section className="talent-invite">
+      <img src={talent.image_url} alt={talent.name} />
+      <p>
+        Invite
+        <br />
+        <span>{talent.name}</span>
+        <br />
+        to your event!
+      </p>
+      <Formik
+        initialValues={{
+          event: '',
+          message: '',
+        }}
+        validate={validate}
+        onSubmit={(values, { setSubmitting }) => {
+          console.log('test');
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+        validateOnChange={false}
+        validateOnBlur={false}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <label htmlFor="event">Event</label>
+           	<Field name="event" as="select">
+              <option value="" disabled selected>
+                Pick an Event
+              </option>
+              {events.map(event => (
+                <option value={event.id} key={event.id}>
+                  {event.name}
+                </option>
+              ))}
+           	</Field>
+            <ErrorMessage name="event" component="div" />
 
-			<label htmlFor="message">Message (Optional)</label>
-			<textarea id="message" {...formik.getFieldProps('message')} />
+            <label htmlFor="message">Message (Optional)</label>
+            <Field name="message" as="textarea" />
 
-			<button type="submit">Send Invitation</button>
-		</form>
+            <button type="submit" disabled={isSubmitting}>
+              Send Invitation
+            </button>
+          </Form>
+        )}
+      </Formik>
+    </section>
 	);
 };
 
