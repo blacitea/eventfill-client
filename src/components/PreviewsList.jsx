@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import './PreviewsList.scss';
 
 const PreviewsList = ({ array, title, message, resource }) => {
-	const handleClick = event => {
-		console.log(this);
-		alert(`you clicked ${event.target.name} with key ${event.target.key}`);
-	};
 	return (
 		<section className="previewslist">
 			<h2 className="previewsList-title">{title}</h2>
@@ -16,9 +12,6 @@ const PreviewsList = ({ array, title, message, resource }) => {
 				{array.map(item => (
 					<Link to={`/${resource}/${item.id}`}>
 						<Preview
-							onClick={() => {
-								console.log(item);
-							}}
 							key={item.id}
 							name={item.name}
 							image_url={item.image_url}

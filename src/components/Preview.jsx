@@ -10,7 +10,7 @@ const Preview = props => {
 	};
 
 	return (
-		<article className="preview-card" onClick={props.onClick}>
+		<article className="preview-card">
 			<img
 				className="preview-cover"
 				src={props.image_url}
