@@ -18,6 +18,7 @@ const Show = ({ events, talents, genres, locations }) => {
 		genre,
 		location,
 		max_attendees,
+		personal_link,
 	} = renderObj;
 
 	// can abstract to helper function??
@@ -31,13 +32,24 @@ const Show = ({ events, talents, genres, locations }) => {
 				<article>
 					<h1>{name}</h1>
 					<h2>{summarySentence}</h2>
-					<h4>
-						Remaining spots: {max_attendees}/{max_attendees}
-					</h4>
 					<p>{description}</p>
-					<button onClick={() => alert('some logic to change remaining spots')}>
-						Claim Ticket
-					</button>
+					{resource === 'events' && (
+						<>
+							<h4>
+								Remaining spots: {max_attendees}/{max_attendees}
+							</h4>
+							<button
+								onClick={() => alert('some logic to change remaining spots')}
+							>
+								Claim Ticket
+							</button>
+						</>
+					)}
+					{resource !== 'events' && (
+						<a href={personal_link} rel="noopener noreferrer" target="_blank">
+							<button>View porfolio</button>
+						</a>
+					)}
 				</article>
 				<article>
 					<img src={image_url} alt={name} />
