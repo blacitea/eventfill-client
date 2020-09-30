@@ -4,10 +4,11 @@ import './App.scss';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
-import { talents, events, locations, categories } from './components/mockData';
+import { talents, events, locations, genres } from './components/mockData';
 import Index from './components/views/Index';
 import Explore from './components/views/Explore';
 import Create from './components/views/Create';
+import Show from './components/views/Show';
 
 // React router
 import { Switch, Route } from 'react-router-dom';
@@ -64,8 +65,8 @@ const App = props => {
 					talent={talents[1]}
 					options={events.filter(event => event.user_id === 1)}
 				/> */}
-				{/* <EventForm locations={locations} categories={categories} /> */}
-				<TalentForm locations={locations} categories={categories} />
+				{/* <EventForm locations={locations} genres={genres} /> */}
+				<TalentForm locations={locations} genres={genres} />
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
@@ -73,12 +74,22 @@ const App = props => {
 			<button onClick={openModal}>Open Modal</button>
 			<Switch>
 				<Route path="/create/:id">
-					<Create locations={locations} categories={categories} />
+					<Create locations={locations} genres={genres} />
 				</Route>
 
 				<Route path="/explore/:id">
 					<Explore events={events} talents={talents} />
 				</Route>
+
+				<Route path="/:resource/:id">
+					<Show
+						events={events}
+						talents={talents}
+						locations={locations}
+						genres={genres}
+					/>
+				</Route>
+
 				<Route path="/">
 					<Index
 						events={events}

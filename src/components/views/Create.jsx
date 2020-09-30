@@ -4,7 +4,7 @@ import EventForm from '../forms/EventForm';
 import TalentForm from '../forms/TalentForm';
 import { EVENTASIDE, TALENTASIDE } from '../../CONST';
 
-const Create = ({ locations, categories }) => {
+const Create = ({ locations, genres }) => {
 	let { id } = useParams();
 	return (
 		<main>
@@ -13,11 +13,9 @@ const Create = ({ locations, categories }) => {
 				{id === 'talent' && TALENTASIDE}
 			</aside>
 			<section className="create-form">
-				{id === 'event' && (
-					<EventForm locations={locations} categories={categories} />
-				)}
+				{id === 'event' && <EventForm locations={locations} genres={genres} />}
 				{id === 'talent' && (
-					<TalentForm locations={locations} categories={categories} />
+					<TalentForm locations={locations} genres={genres} />
 				)}
 			</section>
 		</main>
