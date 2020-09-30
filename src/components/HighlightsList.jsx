@@ -1,19 +1,22 @@
 import React from 'react';
 import Highlight from './Highlight';
 import './HighlightsList.scss';
+import { Link } from 'react-router-dom';
 
-const HighlightsList = props => {
+const HighlightsList = ({ title, array, resource }) => {
 	return (
 		<section className="highlightslist">
-			<h2>{props.title}</h2>
+			<h2>{title}</h2>
 			<ul className="highlightslist-list">
-				{props.array.map(item => {
+				{array.map(item => {
 					return (
-						<Highlight
-							name={item.name}
-							imageURL={item.image_url}
-							onClick={props.onClick}
-						/>
+						<Link to={`/${resource}/${item.id}`}>
+							<Highlight
+								key={item.id}
+								name={item.name}
+								imageURL={item.image_url}
+							/>
+						</Link>
 					);
 				})}
 			</ul>
