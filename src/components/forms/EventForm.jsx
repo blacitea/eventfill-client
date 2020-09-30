@@ -1,10 +1,11 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import './form.scss';
 
 const validate = values => {
 	const errors = {};
-	if (!values.eventName) {
-		errors.eventName = 'Please give us a name to promote your event.';
+	if (!values.name) {
+		errors.name = 'Please give us a name to promote your event.';
 	}
 	if (!values.location) {
 		errors.location = 'Where are you hosting this event?';
@@ -28,93 +29,98 @@ const validate = values => {
 };
 
 const EventForm = props => {
-	const formik = useFormik({
-		initialValues: {
-			eventName: '',
-			location: '',
-			genre: '',
-			start: '',
-			end: '',
-			image_url: '',
-			description: '',
-		},
-		validate,
-		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-			formik.resetForm();
-		},
-	});
 	return (
-		<form onSubmit={formik.handleSubmit}>
-			<label htmlFor="eventName">Event Name</label>
-			<input
-				type="text"
-				id="eventName"
-				{...formik.getFieldProps('eventName')}
-			/>
-			{formik.errors.eventName && (
-				<div className="form-error">{formik.errors.eventName}</div>
-			)}
+    <Formik
+      initialValues={{
+        eventName: '',
+        location: '',
+        genre: '',
+        start: '',
+        end: '',
+        image_url: '',
+        description: '',
+      }}
+      validate={validate}
+      onSubmit={(values, { setSubmitting }) => {
+        console.log('test');
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <div className="form-group">
+            <label htmlFor="name">Event Name</label>
+            <Field name="name" />
+            <ErrorMessage name="name" component="div" />
+          </div>
 
-			<label htmlFor="location">Location</label>
-			<select id="location" {...formik.getFieldProps('location')}>
-				<option value="" disabled selected>
-					Select a city
-				</option>
-				{props.locations.map(location => (
-					<option key={location.id} value={location.id}>
-						{location.name}
-					</option>
-				))}
-			</select>
-			{formik.errors.location && (
-				<div className="form-error">{formik.errors.location}</div>
-			)}
+          <div className="form-group">
+            <label htmlFor="location">Location</label>
+            <Field name="location" as="select">
+              <option value="" disabled>
+                Select a city
+              </option>
+              {props.locations && props.locations
+                .map(location => (
+                  <option key={location.id} value={location.id}>
+                    {location.name}
+                  </option>
+                ))
+              }
+            </Field>
+            <ErrorMessage name="location" component="div" />
+          </div>
 
-			<label htmlFor="genre">genre</label>
-			<select id="genre" {...formik.getFieldProps('genre')}>
-				<option value="" disabled selected>
-					Select a genre
-				</option>
-				{props.genres.map(genre => (
-					<option key={genre.id} value={genre.id}>
-						{genre.name}
-					</option>
-				))}
-			</select>
-			{formik.errors.genre && (
-				<div className="form-error">{formik.errors.genre}</div>
-			)}
+          <div className="form-group">
+            <label htmlFor="genre">Genre</label>
+            <Field name="genre" as="select">
+              <option value="" disabled>
+                Select a genre
+              </option>
+              {props.genres && props.genres
+                .map(genre => (
+                    <option key={genre.id} value={genre.id}>
+                      {genre.name}
+                    </option>
+                ))
+              }
+            </Field>
+            <ErrorMessage name="genre" component="div" />
+          </div>
 
-			<label htmlFor="start">Start Date</label>
-			<input type="date" id="start" {...formik.getFieldProps('start')} />
-			{formik.errors.start && (
-				<div className="form-error">{formik.errors.start}</div>
-			)}
+          <div className="form-group">
+            <label htmlFor="start">Start Date</label>
+            <Field name="start" type="date" />
+            <ErrorMessage name="start" component="div" />
+          </div>
 
-			<label htmlFor="end">End Date</label>
-			<input type="date" id="end" {...formik.getFieldProps('end')} />
-			{formik.errors.end && (
-				<div className="form-error">{formik.errors.end}</div>
-			)}
+          <div className="form-group">
+            <label htmlFor="end">End Date</label>
+            <Field name="end" type="date" />
+            <ErrorMessage name="end" component="div" />
+          </div>
 
-			<label htmlFor="image_url">Cover Image</label>
-			<input id="image_url" {...formik.getFieldProps('image_url')} />
-			{formik.errors.image_url && (
-				<div className="form-error">{formik.errors.image_url}</div>
-			)}
+          <div className="form-group">
+            <label htmlFor="image_url">Cover Image URL</label>
+            <Field name="image_url" />
+            <ErrorMessage name="image_url" component="div" />
+          </div>
 
-			<label htmlFor="description">Description</label>
-			<textarea
-				id="description"
-				{...formik.getFieldProps('description')}
-				placeholder="Tell people about your event!"
-			/>
-			{formik.errors.description && (
-				<div className="form-error">{formik.errors.description}</div>
-			)}
-			<button type="submit">Submit Event</button>
-		</form>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <Field name="description" as="textarea" placeholder="Tell us about your event!" cols={50} rows={3}/>
+            <ErrorMessage name="description" component="div" />
+          </div>
+
+          <button className="form-submit" type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
+        </Form>
+      )}
+    </Formik>
 	);
 };
 
