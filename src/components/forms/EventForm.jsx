@@ -53,55 +53,69 @@ const EventForm = props => {
     >
       {({ isSubmitting }) => (
         <Form>
-          <label htmlFor="name">Event Name</label>
-          <Field name="name" />
-          <ErrorMessage name="name" component="div" />
+          <div className="form-group">
+            <label htmlFor="name">Event Name</label>
+            <Field name="name" />
+            <ErrorMessage name="name" component="div" />
+          </div>
 
-          <label htmlFor="location">Location</label>
-          <Field name="location" as="select">
-            <option value="" disabled>
-              Select a city
-            </option>
-            {props.locations && props.locations
-              .map(location => (
-                <option key={location.id} value={location.id}>
-                  {location.name}
-                </option>
-              ))
-            }
-          </Field>
-          <ErrorMessage name="location" component="div" />
-
-          <label htmlFor="genre">Genre</label>
-          <Field name="genre" as="select">
-            <option value="" disabled>
-              Select a genre
-            </option>
-            {props.genres && props.genres
-              .map(genre => (
-                  <option key={genre.id} value={genre.id}>
-                    {genre.name}
+          <div className="form-group">
+            <label htmlFor="location">Location</label>
+            <Field name="location" as="select">
+              <option value="" disabled>
+                Select a city
+              </option>
+              {props.locations && props.locations
+                .map(location => (
+                  <option key={location.id} value={location.id}>
+                    {location.name}
                   </option>
-              ))
-            }
-          </Field>
-          <ErrorMessage name="genre" component="div" />
+                ))
+              }
+            </Field>
+            <ErrorMessage name="location" component="div" />
+          </div>
 
-          <label htmlFor="start">Start Date</label>
-          <Field name="start" type="date" />
-          <ErrorMessage name="start" component="div" />
+          <div className="form-group">
+            <label htmlFor="genre">Genre</label>
+            <Field name="genre" as="select">
+              <option value="" disabled>
+                Select a genre
+              </option>
+              {props.genres && props.genres
+                .map(genre => (
+                    <option key={genre.id} value={genre.id}>
+                      {genre.name}
+                    </option>
+                ))
+              }
+            </Field>
+            <ErrorMessage name="genre" component="div" />
+          </div>
 
-          <label htmlFor="end">End Date</label>
-          <Field name="end" type="date" />
-          <ErrorMessage name="end" component="div" />
+          <div className="form-group">
+            <label htmlFor="start">Start Date</label>
+            <Field name="start" type="date" />
+            <ErrorMessage name="start" component="div" />
+          </div>
 
-          <label htmlFor="image_url">Cover Image URL</label>
-          <Field name="image_url" />
-          <ErrorMessage name="image_url" component="div" />
+          <div className="form-group">
+            <label htmlFor="end">End Date</label>
+            <Field name="end" type="date" />
+            <ErrorMessage name="end" component="div" />
+          </div>
 
-          <label htmlFor="description">Description</label>
-          <Field name="description" as="textarea" placeholder="Tell us about your event!"/>
-          <ErrorMessage name="description" component="div" />
+          <div className="form-group">
+            <label htmlFor="image_url">Cover Image URL</label>
+            <Field name="image_url" />
+            <ErrorMessage name="image_url" component="div" />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <Field name="description" as="textarea" placeholder="Tell us about your event!"/>
+            <ErrorMessage name="description" component="div" />
+          </div>
 
           <button type="submit" disabled={isSubmitting}>
             Submit

@@ -48,57 +48,73 @@ const TalentForm = props => {
     >
       {({ isSubmitting }) => (
         <Form>
-          <label htmlFor="name">Your Name</label>
-          <Field name="name" />
-          <ErrorMessage name="name" component="div" />
+          <div className="form-group">
+            <label htmlFor="name">Your Name</label>
+            <Field name="name" />
+            <ErrorMessage name="name" component="div" />
+          </div>
 
-          <label htmlFor="location">Location</label>
-          <Field name="location" as="select">
-            <option value="" disabled>
-              Select a city
-            </option>
-            {props.locations && props.locations
-              .map(location => (
-                <option key={location.id} value={location.id}>
-                  {location.name}
-                </option>
-              ))
-            }
-          </Field>
-          <ErrorMessage name="location" component="div" />
+          <div className="form-group">
+            <label htmlFor="location">Location</label>
+            <Field name="location" as="select">
+              <option value="" disabled>
+                Select a city
+              </option>
+              {props.locations && props.locations
+                .map(location => (
+                  <option key={location.id} value={location.id}>
+                    {location.name}
+                  </option>
+                ))
+              }
+            </Field>
+            <ErrorMessage name="location" component="div" />
+          </div>
 
-          <label htmlFor="category">Category</label>
-          <Field name="category" as="select">
-            <option value="" disabled>
-              Select a genre
-            </option>
-            {props.categories && props.categories
-              .map(category => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))
-            }
-          </Field>
-          <ErrorMessage name="category" component="div" />
+          <div className="form-group">
+            <label htmlFor="category">Category</label>
+            <Field name="category" as="select">
+              <option value="" disabled>
+                Select a genre
+              </option>
+              {props.categories && props.categories
+                .map(category => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))
+              }
+            </Field>
+            <ErrorMessage name="category" component="div" />
+          </div>
 
-          <label htmlFor="image_url">Cover Image URL</label>
-          <Field name="image_url" />
-          <ErrorMessage name="image_url" component="div" />
+          <div className="form-group">
+            <label htmlFor="image_url">Cover Image URL</label>
+            <Field name="image_url" />
+            <ErrorMessage name="image_url" component="div" />
+          </div>
 
-          <label htmlFor="personal_link">Portfolio Link URL</label>
-          <Field name="personal_link" />
-          <ErrorMessage name="personal_link" component="div" />
+          <div className="form-group">
+            <label htmlFor="personal_link">Portfolio Link URL</label>
+            <Field name="personal_link" />
+            <ErrorMessage name="personal_link" component="div" />
+          </div>
 
-          <label htmlFor="description">Description</label>
-          <Field name="description" as="textarea" placeholder="Tell us about your skills!"/>
-          <ErrorMessage name="description" component="div" />
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <Field name="description" as="textarea" placeholder="Tell us about your skills!"/>
+            <ErrorMessage name="description" component="div" />
+          </div>
 
-          <label htmlFor="open_for_booking">Accepting Invitation?</label>
-          <Field name="open_for_booking" type="checkbox" />
+          <div className="form-group">
+            <label htmlFor="open_for_booking">Accepting Invitation?</label>
+            <Field name="open_for_booking" type="checkbox" />
+          </div>
 
-          <label htmlFor="open_for_commission">Accepting Commissions?</label>
-          <Field name="open_for_commission" type="checkbox" />
+          <div className="form-group">
+            <label htmlFor="open_for_commission">Accepting Commissions?</label>
+            <Field name="open_for_commission" type="checkbox" />
+          </div>
 
           <button type="submit" disabled={isSubmitting}>
             Submit
