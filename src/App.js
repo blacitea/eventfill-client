@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import './App.scss';
 import NavBar from './components/NavBar';
@@ -9,6 +10,7 @@ import Index from './components/views/Index';
 import Explore from './components/views/Explore';
 import Create from './components/views/Create';
 import Show from './components/views/Show';
+import Login from './components/Login';
 import MessageCenter from './components/MessageCenter';
 
 // React router
@@ -21,6 +23,8 @@ import EventForm from './components/forms/EventForm';
 import TalentForm from './components/forms/TalentForm';
 
 const App = props => {
+	const [cookies, setCookie] = useCookies(['user_id']);
+
 	const [message, setMessage] = useState('Click the button to load data!');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -62,13 +66,17 @@ const App = props => {
 				/> */}
 				{/* <EventForm locations={locations} genres={genres} /> */}
 				<TalentForm locations={locations} categories={genres} />
-        {/* <InvitationForm talent={talents[0]} events={events} /> */}
+				{/* <InvitationForm talent={talents[0]} events={events} /> */}
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
 			<Switch>
+				<Route path="/login/:id">
+					<Login setCookie={setCookie} />
+				</Route>
+
 				<Route path="/create/:id">
 					<Create locations={locations} genres={genres} />
 				</Route>
