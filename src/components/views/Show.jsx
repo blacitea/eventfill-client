@@ -1,9 +1,12 @@
 import React from 'react';
 import HighlightsList from '../HighlightsList';
 import { useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import './Show.scss';
 
 const Show = ({ events, talents, genres, locations }) => {
+	const [cookies] = useCookies();
+	console.log(cookies.user_id);
 	let { resource, id } = useParams();
 	// expect axios call here based on resource (event/talent) and id
 	const renderObj =
