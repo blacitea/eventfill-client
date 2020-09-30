@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 
 const ExploreEvents = props => {
 	let { id } = useParams();
-	const Clicked = () => alert('This card has been clicked!');
 	return (
 		<main>
 			<header>
@@ -16,10 +15,10 @@ const ExploreEvents = props => {
 			</header>
 			<hr />
 			{id === 'events' && (
-				<PreviewsList array={props.events} onClick={Clicked} />
+				<PreviewsList array={props.events} resource="events" />
 			)}
 			{id === 'talents' && (
-				<PreviewsList array={props.talents} onClick={Clicked} />
+				<PreviewsList array={props.talents} resource="talents" />
 			)}
 		</main>
 	);
