@@ -43,11 +43,13 @@ const InvitationForm = ({ talent, events }) => {
               <option value="" disabled>
                 Pick an Event
               </option>
-              {events.map(event => (
-                <option value={event.id} key={event.id}>
-                  {event.name}
-                </option>
-              ))}
+              {events && events
+                .map(event => (
+                  <option value={event.id} key={event.id}>
+                    {event.name}
+                  </option>
+                ))
+              }
            	</Field>
             <ErrorMessage name="event" component="div" />
 

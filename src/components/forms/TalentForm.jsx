@@ -56,13 +56,13 @@ const TalentForm = props => {
             <option value="" disabled>
               Select a city
             </option>
-            {props.locations
-              ? props.locations.map(location => (
-                  <option key={location.id} value={location.id}>
-                    {location.name}
-                  </option>
-                ))
-              : null}
+            {props.locations && props.locations
+              .map(location => (
+                <option key={location.id} value={location.id}>
+                  {location.name}
+                </option>
+              ))
+            }
           </Field>
           <ErrorMessage name="location" component="div" />
 
@@ -71,13 +71,13 @@ const TalentForm = props => {
             <option value="" disabled>
               Select a genre
             </option>
-            {props.categories
-              ? props.categories.map(category => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))
-              : null}
+            {props.categories && props.categories
+              .map(category => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))
+            }
           </Field>
           <ErrorMessage name="category" component="div" />
 

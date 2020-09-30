@@ -61,11 +61,13 @@ const EventForm = props => {
             <option value="" disabled>
               Select a city
             </option>
-            {props.locations.map(location => (
-              <option key={location.id} value={location.id}>
-                {location.name}
-              </option>
-            ))}
+            {props.locations && props.locations
+              .map(location => (
+                <option key={location.id} value={location.id}>
+                  {location.name}
+                </option>
+              ))
+            }
           </Field>
           <ErrorMessage name="location" component="div" />
 
@@ -74,13 +76,13 @@ const EventForm = props => {
             <option value="" disabled>
               Select a genre
             </option>
-            {props.genres
-              ? props.genres.map(genre => (
+            {props.genres && props.genres
+              .map(genre => (
                   <option key={genre.id} value={genre.id}>
                     {genre.name}
                   </option>
-                ))
-              : null}
+              ))
+            }
           </Field>
           <ErrorMessage name="genre" component="div" />
 
