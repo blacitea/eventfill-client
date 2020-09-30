@@ -86,8 +86,8 @@ const EventForm = props => {
 				<option value="" disabled selected>
 					Select a genre
 				</option>
-				{props.categories
-					? props.categories.map(category => (
+				{props.genres
+					? props.genres.map(category => (
 							<option key={category.id} value={category.id}>
 								{category.name}
 							</option>
