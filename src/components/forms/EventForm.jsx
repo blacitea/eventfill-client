@@ -58,7 +58,7 @@ const EventForm = props => {
 
           <label htmlFor="location">Location</label>
           <Field name="location" as="select">
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select a city
             </option>
             {props.locations.map(location => (
@@ -71,7 +71,7 @@ const EventForm = props => {
 
           <label htmlFor="genre">Genre</label>
           <Field name="genre" as="select">
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select a genre
             </option>
             {props.genres

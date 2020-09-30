@@ -40,7 +40,7 @@ const InvitationForm = ({ talent, events }) => {
           <Form>
             <label htmlFor="event">Event</label>
            	<Field name="event" as="select">
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Pick an Event
               </option>
               {events.map(event => (

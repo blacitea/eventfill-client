@@ -53,7 +53,7 @@ const TalentForm = props => {
 
           <label htmlFor="location">Location</label>
           <Field name="location" as="select">
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select a city
             </option>
             {props.locations
@@ -68,7 +68,7 @@ const TalentForm = props => {
 
           <label htmlFor="category">Category</label>
           <Field name="category" as="select">
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select a genre
             </option>
             {props.categories
