@@ -1,5 +1,6 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import "./form.scss";
 
 const validate = values => {
 	const errors = {};
@@ -22,104 +23,98 @@ const validate = values => {
 };
 
 const TalentForm = props => {
-	const formik = useFormik({
-		initialValues: {
-			name: '',
-			location: '',
-			genre: '',
-			image_url: '',
-			personal_link: '',
-			description: '',
-			open_for_booking: false,
-			open_for_commission: false,
-		},
-		validate,
-		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-			formik.resetForm();
-		},
-	});
-
 	return (
-		<form onSubmit={formik.handleSubmit}>
-			<label htmlFor="name">Your Name</label>
-			<input id="name" type="text" {...formik.getFieldProps('name')} />
-			{formik.errors.name ? (
-				<div className="form-error">{formik.errors.name}</div>
-			) : null}
+    <Formik
+      initialValues={{
+        name: '',
+        location: '',
+        category: '',
+        image_url: '',
+        personal_link: '',
+        description: '',
+        open_for_booking: false,
+        open_for_commission: false,
+      }}
+      validate={validate}
+      onSubmit={(values, { setSubmitting }) => {
+        console.log('test');
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <div className="form-group">
+            <label htmlFor="name">Your Name</label>
+            <Field name="name" />
+            <ErrorMessage name="name" component="div" />
+          </div>
 
-			<label htmlFor="location">Location</label>
-			<select id="location" {...formik.getFieldProps('location')}>
-				<option value="" disabled selected>
-					Select a city
-				</option>
-				{props.locations
-					? props.locations.map(location => (
-							<option key={location.id} value={location.id}>
-								{location.name}
-							</option>
-					  ))
-					: null}
-			</select>
-			{formik.errors.location ? (
-				<div className="form-error">{formik.errors.location}</div>
-			) : null}
+          <div className="form-group">
+            <label htmlFor="location">Location</label>
+            <Field name="location" as="select">
+              <option value="" disabled>
+                Select a city
+              </option>
+              {props.locations && props.locations
+                .map(location => (
+                  <option key={location.id} value={location.id}>
+                    {location.name}
+                  </option>
+                ))
+              }
+            </Field>
+            <ErrorMessage name="location" component="div" />
+          </div>
 
-			<label htmlFor="genre">Primary genre</label>
-			<select id="genre" {...formik.getFieldProps('genre')}>
-				<option value="" disabled selected>
-					Select a genre
-				</option>
-				{props.genres
-					? props.genres.map(genre => (
-							<option key={genre.id} value={genre.id}>
-								{genre.name}
-							</option>
-					  ))
-					: null}
-			</select>
-			{formik.errors.genre ? (
-				<div className="form-error">{formik.errors.genre}</div>
-			) : null}
+          <div className="form-group">
+            <label htmlFor="category">Category</label>
+            <Field name="category" as="select">
+              <option value="" disabled>
+                Select a genre
+              </option>
+              {props.categories && props.categories
+                .map(category => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))
+              }
+            </Field>
+            <ErrorMessage name="category" component="div" />
+          </div>
 
-			<label htmlFor="image_url">Cover Image URL</label>
-			<input id="image_url" {...formik.getFieldProps('image_url')} />
-			{formik.errors.image_url ? (
-				<div className="form-error">{formik.errors.image_url}</div>
-			) : null}
+          <div className="form-group">
+            <label htmlFor="image_url">Cover Image URL</label>
+            <Field name="image_url" />
+            <ErrorMessage name="image_url" component="div" />
+          </div>
 
-			<label htmlFor="personal_link">Portfolio Link URL</label>
-			<input id="personal_link" {...formik.getFieldProps('personal_link')} />
-			{formik.errors.personal_link ? (
-				<div className="form-error">{formik.errors.personal_link}</div>
-			) : null}
+          <div className="form-group">
+            <label htmlFor="personal_link">Portfolio Link URL</label>
+            <Field name="personal_link" />
+            <ErrorMessage name="personal_link" component="div" />
+          </div>
 
-			<label htmlFor="description">Description</label>
-			<textarea
-				id="description"
-				{...formik.getFieldProps('description')}
-				placeholder="Tell people about your skills and talents."
-			/>
-			{formik.errors.description ? (
-				<div className="form-error">{formik.errors.description}</div>
-			) : null}
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <Field name="description" as="textarea" placeholder="Tell us about your skills!" cols={50} rows={3} />
+            <ErrorMessage name="description" component="div" />
+          </div>
 
-			<label htmlFor="open_for_booking">Accepting Invitation?</label>
-			<input
-				type="checkbox"
-				id="open_for_booking"
-				{...formik.getFieldProps('open_for_booking')}
-			/>
+          <div className="form-group">
+            <label htmlFor="open_for_booking">Accepting Invitation?</label>
+            <Field name="open_for_booking" type="checkbox" />
+          </div>
 
-			<label htmlFor="open_for_commission">Accepting Commission?</label>
-			<input
-				type="checkbox"
-				id="open_for_commission"
-				{...formik.getFieldProps('open_for_commission')}
-			/>
-
-			<button>Submit Talent Profile</button>
-		</form>
+          <button className="form-submit" type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
+        </Form>
+      )}
+    </Formik>
 	);
 };
 
