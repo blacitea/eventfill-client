@@ -14,13 +14,13 @@ const InvitationForm = ({ talent, events }) => {
 	return (
     <section className="talent-invite">
       <img src={talent.image_url} alt={talent.name} />
-      <p>
+      <section className="invite-text">
         Invite
         <br />
-        <span>{talent.name}</span>
+        <span className="talent-name">{talent.name}</span>
         <br />
         to your event!
-      </p>
+      </section>
       <Formik
         initialValues={{
           event: '',
@@ -56,7 +56,7 @@ const InvitationForm = ({ talent, events }) => {
 
             <div className="form-group">
               <label htmlFor="message">Message (Optional)</label>
-              <Field name="message" as="textarea" placeholder="Write a message to introduce yourself and your event!" cols={50} rows={3} />
+              <Field name="message" as="textarea" placeholder="Write a message to introduce yourself and your event!" cols={30} rows={3} />
             </div>
 
             <button className="form-submit" type="submit" disabled={isSubmitting}>
