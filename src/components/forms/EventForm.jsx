@@ -54,7 +54,9 @@ const EventForm = props => {
 				value={formik.values.eventName}
 				onChange={formik.handleChange}
 			/>
-			{formik.errors.eventName ? <div>{formik.errors.eventName}</div> : null}
+			{formik.errors.eventName ? (
+				<div className="form-validation-error">{formik.errors.eventName}</div>
+			) : null}
 
 			<label htmlFor="location">Location</label>
 			<select
@@ -74,7 +76,9 @@ const EventForm = props => {
 					  ))
 					: null}
 			</select>
-			{formik.errors.location ? <div>{formik.errors.location}</div> : null}
+			{formik.errors.location ? (
+				<div className="form-validation-error">{formik.errors.location}</div>
+			) : null}
 
 			<label htmlFor="category">Category</label>
 			<select
@@ -94,7 +98,9 @@ const EventForm = props => {
 					  ))
 					: null}
 			</select>
-			{formik.errors.category ? <div>{formik.errors.category}</div> : null}
+			{formik.errors.category ? (
+				<div className="form-validation-error">{formik.errors.category}</div>
+			) : null}
 
 			<label htmlFor="start">Start Date</label>
 			<input
@@ -104,7 +110,9 @@ const EventForm = props => {
 				value={formik.values.start}
 				onChange={formik.handleChange}
 			/>
-			{formik.errors.start ? <div>{formik.errors.start}</div> : null}
+			{formik.errors.start ? (
+				<div className="form-validation-error">{formik.errors.start}</div>
+			) : null}
 
 			<label htmlFor="end">End Date</label>
 			<input
@@ -114,7 +122,9 @@ const EventForm = props => {
 				value={formik.values.start}
 				onChange={formik.handleChange}
 			/>
-			{formik.errors.end ? <div>{formik.errors.end}</div> : null}
+			{formik.errors.end ? (
+				<div className="form-validation-error">{formik.errors.end}</div>
+			) : null}
 
 			<label htmlFor="image_url">Cover Image</label>
 			<input
@@ -123,7 +133,9 @@ const EventForm = props => {
 				value={formik.values.image_url}
 				onChange={formik.handleChange}
 			/>
-			{formik.errors.image_url ? <div>{formik.errors.image_url}</div> : null}
+			{formik.errors.image_url ? (
+				<div className="form-validation-error">{formik.errors.image_url}</div>
+			) : null}
 
 			<label htmlFor="description">Description</label>
 			<textarea
@@ -134,7 +146,7 @@ const EventForm = props => {
 				placeholder="Tell people about your event!"
 			/>
 			{formik.errors.description ? (
-				<div>{formik.errors.description}</div>
+				<div className="form-validation-error">{formik.errors.description}</div>
 			) : null}
 			<button type="submit">Submit Event</button>
 		</form>

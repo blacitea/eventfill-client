@@ -55,7 +55,9 @@ const InvitationForm = props => {
 					</option>
 				))}
 			</select>
-			{formik.errors.event ? <div>{formik.errors.event}</div> : null}
+			{formik.errors.event ? (
+				<div className="form-validation-error">{formik.errors.event}</div>
+			) : null}
 			<label htmlFor="message">Message (Optional)</label>
 			<textarea
 				name="message"
