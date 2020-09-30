@@ -115,7 +115,7 @@ const EventForm = props => {
             <ErrorMessage name="description" component="div" />
           </div>
 
-          <button type="submit" disabled={isSubmitting}>
+          <button className="form-submit" type="submit" disabled={isSubmitting}>
             Submit
           </button>
         </Form>

@@ -114,7 +114,7 @@ const TalentForm = props => {
             <Field name="open_for_commission" type="checkbox" />
           </div>
 
-          <button type="submit" disabled={isSubmitting}>
+          <button className="form-submit" type="submit" disabled={isSubmitting}>
             Submit
           </button>
         </Form>

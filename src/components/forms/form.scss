@@ -7,10 +7,12 @@ form {
     margin: 0.4em;
     display: flex;
     flex-direction: column;
-  }
 
-  label {
-    font-size: 0.9em;
+    div {
+      font-size: 0.9em;
+      font-weight: bold;
+      color: red;
+    }
   }
 
   select {
@@ -23,5 +25,10 @@ form {
 
   textarea {
     font-size: 1em;
+  }
+
+  .form-submit {
+    margin: 0.4em;
+    align-self: center;
   }
 }

@@ -59,7 +59,7 @@ const InvitationForm = ({ talent, events }) => {
               <Field name="message" as="textarea" placeholder="Write a message to introduce yourself and your event!" cols={50} rows={3} />
             </div>
 
-            <button type="submit" disabled={isSubmitting}>
+            <button className="form-submit" type="submit" disabled={isSubmitting}>
               Send Invitation
             </button>
           </Form>
