@@ -9,8 +9,8 @@ const validate = values => {
 	if (!values.location) {
 		errors.location = 'Where are you hosting this event?';
 	}
-	if (!values.category) {
-		errors.category = 'Please give us a category to promote your event.';
+	if (!values.genre) {
+		errors.genre = 'Please give us a genre to promote your event.';
 	}
 	if (!values.start) {
 		errors.start = 'When will the event start?';
@@ -32,7 +32,7 @@ const EventForm = props => {
 		initialValues: {
 			eventName: '',
 			location: '',
-			category: '',
+			genre: '',
 			start: '',
 			end: '',
 			image_url: '',
@@ -50,104 +50,69 @@ const EventForm = props => {
 			<input
 				type="text"
 				id="eventName"
-				name="eventName"
-				value={formik.values.eventName}
-				onChange={formik.handleChange}
+				{...formik.getFieldProps('eventName')}
 			/>
-			{formik.errors.eventName ? (
-				<div className="form-validation-error">{formik.errors.eventName}</div>
-			) : null}
+			{formik.errors.eventName && (
+				<div className="form-error">{formik.errors.eventName}</div>
+			)}
 
 			<label htmlFor="location">Location</label>
-			<select
-				id="location"
-				name="location"
-				value={formik.values.location}
-				onChange={formik.handleChange}
-			>
+			<select id="location" {...formik.getFieldProps('location')}>
 				<option value="" disabled selected>
 					Select a city
 				</option>
-				{props.locations
-					? props.locations.map(location => (
-							<option key={location.id} value={location.id}>
-								{location.name}
-							</option>
-					  ))
-					: null}
+				{props.locations.map(location => (
+					<option key={location.id} value={location.id}>
+						{location.name}
+					</option>
+				))}
 			</select>
-			{formik.errors.location ? (
-				<div className="form-validation-error">{formik.errors.location}</div>
-			) : null}
+			{formik.errors.location && (
+				<div className="form-error">{formik.errors.location}</div>
+			)}
 
-			<label htmlFor="category">Category</label>
-			<select
-				id="category"
-				name="category"
-				value={formik.values.category}
-				onChange={formik.handleChange}
-			>
+			<label htmlFor="genre">genre</label>
+			<select id="genre" {...formik.getFieldProps('genre')}>
 				<option value="" disabled selected>
 					Select a genre
 				</option>
-				{props.genres
-					? props.genres.map(category => (
-							<option key={category.id} value={category.id}>
-								{category.name}
-							</option>
-					  ))
-					: null}
+				{props.genres.map(genre => (
+					<option key={genre.id} value={genre.id}>
+						{genre.name}
+					</option>
+				))}
 			</select>
-			{formik.errors.category ? (
-				<div className="form-validation-error">{formik.errors.category}</div>
-			) : null}
+			{formik.errors.genre && (
+				<div className="form-error">{formik.errors.genre}</div>
+			)}
 
 			<label htmlFor="start">Start Date</label>
-			<input
-				type="date"
-				id="start"
-				name="start"
-				value={formik.values.start}
-				onChange={formik.handleChange}
-			/>
-			{formik.errors.start ? (
-				<div className="form-validation-error">{formik.errors.start}</div>
-			) : null}
+			<input type="date" id="start" {...formik.getFieldProps('start')} />
+			{formik.errors.start && (
+				<div className="form-error">{formik.errors.start}</div>
+			)}
 
 			<label htmlFor="end">End Date</label>
-			<input
-				type="date"
-				id="end"
-				name="end"
-				value={formik.values.start}
-				onChange={formik.handleChange}
-			/>
-			{formik.errors.end ? (
-				<div className="form-validation-error">{formik.errors.end}</div>
-			) : null}
+			<input type="date" id="end" {...formik.getFieldProps('end')} />
+			{formik.errors.end && (
+				<div className="form-error">{formik.errors.end}</div>
+			)}
 
 			<label htmlFor="image_url">Cover Image</label>
-			<input
-				id="image_url"
-				name="image_url"
-				value={formik.values.image_url}
-				onChange={formik.handleChange}
-			/>
-			{formik.errors.image_url ? (
-				<div className="form-validation-error">{formik.errors.image_url}</div>
-			) : null}
+			<input id="image_url" {...formik.getFieldProps('image_url')} />
+			{formik.errors.image_url && (
+				<div className="form-error">{formik.errors.image_url}</div>
+			)}
 
 			<label htmlFor="description">Description</label>
 			<textarea
 				id="description"
-				name="description"
-				value={formik.values.description}
-				onChange={formik.handleChange}
+				{...formik.getFieldProps('description')}
 				placeholder="Tell people about your event!"
 			/>
-			{formik.errors.description ? (
-				<div className="form-validation-error">{formik.errors.description}</div>
-			) : null}
+			{formik.errors.description && (
+				<div className="form-error">{formik.errors.description}</div>
+			)}
 			<button type="submit">Submit Event</button>
 		</form>
 	);

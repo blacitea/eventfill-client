@@ -9,8 +9,8 @@ const validate = values => {
 	if (!values.location) {
 		errors.location = 'Where are you located?';
 	}
-	if (!values.category) {
-		errors.category = 'Please give us a category to promote your talent.';
+	if (!values.genre) {
+		errors.genre = 'Please give us a genre to promote your talent.';
 	}
 	if (!values.image_url) {
 		errors.image_url = 'Pick a photo to represent your talent profile!';
@@ -26,7 +26,7 @@ const TalentForm = props => {
 		initialValues: {
 			name: '',
 			location: '',
-			category: '',
+			genre: '',
 			image_url: '',
 			personal_link: '',
 			description: '',
@@ -45,7 +45,7 @@ const TalentForm = props => {
 			<label htmlFor="name">Your Name</label>
 			<input id="name" type="text" {...formik.getFieldProps('name')} />
 			{formik.errors.name ? (
-				<div className="form-validation-error">{formik.errors.name}</div>
+				<div className="form-error">{formik.errors.name}</div>
 			) : null}
 
 			<label htmlFor="location">Location</label>
@@ -62,38 +62,36 @@ const TalentForm = props => {
 					: null}
 			</select>
 			{formik.errors.location ? (
-				<div className="form-validation-error">{formik.errors.location}</div>
+				<div className="form-error">{formik.errors.location}</div>
 			) : null}
 
-			<label htmlFor="category">Primary Category</label>
-			<select id="category" {...formik.getFieldProps('category')}>
+			<label htmlFor="genre">Primary genre</label>
+			<select id="genre" {...formik.getFieldProps('genre')}>
 				<option value="" disabled selected>
 					Select a genre
 				</option>
 				{props.genres
-					? props.genres.map(category => (
-							<option key={category.id} value={category.id}>
-								{category.name}
+					? props.genres.map(genre => (
+							<option key={genre.id} value={genre.id}>
+								{genre.name}
 							</option>
 					  ))
 					: null}
 			</select>
-			{formik.errors.category ? (
-				<div className="form-validation-error">{formik.errors.category}</div>
+			{formik.errors.genre ? (
+				<div className="form-error">{formik.errors.genre}</div>
 			) : null}
 
 			<label htmlFor="image_url">Cover Image URL</label>
 			<input id="image_url" {...formik.getFieldProps('image_url')} />
 			{formik.errors.image_url ? (
-				<div className="form-validation-error">{formik.errors.image_url}</div>
+				<div className="form-error">{formik.errors.image_url}</div>
 			) : null}
 
 			<label htmlFor="personal_link">Portfolio Link URL</label>
 			<input id="personal_link" {...formik.getFieldProps('personal_link')} />
 			{formik.errors.personal_link ? (
-				<div className="form-validation-error">
-					{formik.errors.personal_link}
-				</div>
+				<div className="form-error">{formik.errors.personal_link}</div>
 			) : null}
 
 			<label htmlFor="description">Description</label>
@@ -103,7 +101,7 @@ const TalentForm = props => {
 				placeholder="Tell people about your skills and talents."
 			/>
 			{formik.errors.description ? (
-				<div className="form-validation-error">{formik.errors.description}</div>
+				<div className="form-error">{formik.errors.description}</div>
 			) : null}
 
 			<label htmlFor="open_for_booking">Accepting Invitation?</label>
