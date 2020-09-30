@@ -1,0 +1,22 @@
+.show-display {
+	display: flex;
+	flex-direction: row;
+	.show-info {
+		width: 50%;
+		margin: 5em;
+		h1 {
+			font-size: 50px;
+			text-align: center;
+		}
+		.event-remaining-spots {
+			font-size: 20px;
+		}
+	}
+}
+
+.show-image {
+	img {
+		height: 50vh;
+		width: auto;
+	}
+}
