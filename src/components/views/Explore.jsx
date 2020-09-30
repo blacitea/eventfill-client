@@ -1,7 +1,9 @@
 import React from 'react';
 import PreviewsList from '../PreviewsList';
+import { useParams } from 'react-router-dom';
 
 const ExploreEvents = props => {
+	let { id } = useParams();
 	return (
 		<main>
 			<header>
@@ -12,7 +14,12 @@ const ExploreEvents = props => {
 				</section>
 			</header>
 			<hr />
-			<PreviewsList array={props.events} onClick={props.onClick} />
+			{id === 'events' && (
+				<PreviewsList array={props.events} resource="events" />
+			)}
+			{id === 'talents' && (
+				<PreviewsList array={props.talents} resource="talents" />
+			)}
 		</main>
 	);
 };

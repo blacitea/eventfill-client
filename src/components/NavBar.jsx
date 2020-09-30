@@ -1,17 +1,48 @@
 import React, { useState } from 'react';
 import './NavBar.scss';
+import { Link } from 'react-router-dom';
 
 const NavBar = props => {
-	const [user, setUser] = useState(false);
-	console.log(user);
+	const [open, setOpen] = useState(false);
+
+	const Dropdown = props => {
+		return (
+			<ul className="drop-down">
+				<Link to="/create/event">
+					<li>New Event</li>
+				</Link>
+				<Link to="/create/talent">
+					<li>New Talent Profile</li>
+				</Link>
+			</ul>
+		);
+	};
 	return (
 		<nav>
-			<section className="logo">EVENTFILL</section>
+			<Link className="router-link" to="/">
+				<section className="logo">EVENTFILL</section>
+			</Link>
 			<ul className="links">
-				<li>Events</li>
-				<li>Talents</li>
-				<li>My Profile</li>
-        <li>Log Out</li>
+				<Link to="/">
+					<li>Home</li>
+				</Link>
+				<Link to="/explore/events">
+					<li>Events</li>
+				</Link>
+				<Link to="/explore/talents">
+					<li>Talents</li>
+				</Link>
+				<li
+					onClick={() => {
+						setOpen(!open);
+					}}
+				>
+					Create
+				</li>
+				{open && <Dropdown />}
+				<Link to="/">
+					<li>Log Out</li>
+				</Link>
 			</ul>
 		</nav>
 	);
