@@ -48,8 +48,6 @@ const EventForm = props => {
           setSubmitting(false);
         }, 400);
       }}
-      validateOnChange={false}
-      validateOnBlur={false}
     >
       {({ isSubmitting }) => (
         <Form>

@@ -34,8 +34,6 @@ const InvitationForm = ({ talent, events }) => {
             setSubmitting(false);
           }, 400);
         }}
-        validateOnChange={false}
-        validateOnBlur={false}
       >
         {({ isSubmitting }) => (
           <Form>
