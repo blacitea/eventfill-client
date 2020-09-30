@@ -1,0 +1,42 @@
+.message-center {
+	display: flex;
+	align-items: center;
+	justify-items: center;
+
+	.message-center-nav {
+		flex-direction: column;
+		display: flex;
+		margin: 0 2em;
+
+		.message-center-title {
+			font-size: 2em;
+		}
+
+		.message-center-contacts {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+	.message-center-messages {
+		flex-direction: column;
+		align-items: center;
+		justify-items: center;
+		display: flex;
+		margin: 0 2em;
+	}
+	.messages-board {
+		background-color: #fff;
+		height: 40vh;
+		width: 50vw;
+		margin: 1em;
+
+		.messages-board-recipient-name {
+			background-color: black;
+			color: azure;
+			text-align: center;
+			font-size: 2em;
+			font-weight: bold;
+			margin: 0;
+		}
+	}
+}
