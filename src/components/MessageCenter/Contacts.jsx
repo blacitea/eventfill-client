@@ -3,7 +3,7 @@ import Contact from './Contact';
 
 const Contacts = ({ contactList, setRecipient }) => {
 	return (
-		<section>
+		<section className="message-center-contacts">
 			{contactList.map(contact => {
 				return (
 					<Contact
