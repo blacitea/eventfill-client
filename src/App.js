@@ -6,7 +6,8 @@ import Footer from './components/Footer';
 import Modal from './components/Modal';
 import { talents, events, locations, categories } from './components/mockData';
 import Index from './components/views/Index';
-import ExploreEvents from './components/views/ExploreEvents';
+import Explore from './components/views/Explore';
+import Create from './components/views/Create';
 
 // React router
 import { Switch, Route } from 'react-router-dom';
@@ -71,13 +72,12 @@ const App = props => {
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
 			<Switch>
-				<Route path="/events">
-					<ExploreEvents
-						events={events}
-						onClick={() =>
-							alert('Clicked! I do not know what do to about the click yet')
-						}
-					/>
+				<Route path="/create/:id">
+					<Create locations={locations} categories={categories} />
+				</Route>
+
+				<Route path="/explore/:id">
+					<Explore events={events} talents={talents} />
 				</Route>
 				<Route path="/">
 					<Index
