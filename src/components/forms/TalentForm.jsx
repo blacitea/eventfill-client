@@ -100,7 +100,7 @@ const TalentForm = props => {
 
           <div className="form-group">
             <label htmlFor="description">Description</label>
-            <Field name="description" as="textarea" placeholder="Tell us about your skills!"/>
+            <Field name="description" as="textarea" placeholder="Tell us about your skills!" cols={50} rows={3} />
             <ErrorMessage name="description" component="div" />
           </div>
 
