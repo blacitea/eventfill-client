@@ -9,8 +9,8 @@ const validate = values => {
 	if (!values.location) {
 		errors.location = 'Where are you located?';
 	}
-	if (!values.category) {
-		errors.category = 'Please give us a category to promote your talent.';
+	if (!values.genre) {
+		errors.genre = 'Please give us a genre to promote your talent.';
 	}
 	if (!values.image_url) {
 		errors.image_url = 'Pick a photo to represent your talent profile!';

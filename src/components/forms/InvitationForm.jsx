@@ -9,12 +9,11 @@ const validate = values => {
 	return errors;
 };
 
-const InvitationForm = props => {
+const InvitationForm = ({ talent, events }) => {
 	const formik = useFormik({
 		initialValues: {
 			event: '',
 			message: '',
-			talent: props.talent,
 		},
 		validate,
 		onSubmit: values => {
@@ -28,41 +27,32 @@ const InvitationForm = props => {
 	});
 	return (
 		<form onSubmit={formik.handleSubmit}>
-			<img
-				src={formik.values.talent.image_url}
-				alt={formik.values.talent.name}
-			/>
+			<img src={talent.image_url} alt={talent.name} />
 			<p>
 				Invite
 				<br />
-				<span>{formik.values.talent.name}</span>
+				<span>{talent.name}</span>
 				<br />
 				to your event!
 			</p>
 			<label htmlFor="event">Event</label>
-			<select
-				name="event"
-				id="event"
-				onChange={formik.handleChange}
-				value={formik.values.event}
-			>
+			<select id="event" {...formik.getFieldProps('event')}>
 				<option value="" disabled selected>
 					Pick an Event
 				</option>
-				{props.events.map(event => (
+				{events.map(event => (
 					<option value={event.id} key={event.id}>
 						{event.name}
 					</option>
 				))}
 			</select>
-			{formik.errors.event ? <div>{formik.errors.event}</div> : null}
+			{formik.errors.event && (
+				<div className="form-error">{formik.errors.event}</div>
+			)}
+
 			<label htmlFor="message">Message (Optional)</label>
-			<textarea
-				name="message"
-				id="message"
-				onChange={formik.handleChange}
-				value={formik.values.message}
-			/>
+			<textarea id="message" {...formik.getFieldProps('message')} />
+
 			<button type="submit">Send Invitation</button>
 		</form>
 	);

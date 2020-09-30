@@ -4,9 +4,14 @@ import './App.scss';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
-import { talents, events, locations, categories } from './components/mockData';
+import { talents, events, locations, genres } from './components/mockData';
 import Index from './components/views/Index';
-import ExploreEvents from './components/views/ExploreEvents';
+import Explore from './components/views/Explore';
+import Create from './components/views/Create';
+import Show from './components/views/Show';
+
+// React router
+import { Switch, Route } from 'react-router-dom';
 
 /* Modal test
 import Calendar from './components/Calendar';
@@ -60,33 +65,42 @@ const App = props => {
 					talent={talents[1]}
 					options={events.filter(event => event.user_id === 1)}
 				/> */}
-				{/* <EventForm locations={locations} categories={categories} /> */}
-				<TalentForm locations={locations} categories={categories} />
+				{/* <EventForm locations={locations} genres={genres} /> */}
+				<TalentForm locations={locations} genres={genres} />
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
-			{/* <PreviewsList
-				title={'Events Highlights'}
-				message="Check out these events and plan your attendance!"
-				array={events}
-			/>
+			<Switch>
+				<Route path="/create/:id">
+					<Create locations={locations} genres={genres} />
+				</Route>
 
-			<HighlightsList title="Our hottest Talent profiles!" array={talents} /> */}
-			<Index
-				events={events}
-				talents={talents}
-				onClick={() =>
-					alert('Clicked! I do not know what do to about the click yet')
-				}
-			/>
-			<ExploreEvents
-				events={events}
-				onClick={() =>
-					alert('Clicked! I do not know what do to about the click yet')
-				}
-			/>
+				<Route path="/explore/:id">
+					<Explore events={events} talents={talents} />
+				</Route>
+
+				<Route path="/:resource/:id">
+					<Show
+						events={events}
+						talents={talents}
+						locations={locations}
+						genres={genres}
+					/>
+				</Route>
+
+				<Route path="/">
+					<Index
+						events={events}
+						talents={talents}
+						onClick={() =>
+							alert('Clicked! I do not know what do to about the click yet')
+						}
+					/>
+				</Route>
+			</Switch>
+
 			<Footer />
 		</div>
 	);
