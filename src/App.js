@@ -9,6 +9,7 @@ import Index from './components/views/Index';
 import Explore from './components/views/Explore';
 import Create from './components/views/Create';
 import Show from './components/views/Show';
+import MessageCenter from './components/MessageCenter';
 
 // React router
 import { Switch, Route } from 'react-router-dom';
@@ -74,6 +75,10 @@ const App = props => {
 
 				<Route path="/explore/:id">
 					<Explore events={events} talents={talents} />
+				</Route>
+
+				<Route path="/messages/:id">
+					<MessageCenter />
 				</Route>
 
 				<Route path="/:resource/:id">
