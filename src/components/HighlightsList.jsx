@@ -10,12 +10,8 @@ const HighlightsList = ({ title, array, resource }) => {
 			<ul className="highlightslist-list">
 				{array.map(item => {
 					return (
-						<Link to={`/${resource}/${item.id}`}>
-							<Highlight
-								key={item.id}
-								name={item.name}
-								imageURL={item.image_url}
-							/>
+						<Link to={`/${resource}/${item.id}`} key={item.id}>
+							<Highlight name={item.name} imageURL={item.image_url} />
 						</Link>
 					);
 				})}

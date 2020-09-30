@@ -10,9 +10,8 @@ const PreviewsList = ({ array, title, message, resource }) => {
 			<h4 className="previewsList-message">{message}</h4>
 			<ul className="previewsList-list">
 				{array.map(item => (
-					<Link to={`/${resource}/${item.id}`}>
+					<Link to={`/${resource}/${item.id}`} key={item.id}>
 						<Preview
-							key={item.id}
 							name={item.name}
 							image_url={item.image_url}
 							description={item.description}
