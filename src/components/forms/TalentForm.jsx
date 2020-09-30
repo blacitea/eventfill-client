@@ -109,11 +109,6 @@ const TalentForm = props => {
             <Field name="open_for_booking" type="checkbox" />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="open_for_commission">Accepting Commissions?</label>
-            <Field name="open_for_commission" type="checkbox" />
-          </div>
-
           <button className="form-submit" type="submit" disabled={isSubmitting}>
             Submit
           </button>

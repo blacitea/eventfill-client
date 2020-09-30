@@ -60,8 +60,8 @@ const App = props => {
 					}}
 				/> */}
 				{/* <EventForm locations={locations} genres={genres} /> */}
-				{/* <TalentForm locations={locations} categories={genres} /> */}
-        <InvitationForm talent={talents[0]} events={events} />
+				<TalentForm locations={locations} categories={genres} />
+        {/* <InvitationForm talent={talents[0]} events={events} /> */}
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
