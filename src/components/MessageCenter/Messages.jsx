@@ -7,7 +7,8 @@ const Messages = ({ messages, recipient }) => {
 			<p className="messages-board-recipient-name">
 				{recipient && recipient.name}
 			</p>
-			{messages &&
+			{recipient &&
+				messages &&
 				messages.map(message => (
 					<Message
 						key={message.id}
