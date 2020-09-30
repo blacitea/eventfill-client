@@ -4,19 +4,19 @@ import Send from './Send';
 import Contacts from './Contacts';
 import Messages from './Messages';
 import { useParams } from 'react-router-dom';
-import { users } from '../mockData';
+import { users, msgs } from '../mockData';
 
 const MessageCenter = props => {
 	const { id } = useParams();
-	const [messages, setMessages] = useState([]);
-	const [recipient, setRecipient] = useState(2);
-	const [contactList, setContactList] = useState([]);
+	const [messages, setMessages] = useState(msgs);
+	const [recipient, setRecipient] = useState('');
+	const [contactList, setContactList] = useState(users);
+
 	useEffect(() => {
 		//axios calls to BE for message data
 		document.title = `Message center for user_id ${id}`;
-		setContactList(users);
-		setMessages();
 	});
+
 	return (
 		<main className="message-center">
 			<section className="message-center-nav">
