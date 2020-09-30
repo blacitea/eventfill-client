@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const validate = values => {
 	const errors = {};
@@ -22,106 +22,89 @@ const validate = values => {
 };
 
 const TalentForm = props => {
-	const formik = useFormik({
-		initialValues: {
-			name: '',
-			location: '',
-			category: '',
-			image_url: '',
-			personal_link: '',
-			description: '',
-			open_for_booking: false,
-			open_for_commission: false,
-		},
-		validate,
-		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-			formik.resetForm();
-		},
-	});
-
 	return (
-		<form onSubmit={formik.handleSubmit}>
-			<label htmlFor="name">Your Name</label>
-			<input id="name" type="text" {...formik.getFieldProps('name')} />
-			{formik.errors.name ? (
-				<div className="form-validation-error">{formik.errors.name}</div>
-			) : null}
+    <Formik
+      initialValues={{
+        name: '',
+        location: '',
+        category: '',
+        image_url: '',
+        personal_link: '',
+        description: '',
+        open_for_booking: false,
+        open_for_commission: false,
+      }}
+      validate={validate}
+      onSubmit={(values, { setSubmitting }) => {
+        console.log('test');
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+      validateOnChange={false}
+      validateOnBlur={false}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <label htmlFor="name">Your Name</label>
+          <Field name="name" />
+          <ErrorMessage name="name" component="div" />
 
-			<label htmlFor="location">Location</label>
-			<select id="location" {...formik.getFieldProps('location')}>
-				<option value="" disabled selected>
-					Select a city
-				</option>
-				{props.locations
-					? props.locations.map(location => (
-							<option key={location.id} value={location.id}>
-								{location.name}
-							</option>
-					  ))
-					: null}
-			</select>
-			{formik.errors.location ? (
-				<div className="form-validation-error">{formik.errors.location}</div>
-			) : null}
+          <label htmlFor="name">Location</label>
+          <Field name="location" as="select">
+            <option value="" disabled selected>
+              Select a city
+            </option>
+            {props.locations
+              ? props.locations.map(location => (
+                  <option key={location.id} value={location.id}>
+                    {location.name}
+                  </option>
+                ))
+              : null}
+          </Field>
+          <ErrorMessage name="location" component="div" />
 
-			<label htmlFor="category">Primary Category</label>
-			<select id="category" {...formik.getFieldProps('category')}>
-				<option value="" disabled selected>
-					Select a genre
-				</option>
-				{props.categories
-					? props.categories.map(category => (
-							<option key={category.id} value={category.id}>
-								{category.name}
-							</option>
-					  ))
-					: null}
-			</select>
-			{formik.errors.category ? (
-				<div className="form-validation-error">{formik.errors.category}</div>
-			) : null}
+          <label htmlFor="category">Category</label>
+          <Field name="category" as="select">
+            <option value="" disabled selected>
+              Select a genre
+            </option>
+            {props.categories
+              ? props.categories.map(category => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))
+              : null}
+          </Field>
+          <ErrorMessage name="category" component="div" />
 
-			<label htmlFor="image_url">Cover Image URL</label>
-			<input id="image_url" {...formik.getFieldProps('image_url')} />
-			{formik.errors.image_url ? (
-				<div className="form-validation-error">{formik.errors.image_url}</div>
-			) : null}
+          <label htmlFor="image_url">Cover Image URL</label>
+          <Field name="image_url" />
+          <ErrorMessage name="image_url" component="div" />
 
-			<label htmlFor="personal_link">Portfolio Link URL</label>
-			<input id="personal_link" {...formik.getFieldProps('personal_link')} />
-			{formik.errors.personal_link ? (
-				<div className="form-validation-error">
-					{formik.errors.personal_link}
-				</div>
-			) : null}
+          <label htmlFor="personal_link">Portfolio Link URL</label>
+          <Field name="personal_link" />
+          <ErrorMessage name="personal_link" component="div" />
 
-			<label htmlFor="description">Description</label>
-			<textarea
-				id="description"
-				{...formik.getFieldProps('description')}
-				placeholder="Tell people about your skills and talents."
-			/>
-			{formik.errors.description ? (
-				<div className="form-validation-error">{formik.errors.description}</div>
-			) : null}
+          <label htmlFor="description">Description</label>
+          <Field name="description" as="textarea" />
+          <ErrorMessage name="description" component="div" />
 
-			<label htmlFor="open_for_booking">Accepting Invitation?</label>
-			<input
-				type="checkbox"
-				id="open_for_booking"
-				{...formik.getFieldProps('open_for_booking')}
-			/>
+          <label htmlFor="open_for_booking">Accepting Invitation?</label>
+          <Field name="open_for_booking" type="checkbox" />
 
-			<label htmlFor="open_for_commission">Accepting Commission?</label>
-			<input
-				type="checkbox"
-				id="open_for_commission"
-				{...formik.getFieldProps('open_for_commission')}
-			/>
+          <label htmlFor="open_for_commission">Accepting Commissions?</label>
+          <Field name="open_for_commission" type="checkbox" />
 
-			<button>Submit Talent Profile</button>
-		</form>
+          <button type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
+        </Form>
+      )}
+    </Formik>
 	);
 };
 
