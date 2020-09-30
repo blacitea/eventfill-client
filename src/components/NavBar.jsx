@@ -40,8 +40,8 @@ const NavBar = props => {
 					Create
 				</li>
 				{open && <Dropdown />}
-				<Link to="/">
-					<li>Log Out</li>
+				<Link to={`/messages/1`}>
+					<li>My Messages</li>
 				</Link>
 			</ul>
 		</nav>
