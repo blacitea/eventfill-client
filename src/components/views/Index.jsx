@@ -1,6 +1,7 @@
 import React from 'react';
 import PreviewsList from '../PreviewsList';
 import HighligthsList from '../HighlightsList';
+import { Link } from 'react-router-dom';
 
 const Index = props => {
 	return (
@@ -15,7 +16,9 @@ const Index = props => {
 						sapien at consequat scelerisque, nulla turpis sagittis leo, ac
 						iaculis elit urna vitae lorem.
 					</p>
-					<button>Start an event!</button>
+					<Link to="/create/event">
+						<button>Start an event!</button>
+					</Link>
 				</article>
 				<aside>
 					<img
