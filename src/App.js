@@ -16,6 +16,8 @@ import MessageCenter from './components/MessageCenter';
 // React router
 import { Switch, Route } from 'react-router-dom';
 
+import useModal from './hooks/useModal'
+
 // modal elements
 import Calendar from './components/Calendar';
 import InvitationForm from './components/forms/InvitationForm';
@@ -26,15 +28,7 @@ const App = props => {
 	const [cookies, setCookie] = useCookies(['user_id']);
 
 	const [message, setMessage] = useState('Click the button to load data!');
-  const [modalState, setModalState] = useState({open: false, content: {}});
-  
-	const openModal = (content) => {
-		setModalState({content, open: true});
-	};
-
-	const closeModal = () => {
-		setModalState({...modalState, open: false});
-	};
+  const [modalState, openModal, closeModal] = useModal();
 
 	const fetchData = () => {
 		axios
