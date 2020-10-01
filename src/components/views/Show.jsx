@@ -1,6 +1,6 @@
 import React from 'react';
 import HighlightsList from '../HighlightsList';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import './Show.scss';
 
@@ -47,14 +47,20 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 							>
 								Claim Ticket
 							</button>
+							<Link to="/explore/events">
+								<button>See More Events</button>
+							</Link>
 						</>
 					)}
 					{resource !== 'events' && (
 						<>
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
-								<button>View porfolio</button>
+								<button>View Porfolio</button>
 							</a>
 							<button onClick={openModal}>Invite Talent</button>
+							<Link to="/explore/talents">
+								<button>See More Talents</button>
+							</Link>
 						</>
 					)}
 				</article>
