@@ -68,9 +68,11 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 					{resource === 'events' && (
 						<>
 							<h4 className="event-remaining-spots">
-								{attendeeCount === max_attendees && 'Sold Out'}
+								{max_attendees - attendeeCount === 0 && 'Sold Out'}
 								{max_attendees > attendeeCount &&
-									`Remaining spots: ${attendeeCount}/${max_attendees}`}
+									`Remaining spots: ${
+										max_attendees - attendeeCount
+									}/${max_attendees}`}
 							</h4>
 							<button
 								disabled={attendeeCount === max_attendees}
@@ -85,7 +87,6 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 					)}
 					{resource !== 'events' && (
 						<>
-							Is this working? Talent
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Porfolio</button>
 							</a>
