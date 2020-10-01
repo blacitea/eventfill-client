@@ -1,19 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import HighlightsList from '../HighlightsList';
+import InvitationForm from '../forms/InvitationForm';
 import { useParams, Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+
+import getName from '../../helpers/getName';
+
 import './Show.scss';
 
 const Show = ({ events, talents, genres, locations, openModal }) => {
-	const [cookies] = useCookies();
-	console.log(cookies.user_id);
-	let { resource, id } = useParams();
-	// expect axios call here based on resource (event/talent) and id
-	const renderObj =
-		resource === 'events'
-			? events.filter(event => event.id === Number(id))[0]
-			: talents.filter(talent => talent.id === Number(id))[0];
+	//Set up
+	const { resource, id } = useParams();
 
+	const [showObj, setShowObj] = useState({});
+	const [attendeeCount, setAttendeeCount] = useState(0);
+	const [highlights, setHighlights] = useState({
+		array: [],
+		resource: '',
+		title: '',
+	});
+
+	useEffect(() => {
+		// axios call to get relevant filtered data based on resource (event/talent) and id
+		const mainObj = // returnFromAxios.event/talent
+			resource === 'events'
+				? events.filter(event => event.id === parseInt(id))[0]
+				: talents.filter(talent => talent.id === parseInt(id))[0];
+
+		const childObj = resource === 'events' ? talents : events; //returnFromAxios.event/talent
+
+		const attendees = Math.floor(Math.random() * 10);
+
+		const title =
+			resource === 'events'
+				? 'Talents showing at this event'
+				: 'Attended events';
+		const mode = resource === 'events' ? 'talents' : 'events';
+
+		setShowObj(mainObj);
+		setHighlights({ array: childObj, resource: mode, title: title });
+		setAttendeeCount(attendees);
+	}, [resource, id]);
+
+	const inviteForm = resource === 'talents' && (
+		<InvitationForm talent={showObj} events={events} />
+	);
 	// destructuring the data from axios call
 	const {
 		name,
@@ -23,26 +53,29 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 		location,
 		max_attendees,
 		personal_link,
-	} = renderObj;
+	} = showObj;
 
-	// can abstract to helper function??
-	const summarySentence = `${
-		genres.find(({ id }) => id === genre).name
-	} ${resource} in ${locations.find(({ id }) => id === location).name}`;
+	const genreName = getName(genres, genre);
+	const locationName = getName(locations, location);
 
 	return (
 		<main>
 			<section className="show-display">
 				<article className="show-info">
 					<h1 className="show-info-title">{name}</h1>
-					<h2>{summarySentence}</h2>
+					<h2>{`${genreName} ${resource} in ${locationName}`}</h2>
 					<p>{description}</p>
 					{resource === 'events' && (
 						<>
 							<h4 className="event-remaining-spots">
-								Remaining spots: {max_attendees}/{max_attendees}
+								{max_attendees - attendeeCount === 0 && 'Sold Out'}
+								{max_attendees > attendeeCount &&
+									`Remaining spots: ${
+										max_attendees - attendeeCount
+									}/${max_attendees}`}
 							</h4>
 							<button
+								disabled={attendeeCount === max_attendees}
 								onClick={() => alert('some logic to change remaining spots')}
 							>
 								Claim Ticket
@@ -57,7 +90,9 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Porfolio</button>
 							</a>
-							<button onClick={openModal}>Invite Talent</button>
+							<button onClick={() => openModal(inviteForm)}>
+								Invite Talent
+							</button>
 							<Link to="/explore/talents">
 								<button>See More Talents</button>
 							</Link>
@@ -68,16 +103,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 					<img src={image_url} alt={name} />
 				</article>
 			</section>
-			<HighlightsList
-				//maybe helper function?
-				array={resource === 'events' ? talents : events}
-				resource={resource === 'events' ? 'talents' : 'events'}
-				title={
-					resource === 'events'
-						? 'Talents showing at this event'
-						: 'Attended events'
-				}
-			/>
+			<HighlightsList {...highlights} />
 		</main>
 	);
 };
