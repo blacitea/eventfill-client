@@ -6,7 +6,7 @@ import './Explore.scss';
 const Explore = props => {
 	let { id } = useParams();
 	return (
-		<main>
+		<main className="explore">
 			<header>
 				<h1 className="title">
 					{id === 'events' ? 'Explore Events' : 'Explore Talents'}
