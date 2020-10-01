@@ -7,9 +7,9 @@ import './Show.scss';
 const Show = ({ events, talents, genres, locations, openModal }) => {
 	//Set up
 	const { resource, id } = useParams();
-	console.log(resource, id);
 
 	const [showObj, setShowObj] = useState({});
+	const [attendeeCount, setAttendeeCount] = useState(0);
 	const [highlights, setHighlights] = useState({
 		array: [],
 		resource: '',
@@ -22,9 +22,10 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 			resource === 'events'
 				? events.filter(event => event.id === parseInt(id))[0]
 				: talents.filter(talent => talent.id === parseInt(id))[0];
-		console.log(mainObj);
+
 		const childObj = resource === 'events' ? talents : events; //returnFromAxios.event/talent
-		console.log(childObj);
+
+		const attendees = 10; //Math.floor(Math.random() * 10);
 
 		const title =
 			resource === 'events'
@@ -34,6 +35,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 
 		setShowObj(mainObj);
 		setHighlights({ array: childObj, resource: mode, title: title });
+		setAttendeeCount(attendees);
 	}, [resource, id]);
 
 	const inviteForm = resource === 'talents' && (
@@ -67,11 +69,15 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 					<p>{description}</p>
 					{resource === 'events' && (
 						<>
-							Is this working? Event
 							<h4 className="event-remaining-spots">
-								Remaining spots: {max_attendees}/{max_attendees}
+								{attendeeCount === max_attendees && 'Sold Out'}
+								{max_attendees > attendeeCount &&
+									`Remaining spots: ${attendeeCount}/${max_attendees}`}
 							</h4>
 							<button
+								// {
+								// 	(attendeeCount === max_attendees ? 'disabled' : ''
+								// }
 								onClick={() => alert('some logic to change remaining spots')}
 							>
 								Claim Ticket
