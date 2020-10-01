@@ -4,9 +4,9 @@ import { useParams, Link } from 'react-router-dom';
 import './Explore.scss';
 
 // mock data
-import { talents, events, locations, genres } from '../mockData';
+import { talents, events } from '../mockData';
 
-const Explore = props => {
+const Explore = ({locations, genres}) => {
   let { id } = useParams();
   const [collection, setCollection] = useState([]);
   const [location, setLocation] = useState('');

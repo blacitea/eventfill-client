@@ -86,7 +86,7 @@ const App = props => {
 				</Route>
 
 				<Route path="/explore/:id">
-					<Explore events={events} talents={talents} />
+					<Explore locations={locations} genres={genres} />
 				</Route>
 
 				<Route path="/messages">
