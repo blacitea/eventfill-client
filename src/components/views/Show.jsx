@@ -1,19 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import HighlightsList from '../HighlightsList';
+import InvitationForm from '../forms/InvitationForm';
 import { useParams, Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 import './Show.scss';
 
 const Show = ({ events, talents, genres, locations, openModal }) => {
-	const [cookies] = useCookies();
-	console.log(cookies.user_id);
-	let { resource, id } = useParams();
-	// expect axios call here based on resource (event/talent) and id
-	const renderObj =
-		resource === 'events'
-			? events.filter(event => event.id === Number(id))[0]
-			: talents.filter(talent => talent.id === Number(id))[0];
+	//Set up
+	const { resource, id } = useParams();
+	console.log(resource, id);
 
+	const [showObj, setShowObj] = useState({});
+	const [highlights, setHighlights] = useState({
+		array: [],
+		resource: '',
+		title: '',
+	});
+
+	useEffect(() => {
+		// axios call to get relevant filtered data based on resource (event/talent) and id
+		const mainObj = // returnFromAxios.event/talent
+			resource === 'events'
+				? events.filter(event => event.id === parseInt(id))[0]
+				: talents.filter(talent => talent.id === parseInt(id))[0];
+		console.log(mainObj);
+		const childObj = resource === 'events' ? talents : events; //returnFromAxios.event/talent
+		console.log(childObj);
+
+		const title =
+			resource === 'events'
+				? 'Talents showing at this event'
+				: 'Attended events';
+		const mode = resource === 'events' ? 'talents' : 'events';
+
+		setShowObj(mainObj);
+		setHighlights({ array: childObj, resource: mode, title: title });
+	}, [resource, id]);
+
+	const inviteForm = resource === 'talents' && (
+		<InvitationForm talent={showObj} events={events} />
+	);
 	// destructuring the data from axios call
 	const {
 		name,
@@ -23,12 +48,15 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 		location,
 		max_attendees,
 		personal_link,
-	} = renderObj;
+	} = showObj;
+
+	const genreName = genre && genres.find(({ id }) => id === genre).name;
+	const locationName =
+		location && locations.find(({ id }) => id === location).name;
 
 	// can abstract to helper function??
-	const summarySentence = `${
-		genres.find(({ id }) => id === genre).name
-	} ${resource} in ${locations.find(({ id }) => id === location).name}`;
+	console.log(resource);
+	const summarySentence = `${genreName} ${resource} in ${locationName}`;
 
 	return (
 		<main>
@@ -39,6 +67,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 					<p>{description}</p>
 					{resource === 'events' && (
 						<>
+							Is this working? Event
 							<h4 className="event-remaining-spots">
 								Remaining spots: {max_attendees}/{max_attendees}
 							</h4>
@@ -54,10 +83,13 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 					)}
 					{resource !== 'events' && (
 						<>
+							Is this working? Talent
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Porfolio</button>
 							</a>
-							<button onClick={openModal}>Invite Talent</button>
+							<button onClick={() => openModal(inviteForm)}>
+								Invite Talent
+							</button>
 							<Link to="/explore/talents">
 								<button>See More Talents</button>
 							</Link>
@@ -68,16 +100,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 					<img src={image_url} alt={name} />
 				</article>
 			</section>
-			<HighlightsList
-				//maybe helper function?
-				array={resource === 'events' ? talents : events}
-				resource={resource === 'events' ? 'talents' : 'events'}
-				title={
-					resource === 'events'
-						? 'Talents showing at this event'
-						: 'Attended events'
-				}
-			/>
+			<HighlightsList {...highlights} />
 		</main>
 	);
 };
