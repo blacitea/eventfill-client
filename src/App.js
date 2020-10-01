@@ -65,10 +65,10 @@ const App = props => {
 					}}
 				/> */}
 				{/* <EventForm locations={locations} genres={genres} /> */}
-				<TalentForm locations={locations} categories={genres} />
-				{/* <InvitationForm talent={talents[0]} events={events} /> */}
+				{/* <TalentForm locations={locations} categories={genres} /> */}
+				<InvitationForm talent={talents[0]} events={events} />
 			</Modal>
-			<NavBar />
+			<NavBar cookies={cookies} />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
@@ -85,12 +85,13 @@ const App = props => {
 					<Explore events={events} talents={talents} />
 				</Route>
 
-				<Route path="/messages/:id">
+				<Route path="/messages">
 					<MessageCenter />
 				</Route>
 
 				<Route path="/:resource/:id">
 					<Show
+						openModal={openModal}
 						events={events}
 						talents={talents}
 						locations={locations}

@@ -8,6 +8,7 @@ const Send = props => {
 		event.preventDefault();
 		const msg = { sender, recipient, text };
 		alert(JSON.stringify(msg));
+		setText('');
 	};
 	return (
 		<form className="message-send" onSubmit={submitHandler}>
