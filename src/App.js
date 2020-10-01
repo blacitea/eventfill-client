@@ -91,6 +91,7 @@ const App = props => {
 
 				<Route path="/:resource/:id">
 					<Show
+						openModal={openModal}
 						events={events}
 						talents={talents}
 						locations={locations}
