@@ -28,7 +28,7 @@ const App = props => {
 	const [cookies, setCookie] = useCookies(['user_id']);
 
 	const [message, setMessage] = useState('Click the button to load data!');
-  const [modalState, openModal, closeModal] = useModal();
+  const {modalState, openModal, closeModal} = useModal();
 
 	const fetchData = () => {
 		axios

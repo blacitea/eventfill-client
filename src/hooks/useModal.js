@@ -11,5 +11,5 @@ export default function useModal() {
 		setModalState({...modalState, open: false});
 	};
   
-  return [modalState, openModal, closeModal];
+  return { modalState, openModal, closeModal };
 }
