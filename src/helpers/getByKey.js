@@ -1,8 +1,8 @@
 const getByKey = (obj, key) => {
+	let result = {};
 	if (key) {
-		return obj.find(({ id }) => id === key);
-	} else {
-		return {};
+		result = obj.find(({ id }) => parseInt(id) === parseInt(key));
 	}
+	return result;
 };
 export default getByKey;
