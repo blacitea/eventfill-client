@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 const NavBar = props => {
 	const [open, setOpen] = useState(false);
-	console.log(props.cookies.user_id);
-
 	const Dropdown = props => {
 		return (
 			<ul className="drop-down">
