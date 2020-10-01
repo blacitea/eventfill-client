@@ -25,7 +25,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 
 		const childObj = resource === 'events' ? talents : events; //returnFromAxios.event/talent
 
-		const attendees = 10; //Math.floor(Math.random() * 10);
+		const attendees = Math.floor(Math.random() * 10);
 
 		const title =
 			resource === 'events'
@@ -75,9 +75,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 									`Remaining spots: ${attendeeCount}/${max_attendees}`}
 							</h4>
 							<button
-								// {
-								// 	(attendeeCount === max_attendees ? 'disabled' : ''
-								// }
+								disabled={attendeeCount === max_attendees}
 								onClick={() => alert('some logic to change remaining spots')}
 							>
 								Claim Ticket
