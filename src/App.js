@@ -16,6 +16,7 @@ import MessageCenter from './components/MessageCenter';
 // React router
 import { Switch, Route } from 'react-router-dom';
 
+// hooks
 import useModal from './hooks/useModal'
 
 // modal elements
@@ -23,6 +24,34 @@ import Calendar from './components/Calendar';
 import InvitationForm from './components/forms/InvitationForm';
 import EventForm from './components/forms/EventForm';
 import TalentForm from './components/forms/TalentForm';
+
+const demoCalendar = (
+  <Calendar
+    events={events}
+    onClick={() => alert('Event clicked! pending url')}
+    buttonName={'Whatever'}
+    customButtons={{
+      Whatever: {
+        text: 'Whatever button you want',
+        click: () => {
+          alert('add logic for button click');
+        },
+      },
+    }}
+  /> 
+);
+
+const demoInviteForm = (
+  <InvitationForm talent={talents[0]} events={events} />
+);
+
+const demoEventForm = (
+  <EventForm locations={locations} genres={genres} />
+);
+
+const demoTalentForm = (
+  <TalentForm locations={locations} categories={genres} />
+);
 
 const App = props => {
 	const [cookies, setCookie] = useCookies(['user_id']);
@@ -44,28 +73,16 @@ const App = props => {
 
 	return (
 		<div className="App">
-			<Modal isOpen={modalState.open} close={closeModal} content={modalState.content} >
-				{/* <Calendar
-					events={events}
-					onClick={() => alert('Event clicked! pending url')}
-					buttonName={'Whatever'}
-					customButtons={{
-						Whatever: {
-							text: 'Whatever button you want',
-							click: () => {
-								alert('add logic for button click');
-							},
-						},
-					}}
-				/> */}
-				{/* <EventForm locations={locations} genres={genres} /> */}
-				{/* <TalentForm locations={locations} categories={genres} /> */}
-				{/* <InvitationForm talent={talents[0]} events={events} /> */}
-			</Modal>
+			<Modal isOpen={modalState.open} close={closeModal} content={modalState.content} />
 			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
-			<button onClick={() => openModal(<InvitationForm talent={talents[0]} events={events} />)}>Open Modal</button>
+      <div>
+		  	<button onClick={() => openModal(demoCalendar)}>Calendar Modal</button>
+        <button onClick={() => openModal(demoEventForm)}>Event Modal</button>
+        <button onClick={() => openModal(demoTalentForm)}>Talent Modal</button>
+        <button onClick={() => openModal(demoInviteForm)}>Invite Modal</button>
+      </div>
 			<Switch>
 				<Route path="/login/:id">
 					<Login setCookie={setCookie} />
