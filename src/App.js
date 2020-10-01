@@ -26,14 +26,14 @@ const App = props => {
 	const [cookies, setCookie] = useCookies(['user_id']);
 
 	const [message, setMessage] = useState('Click the button to load data!');
-	const [modalIsOpen, setModalIsOpen] = useState(false);
-
-	const openModal = () => {
-		setModalIsOpen(true);
+  const [modalState, setModalState] = useState({open: false, content: {}});
+  
+	const openModal = (content) => {
+		setModalState({content, open: true});
 	};
 
 	const closeModal = () => {
-		setModalIsOpen(false);
+		setModalState({...modalState, open: false});
 	};
 
 	const fetchData = () => {
@@ -50,7 +50,7 @@ const App = props => {
 
 	return (
 		<div className="App">
-			<Modal isOpen={modalIsOpen} close={closeModal}>
+			<Modal isOpen={modalState.open} close={closeModal} content={modalState.content} >
 				{/* <Calendar
 					events={events}
 					onClick={() => alert('Event clicked! pending url')}
@@ -65,13 +65,13 @@ const App = props => {
 					}}
 				/> */}
 				{/* <EventForm locations={locations} genres={genres} /> */}
-				<TalentForm locations={locations} categories={genres} />
+				{/* <TalentForm locations={locations} categories={genres} /> */}
 				{/* <InvitationForm talent={talents[0]} events={events} /> */}
 			</Modal>
 			<NavBar />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
-			<button onClick={openModal}>Open Modal</button>
+			<button onClick={() => openModal(<InvitationForm talent={talents[0]} events={events} />)}>Open Modal</button>
 			<Switch>
 				<Route path="/login/:id">
 					<Login setCookie={setCookie} />
