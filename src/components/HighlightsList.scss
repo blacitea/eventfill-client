@@ -1,10 +1,14 @@
-.highlightslist-list {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	padding: 0;
-}
-h2 {
-	text-align: center;
+.highlightslist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .highlightslist-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 730px;
+    padding: 0;
+  }
 }

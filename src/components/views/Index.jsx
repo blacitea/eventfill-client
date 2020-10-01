@@ -1,11 +1,13 @@
 import React from 'react';
 import PreviewsList from '../PreviewsList';
-import HighligthsList from '../HighlightsList';
+import HighlightsList from '../HighlightsList';
 import { Link } from 'react-router-dom';
+
+import './Index.scss';
 
 const Index = props => {
 	return (
-		<main>
+		<main className="home">
 			<section className="index-focus">
 				<article>
 					<h1>Your Event Starts Here</h1>
@@ -34,11 +36,11 @@ const Index = props => {
 				onClick={props.onClick}
 				resource="events"
 			/>
-			<h2>Our hottest Talent profiles!</h2>
-			<HighligthsList
+			<HighlightsList
 				array={props.talents}
 				onClick={props.onClick}
-				resource="talents"
+        resource="talents"
+        title="Our hottest Talent profiles!"
 			/>
 		</main>
 	);
