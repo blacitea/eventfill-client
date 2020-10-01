@@ -36,11 +36,11 @@ const Index = props => {
 				onClick={props.onClick}
 				resource="events"
 			/>
-			<h2>Our hottest Talent profiles!</h2>
 			<HighlightsList
 				array={props.talents.concat(props.talents)}
 				onClick={props.onClick}
-				resource="talents"
+        resource="talents"
+        title="Our hottest Talent profiles!"
 			/>
 		</main>
 	);
