@@ -3,6 +3,9 @@ import PreviewsList from '../PreviewsList';
 import { useParams, Link } from 'react-router-dom';
 import './Explore.scss';
 
+// mock data
+import { talents, events, locations, genres } from '../mockData';
+
 const Explore = props => {
   let { id } = useParams();
   const [location, setLocation] = useState('');
@@ -29,9 +32,12 @@ const Explore = props => {
             <option value="" disabled >
               Location
             </option>
-            <option value="location-test">
-              TEST
-            </option>
+            {locations &&
+              locations.map(location => (
+                <option key={location.id} value={location.id}>
+                  {location.name}
+                </option>
+              ))}
           </select>
           <select 
             className='location-select' 
@@ -41,15 +47,18 @@ const Explore = props => {
             <option value="" disabled >
               Genre
             </option>
-            <option value="genre-test">
-              TEST
-            </option>
+            {genres &&
+              genres.map(genre => (
+                <option key={genre.id} value={genre.id}>
+                  {genre.name}
+                </option>
+              ))}
           </select>
 					<Link
 						to={`/create/${id === 'events' ? 'event' : 'talent'}`}
 						className="create-button"
 					>
-						<button>Create</button>
+						<button>Add Your Own!</button>
 					</Link>
 				</section>
 			</header>
