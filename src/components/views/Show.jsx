@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import HighlightsList from '../HighlightsList';
 import InvitationForm from '../forms/InvitationForm';
 import { useParams, Link } from 'react-router-dom';
+
+import getName from '../../helpers/getName';
+
 import './Show.scss';
 
 const Show = ({ events, talents, genres, locations, openModal }) => {
@@ -52,20 +55,15 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 		personal_link,
 	} = showObj;
 
-	const genreName = genre && genres.find(({ id }) => id === genre).name;
-	const locationName =
-		location && locations.find(({ id }) => id === location).name;
-
-	// can abstract to helper function??
-	console.log(resource);
-	const summarySentence = `${genreName} ${resource} in ${locationName}`;
+	const genreName = getName(genres, genre);
+	const locationName = getName(locations, location);
 
 	return (
 		<main>
 			<section className="show-display">
 				<article className="show-info">
 					<h1 className="show-info-title">{name}</h1>
-					<h2>{summarySentence}</h2>
+					<h2>{`${genreName} ${resource} in ${locationName}`}</h2>
 					<p>{description}</p>
 					{resource === 'events' && (
 						<>
