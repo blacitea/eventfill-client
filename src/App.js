@@ -75,14 +75,7 @@ const App = props => {
 		<div className="App">
 			<Modal isOpen={modalState.open} close={closeModal} content={modalState.content} />
 			<NavBar cookies={cookies} />
-			<h1>{message}</h1>
-			<button onClick={fetchData}>Fetch Data</button>
-      <div>
-		  	<button onClick={() => openModal(demoCalendar)}>Calendar Modal</button>
-        <button onClick={() => openModal(demoEventForm)}>Event Modal</button>
-        <button onClick={() => openModal(demoTalentForm)}>Talent Modal</button>
-        <button onClick={() => openModal(demoInviteForm)}>Invite Modal</button>
-      </div>
+
 			<Switch>
 				<Route path="/login/:id">
 					<Login setCookie={setCookie} />
@@ -111,6 +104,17 @@ const App = props => {
 				</Route>
 
 				<Route path="/">
+          <div className="debug-panel">
+            <h1>{message}</h1>
+            <button onClick={fetchData}>Fetch Data</button>
+            <div>
+              <button onClick={() => openModal(demoCalendar)}>Calendar Modal</button>
+              <button onClick={() => openModal(demoEventForm)}>Event Modal</button>
+              <button onClick={() => openModal(demoTalentForm)}>Talent Modal</button>
+              <button onClick={() => openModal(demoInviteForm)}>Invite Modal</button>
+            </div>
+          </div>
+
 					<Index
 						events={events}
 						talents={talents}

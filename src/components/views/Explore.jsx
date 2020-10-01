@@ -3,7 +3,7 @@ import PreviewsList from '../PreviewsList';
 import { useParams, Link } from 'react-router-dom';
 import './Explore.scss';
 
-const ExploreEvents = props => {
+const Explore = props => {
 	let { id } = useParams();
 	return (
 		<main>
@@ -35,4 +35,4 @@ const ExploreEvents = props => {
 	);
 };
 
-export default ExploreEvents;
+export default Explore;
