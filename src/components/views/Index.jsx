@@ -7,10 +7,10 @@ import './Index.scss';
 
 const Index = props => {
 	return (
-		<main className="home">
-			<section className="index-focus">
-				<article>
-					<h1>Your Event Starts Here</h1>
+		<main className="index">
+			<section className="splash">
+				<article className="splash-description">
+					<h1>{'Your Event\nStarts Here'}</h1>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
 						faucibus mi et lobortis euismod. Vivamus pellentesque gravida urna,
@@ -19,10 +19,10 @@ const Index = props => {
 						iaculis elit urna vitae lorem.
 					</p>
 					<Link to="/create/event">
-						<button>Start an event!</button>
+						<button>Create an event!</button>
 					</Link>
 				</article>
-				<aside>
+				<aside className="splash-image">
 					<img
 						src="http://www.manaleak.com/mtguk/files/2016/11/Stoneforge-Mystic-1.jpg"
 						alt="main poster"
