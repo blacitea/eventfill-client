@@ -17,11 +17,13 @@ const Explore = props => {
 
     // simulating results of api call
     console.log(`location: ${location || null}, genre ${genre || null}`);
+
     let newCollection = id === "events" ? events : talents;
     newCollection = newCollection
       .filter(item => (!location || item.location === location) && (!genre || item.genre === genre));
     
-    console.log(newCollection)
+    console.log(newCollection);
+    setCollection(newCollection);
 
   }, [location, genre])
 
@@ -72,12 +74,7 @@ const Explore = props => {
 				</section>
 			</header>
 			<hr />
-			{id === 'events' && (
-				<PreviewsList array={props.events} resource="events" />
-			)}
-			{id === 'talents' && (
-				<PreviewsList array={props.talents} resource="talents" />
-			)}
+      <PreviewsList array={collection} resource={id} />
 		</main>
 	);
 };
