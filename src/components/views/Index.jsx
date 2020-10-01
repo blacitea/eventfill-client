@@ -7,8 +7,8 @@ import './Index.scss';
 
 const Index = props => {
 	return (
-		<main className="home">
-			<section className="index-focus">
+		<main className="index">
+			<section className="index-splash">
 				<article>
 					<h1>Your Event Starts Here</h1>
 					<p>
