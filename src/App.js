@@ -104,7 +104,7 @@ const App = props => {
 				</Route>
 
 				<Route path="/">
-          <div className="debug-panel">
+          {/* <div className="debug-panel">
             <h1>{message}</h1>
             <button onClick={fetchData}>Fetch Data</button>
             <div>
@@ -113,7 +113,7 @@ const App = props => {
               <button onClick={() => openModal(demoTalentForm)}>Talent Modal</button>
               <button onClick={() => openModal(demoInviteForm)}>Invite Modal</button>
             </div>
-          </div>
+          </div> */}
 
 					<Index
 						events={events}
