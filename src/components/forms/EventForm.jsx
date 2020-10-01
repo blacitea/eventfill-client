@@ -35,7 +35,7 @@ const EventForm = props => {
 		<Formik
 			initialValues={{
 				user_id: cookies.user_id,
-				eventName: '',
+				name: '',
 				location: '',
 				genre: '',
 				start: '',
@@ -45,7 +45,7 @@ const EventForm = props => {
 			}}
 			validate={validate}
 			onSubmit={(values, { setSubmitting }) => {
-				console.log('test');
+				console.log(values);
 				setTimeout(() => {
 					alert(JSON.stringify(values, null, 2));
 					setSubmitting(false);
