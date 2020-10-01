@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
+import { useCookies } from 'react-cookie';
 import PreviewsList from '../PreviewsList';
 import HighligthsList from '../HighlightsList';
 import { Link } from 'react-router-dom';
 // import { UserContext } from '../context/UserContext';
 
 const Index = props => {
-	console.log('index has rednered');
+	const [cookies, setCookie] = useCookies(['user_id']);
+
+	console.log('index has rednered', cookies);
 	// const { cookies, userId } = useContext(UserContext);
 	// console.log(JSON.stringify(cookies, null, 2));
 	return (

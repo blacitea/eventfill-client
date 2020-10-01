@@ -33,8 +33,8 @@ const App = props => {
 	const [userId, setUserId] = useState(null);
 
 	//useEffect(() => {
-		//setUserId(userId + 100);
-		// setTimeout(() => setCookie('nonsense', Math.random()), 2000);
+	//setUserId(userId + 100);
+	// setTimeout(() => setCookie('nonsense', Math.random()), 2000);
 	// }, []);
 	// /// Begin cookies-hackery
 	// const [cookies, stateSetCookies] = useState({});
