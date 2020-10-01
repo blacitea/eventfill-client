@@ -37,7 +37,7 @@ const Index = props => {
 				resource="events"
 			/>
 			<HighlightsList
-				array={props.talents.concat(props.talents)}
+				array={props.talents}
 				onClick={props.onClick}
         resource="talents"
         title="Our hottest Talent profiles!"
