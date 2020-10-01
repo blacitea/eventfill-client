@@ -3,9 +3,11 @@ import PreviewsList from '../PreviewsList';
 import HighlightsList from '../HighlightsList';
 import { Link } from 'react-router-dom';
 
+import './Index.scss';
+
 const Index = props => {
 	return (
-		<main>
+		<main className="home">
 			<section className="index-focus">
 				<article>
 					<h1>Your Event Starts Here</h1>
