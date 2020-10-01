@@ -8,8 +8,7 @@ const Contacts = ({ contactList, setRecipient }) => {
 				return (
 					<Contact
 						key={contact.id}
-						id={contact.id}
-						setRecipient={setRecipient}
+						onClick={() => setRecipient(contact.id)}
 						name={contact.name}
 					/>
 				);
