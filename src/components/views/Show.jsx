@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import './Show.scss';
 
-const Show = ({ events, talents, genres, locations }) => {
+const Show = ({ events, talents, genres, locations, openModal }) => {
 	const [cookies] = useCookies();
 	console.log(cookies.user_id);
 	let { resource, id } = useParams();
@@ -50,9 +50,12 @@ const Show = ({ events, talents, genres, locations }) => {
 						</>
 					)}
 					{resource !== 'events' && (
-						<a href={personal_link} rel="noopener noreferrer" target="_blank">
-							<button>View porfolio</button>
-						</a>
+						<>
+							<a href={personal_link} rel="noopener noreferrer" target="_blank">
+								<button>View porfolio</button>
+							</a>
+							<button onClick={openModal}>Invite Talent</button>
+						</>
 					)}
 				</article>
 				<article className="show-image">
