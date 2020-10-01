@@ -5,9 +5,10 @@ const Messages = ({ messages, recipient, owner }) => {
 	return (
 		<section className="messages-board">
 			<p className="messages-board-recipient-name">
-				{recipient && recipient.name}
+				{!recipient.name && 'Select a user to get in touch!'}
+				{recipient.name && recipient.name}
 			</p>
-			{recipient &&
+			{recipient.name &&
 				messages &&
 				messages.map(message => (
 					<Message

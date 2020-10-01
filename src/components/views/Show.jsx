@@ -3,7 +3,7 @@ import HighlightsList from '../HighlightsList';
 import InvitationForm from '../forms/InvitationForm';
 import { useParams, Link } from 'react-router-dom';
 
-import getName from '../../helpers/getName';
+import getByKey from '../../helpers/getByKey';
 
 import './Show.scss';
 
@@ -55,8 +55,8 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 		personal_link,
 	} = showObj;
 
-	const genreName = getName(genres, genre);
-	const locationName = getName(locations, location);
+	const genreName = getByKey(genres, genre).name;
+	const locationName = getByKey(locations, location).name;
 
 	return (
 		<main>
