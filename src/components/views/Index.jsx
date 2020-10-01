@@ -1,6 +1,6 @@
 import React from 'react';
 import PreviewsList from '../PreviewsList';
-import HighligthsList from '../HighlightsList';
+import HighlightsList from '../HighlightsList';
 import { Link } from 'react-router-dom';
 
 const Index = props => {
@@ -35,8 +35,8 @@ const Index = props => {
 				resource="events"
 			/>
 			<h2>Our hottest Talent profiles!</h2>
-			<HighligthsList
-				array={props.talents}
+			<HighlightsList
+				array={props.talents.concat(props.talents)}
 				onClick={props.onClick}
 				resource="talents"
 			/>
