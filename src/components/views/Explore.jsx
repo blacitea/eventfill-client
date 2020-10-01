@@ -26,7 +26,7 @@ const Explore = ({locations, genres}) => {
     console.log(newCollection);
     setCollection(newCollection);
 
-  }, [location, genre])
+  }, [location, genre, id])
 
 
 	return (
