@@ -74,7 +74,7 @@ const App = props => {
 	return (
 		<div className="App">
 			<Modal isOpen={modalState.open} close={closeModal} content={modalState.content} />
-			<NavBar />
+			<NavBar cookies={cookies} />
 			<h1>{message}</h1>
 			<button onClick={fetchData}>Fetch Data</button>
       <div>
@@ -96,12 +96,13 @@ const App = props => {
 					<Explore events={events} talents={talents} />
 				</Route>
 
-				<Route path="/messages/:id">
+				<Route path="/messages">
 					<MessageCenter />
 				</Route>
 
 				<Route path="/:resource/:id">
 					<Show
+						openModal={openModal}
 						events={events}
 						talents={talents}
 						locations={locations}

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const NavBar = props => {
 	const [open, setOpen] = useState(false);
-
 	const Dropdown = props => {
 		return (
 			<ul className="drop-down">
@@ -40,7 +39,7 @@ const NavBar = props => {
 					Create
 				</li>
 				{open && <Dropdown />}
-				<Link to={`/messages/1`}>
+				<Link to="/messages">
 					<li>My Messages</li>
 				</Link>
 			</ul>

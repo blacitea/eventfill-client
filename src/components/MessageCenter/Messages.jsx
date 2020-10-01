@@ -1,7 +1,7 @@
 import React from 'react';
 import Message from './Message';
 
-const Messages = ({ messages, recipient }) => {
+const Messages = ({ messages, recipient, owner }) => {
 	return (
 		<section className="messages-board">
 			<p className="messages-board-recipient-name">
@@ -11,6 +11,7 @@ const Messages = ({ messages, recipient }) => {
 				messages &&
 				messages.map(message => (
 					<Message
+						owner={owner}
 						key={message.id}
 						content={message.content}
 						sender={message.sender_id}
