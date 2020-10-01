@@ -13,6 +13,7 @@ const Modal = ({isOpen, close, ...props}) => {
     >
       <span className='modal-close' onClick={close}>x</span>
       <section className='modal-content'>
+        {props.content}
         {props.children}
       </section>
     </ReactModal>

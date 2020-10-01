@@ -60,5 +60,9 @@ form {
   form {
     align-items: stretch;
     text-align: start;
+
+    .form-group {
+      align-items: inherit;
+    }
   }
 }
