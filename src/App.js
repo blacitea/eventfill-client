@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import './App.scss';
 import NavBar from './components/NavBar';
@@ -13,6 +14,9 @@ import Show from './components/views/Show';
 import Login from './components/Login';
 import MessageCenter from './components/MessageCenter';
 
+//Context Import
+import { UserContext } from './components/context/UserContext';
+
 // React router
 import { Switch, Route } from 'react-router-dom';
 
@@ -24,6 +28,28 @@ import TalentForm from './components/forms/TalentForm';
 
 const App = props => {
 	const [cookies, setCookie] = useCookies(['user_id']);
+	console.log('cookies are now', cookies);
+
+	const [userId, setUserId] = useState(null);
+
+	//useEffect(() => {
+		//setUserId(userId + 100);
+		// setTimeout(() => setCookie('nonsense', Math.random()), 2000);
+	// }, []);
+	// /// Begin cookies-hackery
+	// const [cookies, stateSetCookies] = useState({});
+	// const [pageloadCookies, saveCookieToBrowser] = useCookies();
+	// useEffect(() => {
+	// 	stateSetCookies(pageloadCookies);
+	// });
+	// function setCookies(cookies) {
+	// 	for (let cookie_name in cookies) {
+	// 		saveCookieToBrowser(cookie_name, cookies[cookie_name]);
+	// 	}
+	// 	stateSetCookies(cookies);
+	// }
+	// /// End cookies-hackery.
+	// /// From here, use `cookies` and `setCookies`
 
 	const [message, setMessage] = useState('Click the button to load data!');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -68,17 +94,18 @@ const App = props => {
 				{/* <TalentForm locations={locations} categories={genres} /> */}
 				<InvitationForm talent={talents[0]} events={events} />
 			</Modal>
-			<NavBar cookies={cookies} />
-			<h1>{message}</h1>
+			<NavBar />
+			{/* <h1>{message}</h1> */}
 			<button onClick={fetchData}>Fetch Data</button>
 			<button onClick={openModal}>Open Modal</button>
+			{/* <UserContext.Provider value={{ cookies, setCookies, userId }}> */}
 			<Switch>
 				<Route path="/login/:id">
-					<Login setCookie={setCookie} />
+					<Login setUserId={setUserId} setCookie={setCookie} />
 				</Route>
 
 				<Route path="/create/:id">
-					<Create locations={locations} genres={genres} />
+					<Create locations={locations} genres={genres} cookies={cookies} />
 				</Route>
 
 				<Route path="/explore/:id">
@@ -109,7 +136,7 @@ const App = props => {
 					/>
 				</Route>
 			</Switch>
-
+			{/* </UserContext.Provider> */}
 			<Footer />
 		</div>
 	);

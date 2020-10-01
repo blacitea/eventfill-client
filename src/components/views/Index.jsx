@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PreviewsList from '../PreviewsList';
 import HighligthsList from '../HighlightsList';
 import { Link } from 'react-router-dom';
+// import { UserContext } from '../context/UserContext';
 
 const Index = props => {
+	console.log('index has rednered');
+	// const { cookies, userId } = useContext(UserContext);
+	// console.log(JSON.stringify(cookies, null, 2));
 	return (
 		<main>
 			<section className="index-focus">
