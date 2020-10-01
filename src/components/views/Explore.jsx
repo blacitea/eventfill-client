@@ -8,12 +8,21 @@ import { talents, events, locations, genres } from '../mockData';
 
 const Explore = props => {
   let { id } = useParams();
+  const [collection, setCollection] = useState([]);
   const [location, setLocation] = useState('');
   const [genre, setGenre] = useState('');
 
   useEffect(() => {
-    console.log(`location: ${location || null}, genre ${genre || null}`);
     // axios call to get relevant filtered list of events/profiles here
+
+    // simulating results of api call
+    console.log(`location: ${location || null}, genre ${genre || null}`);
+    let newCollection = id === "events" ? events : talents;
+    newCollection = newCollection
+      .filter(item => (!location || item.location === location) && (!genre || item.genre === genre));
+    
+    console.log(newCollection)
+
   }, [location, genre])
 
 
@@ -27,7 +36,7 @@ const Explore = props => {
           <select 
             className='location-select' 
             defaultValue="" 
-            onChange={(event) => setLocation(event.target.value)}
+            onChange={(event) => setLocation(parseInt(event.target.value))}
           >
             <option value="" disabled >
               Location
@@ -42,7 +51,7 @@ const Explore = props => {
           <select 
             className='location-select' 
             defaultValue="" 
-            onChange={(event) => setGenre(event.target.value)}
+            onChange={(event) => setGenre(parseInt(event.target.value))}
           >
             <option value="" disabled >
               Genre
