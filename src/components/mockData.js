@@ -65,7 +65,7 @@ export const talents = [
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNMSYTAILIUcNLVGZ7JNz4xt96spL4zpv3nQ&usqp=CAU',
 		personal_link: 'https://mtg.gamepedia.com/Nicol_Bolas',
 		location: 1,
-		genre: 2,
+		genre: 1,
 		description:
 			'Aliquam orci tellus, venenatis vel suscipit id, aliquet sed arcu. Curabitur interdum enim a orci luctus, non fermentum ligula tincidunt. Donec at orci a ipsum ullamcorper dignissim eget vel lectus. Aliquam erat volutpat. Praesent sollicitudin convallis faucibus. Curabitur ac suscipit magna, non rhoncus mauris. Cras ac lorem magna. Fusce vitae tellus nisi. Integer tristique iaculis est, in euismod nisl condimentum eu.',
 	},
@@ -87,8 +87,8 @@ export const talents = [
 		name: 'Liliana',
 		image_url: 'https://i.imgur.com/TRrV9e6.jpg',
 		personal_link: 'https://mtg.gamepedia.com/Liliana_Vess',
-		location: 1,
-		genre: 2,
+		location: 2,
+		genre: 3,
 		description:
 			'Ut turpis risus, fermentum at est eget, feugiat pretium odio. Duis placerat, mi eu pretium imperdiet, diam nunc iaculis diam, lobortis dictum nunc risus in erat. Duis nibh urna, cursus vitae enim sed, placerat accumsan urna. Praesent rutrum facilisis sapien a pharetra. Morbi elementum mauris et massa sollicitudin, ut suscipit tellus tincidunt. Vestibulum blandit maximus risus. Donec elementum elementum nulla sit amet sollicitudin. Nulla non mi a mauris hendrerit ultricies. ',
 	},
@@ -98,7 +98,7 @@ export const talents = [
 		name: 'Nissa',
 		image_url: 'https://i.imgur.com/59LE47m.jpg',
 		personal_link: 'https://mtg.gamepedia.com/Nissa_Revane',
-		location: 1,
+		location: 3,
 		genre: 2,
 		description:
 			'Nam ligula mi, fermentum eu rutrum ac, facilisis non sapien. Nulla elementum odio lacus, quis aliquam velit iaculis eu. Quisque eget tempor tortor, eget elementum tellus. Aliquam vel laoreet urna, vitae venenatis magna. Curabitur lectus tellus, rutrum id sapien ac, posuere semper massa. Nam bibendum ligula est. Praesent sit amet nulla nunc. Curabitur elit risus, molestie in tristique non, lobortis vitae ante. Donec rhoncus, lectus vitae tincidunt dignissim, ex orci porttitor arcu, sed lobortis turpis magna nec purus. Donec mi tortor, suscipit at elit in, rutrum auctor turpis.',
