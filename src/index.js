@@ -5,13 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
+import ScrollToTop from './helpers/ScrollToTop';
 
 ReactDOM.render(
 	<CookiesProvider>
 		<Router>
-			<App />
+      <ScrollToTop>
+		  	<App />
+      </ScrollToTop>
 		</Router>
-		,
 	</CookiesProvider>,
 	document.getElementById('root')
 );
