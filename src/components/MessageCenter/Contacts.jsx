@@ -1,15 +1,17 @@
 import React from 'react';
 import Contact from './Contact';
 
-const Contacts = ({ contactList, setRecipient }) => {
+const Contacts = ({ contactList, setRecipient, recipient }) => {
+	const toggleRecipient = id => {
+		id === recipient ? setRecipient('') : setRecipient(id);
+	};
 	return (
 		<section className="message-center-contacts">
 			{contactList.map(contact => {
 				return (
 					<Contact
 						key={contact.id}
-						id={contact.id}
-						setRecipient={setRecipient}
+						onClick={() => toggleRecipient(contact.id)}
 						name={contact.name}
 					/>
 				);

@@ -1,37 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import './MessageCenter.scss';
-import Send from './Send';
+
 import Contacts from './Contacts';
-import Messages from './Messages';
+import MessageBoard from './MessageBoard';
+import getByKey from '../../helpers/getByKey';
 import { users, msgs } from '../mockData';
 import { useCookies } from 'react-cookie';
 
 const MessageCenter = props => {
-	const [messages, setMessages] = useState(msgs);
+	const [messages, setMessages] = useState([]);
 	const [recipient, setRecipient] = useState('');
-	const [contactList, setContactList] = useState(users);
+	const [contactList, setContactList] = useState([]);
 	const [cookies] = useCookies();
 
-	const id = cookies.user_id;
+	const owner = cookies.user_id;
 
 	useEffect(() => {
 		//axios calls to BE for message data
-		document.title = `Message center for user_id ${id}`;
+		document.title = getByKey(users, owner)
+			? `Message center for ${getByKey(users, owner).name}`
+			: 'Message center';
+		setMessages(msgs);
+		setContactList(users);
 	});
 
 	return (
 		<main className="message-center">
 			<section className="message-center-nav">
 				<p className="message-center-title">Message Center</p>
-				<Contacts contactList={contactList} setRecipient={setRecipient} />
+				<Contacts
+					contactList={contactList}
+					setRecipient={setRecipient}
+					recipient={recipient}
+				/>
 			</section>
 			<section className="message-center-messages">
-				<Messages
-					owner={Number(id)}
-					messages={messages}
-					recipient={contactList.filter(contact => contact.id === recipient)[0]}
-				/>
-				<Send sender={Number(id)} recipient={recipient} />
+				{recipient === '' && (
+					<p className="message-center-no-recipient">
+						Select a user to get in touch!
+					</p>
+				)}
+				{recipient && (
+					<MessageBoard
+						owner={owner}
+						messages={messages}
+						contactList={contactList}
+						recipient={recipient}
+					/>
+				)}
 			</section>
 		</main>
 	);
