@@ -10,16 +10,31 @@ const Calendar = props => {
 	useEffect(() => {
 		console.log('Did this happen?');
 		axios.get('/api/events').then(resolve => {
-			const eList = resolve.data.all.map(e => ({
-				...e,
-				url: `/events/${e.id}`,
-			}));
+			const eList = resolve.data.all.map(e => {
+				console.log('before change start', e.start);
+				let startd = new Date(e.start);
+				startd.setDate(startd.getDate() + 1);
+				console.log('after changed', startd);
+
+				console.log('before change end', e.end);
+				let endd = new Date(e.end);
+				console.log('after day conversion', endd);
+				startd.setDate(endd.getDate() + 1);
+				console.log('after changed', endd);
+				return {
+					...e,
+					url: `/events/${e.id}`,
+					start: startd,
+					end: endd,
+				};
+			});
 
 			setEvents(eList);
 		});
 	}, []);
 	//Control what data to display in grid
 	function renderEventContent(eventInfo) {
+		console.log(eventInfo);
 		return (
 			<article className="calendar-grid">
 				<p>{eventInfo.event.extendedProps.name}</p>

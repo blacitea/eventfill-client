@@ -12,7 +12,6 @@ import Show from './components/views/Show';
 import Login from './components/Login';
 import MessageCenter from './components/MessageCenter';
 // Test Calendar
-import Calendar from './components/Calendar';
 
 // React router
 import { Switch, Route } from 'react-router-dom';
@@ -44,8 +43,6 @@ const App = props => {
 		);
 	}, []);
 
-	const demoCalendar = <Calendar />;
-
 	return (
 		<div className="App">
 			<Modal
@@ -53,7 +50,7 @@ const App = props => {
 				close={closeModal}
 				content={modalState.content}
 			/>
-			<NavBar cookies={cookies} />
+			<NavBar openModal={openModal} />
 
 			<Switch>
 				<Route path="/login/:id">
@@ -78,12 +75,12 @@ const App = props => {
 
 				<Route path="/">
 					<div className="debug-panel">
-						<h1>{'Debug'}</h1>
+						{/* <h1>{'Debug'}</h1> */}
 						{/* <button onClick={fetchData}>Fetch Data</button> */}
 						<div>
-							<button onClick={() => openModal(demoCalendar)}>
+							{/* <button onClick={() => openModal(demoCalendar)}>
 								Calendar Modal
-							</button>
+							</button> */}
 							{/* <button onClick={() => openModal(demoEventForm)}>
 								Event Modal
 							</button>
