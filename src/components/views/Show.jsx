@@ -98,38 +98,37 @@ const Show = ({ genres, locations, openModal }) => {
 			<section className="show-display">
 				<article className="show-info">
 					<h1 className="show-info-title">{name}</h1>
-					<h2>{summary}</h2>
-					<p>{description}</p>
-					{resource === 'events' && (
-						<>
-							<h4 className="event-remaining-spots">
-								{max_attendees - attendeeCount === 0 && 'Sold Out'}
-								{max_attendees > attendeeCount &&
-									`Remaining spots: ${
-										max_attendees - attendeeCount
-									}/${max_attendees}`}
-							</h4>
-							<button
-								disabled={attendeeCount === max_attendees}
-								onClick={() => alert('some logic to change remaining spots')}
-							>
-								Claim Ticket
-							</button>
-							<Link to="/explore/events">
-								<button>See More Events</button>
-							</Link>
-						</>
-					)}
-					{resource !== 'events' && (
-						<>
-							<a href={personal_link} rel="noopener noreferrer" target="_blank">
-								<button>View Porfolio</button>
-							</a>
-							<button onClick={() => openModal(<InvitationForm {...invite} />)}>
-								Invite To Event
-							</button>
-						</>
-					)}
+          <section className="show-info-details">
+            <h2>{summary}</h2>
+            <p>{description}</p>
+          </section>
+            {resource === 'events' && (
+              <>
+                <h4 className="event-remaining-spots">
+                  {max_attendees - attendeeCount === 0 && 'Sold Out'}
+                  {max_attendees > attendeeCount &&
+                    `Remaining spots: ${
+                      max_attendees - attendeeCount
+                    }/${max_attendees}`}
+                </h4>
+                <button
+                  disabled={attendeeCount === max_attendees}
+                  onClick={() => alert('some logic to change remaining spots')}
+                >
+                  Claim Ticket
+                </button>
+              </>
+            )}
+            {resource !== 'events' && (
+              <section className="show-info-actions">
+                <a href={personal_link} rel="noopener noreferrer" target="_blank">
+                  <button>View Portfolio</button>
+                </a>
+                <button onClick={() => openModal(<InvitationForm {...invite} />)}>
+                  Invite To Event
+                </button>
+              </section>
+            )}
 				</article>
 				<article className="show-image">
 					<img src={image_url} alt={name} />
