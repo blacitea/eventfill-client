@@ -3,6 +3,7 @@ import HighlightsList from '../HighlightsList';
 import InvitationForm from '../forms/InvitationForm';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment';
 import getByKey from '../../helpers/getByKey';
 import { useCookies } from 'react-cookie';
 
@@ -96,7 +97,9 @@ const Show = ({ genres, locations, openModal }) => {
             <h2>{summary}</h2>
             {start && end &&
               <section className="show-info-dates">
-                {start} - {end}
+                {start.slice(0, 10) !== end.slice(0, 10) && 
+                  moment(start).format('MMMM Do').concat(' - ')}
+                {moment(end).format('MMMM Do, YYYY')}
               </section>
             }
             <p>{description}</p>
