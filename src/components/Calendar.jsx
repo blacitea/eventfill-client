@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import moment from 'moment';
 import './Calendar.scss';
 
 import axios from 'axios';
@@ -12,14 +13,12 @@ const Calendar = props => {
 		axios.get('/api/events').then(resolve => {
 			const eList = resolve.data.all.map(e => {
 				console.log('before change start', e.start);
-				let startd = new Date(e.start);
-				startd.setDate(startd.getDate() + 1);
+				let startd = moment(e.start).add(1, 'days').toISOString();
+
 				console.log('after changed', startd);
 
 				console.log('before change end', e.end);
-				let endd = new Date(e.end);
-				console.log('after day conversion', endd);
-				startd.setDate(endd.getDate() + 1);
+				let endd = moment(e.end).add(1, 'days').toISOString();
 				console.log('after changed', endd);
 				return {
 					...e,
