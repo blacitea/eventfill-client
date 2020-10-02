@@ -19,7 +19,6 @@
     
 		li {
 			display: inline-block;
-			padding: 1em;
     }
     
     a {
@@ -31,5 +30,9 @@
 			width: 2em;
 			border-radius: 50%;
 		}
-	}
+  }
+  
+  .footer-links {
+    padding-right: 1em;
+  }
 }

@@ -1,15 +1,26 @@
 import React from 'react';
 import './Footer.scss';
+import { Link } from 'react-router-dom';
 
 const Footer = props => {
 	return (
 		<section className="footer">
 			<ul className="footer-links">
-				<li>Events</li>
-				<li>Talents</li>
-				<li className="logo">EVENTFILL</li>
-				<li>About</li>
-				<li>Blog</li>
+        <Link to="/explore/events">
+					<li>Events</li>
+				</Link>
+				<Link to="/explore/talents">
+					<li>Talents</li>
+				</Link>
+        <Link to="/">
+			    <li className="logo">EVENTFILL</li>
+        </Link>
+        <Link to="/">
+				  <li>About</li>
+        </Link>
+        <Link to="/">
+			    <li>Blog</li>
+        </Link>
 			</ul>
 			<hr></hr>
 			<ul className="footer-thumbnails">
