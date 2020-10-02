@@ -1,17 +1,21 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import './form.scss';
 
 const validate = values => {
 	const errors = {};
-	if (!values.event) {
-		errors.event = 'Event required to send invitation.';
+	if (!values.event_id) {
+		errors.event_id = 'Event required to send invitation.';
+	}
+	if (!values.time) {
+		errors.time = 'Event required to send invitation.';
 	}
 	return errors;
 };
 
-const InvitationForm = ({ talent, events }) => {
+const InvitationForm = ({ talent, events, closeModal }) => {
 	const [cookies] = useCookies();
 	return (
 		<section className="talent-invite">
@@ -26,24 +30,30 @@ const InvitationForm = ({ talent, events }) => {
 			<Formik
 				initialValues={{
 					sender_id: cookies.user_id,
-					recipient_id: talent.id,
-					event: '',
-					message: '',
+					talent_profile_id: talent.id,
+					time: '',
+					event_id: '',
+					description: '',
 				}}
 				validate={validate}
-				onSubmit={(values, { setSubmitting }) => {
-					console.log('test');
-					setTimeout(() => {
-						alert(JSON.stringify(values, null, 2));
-						setSubmitting(false);
-					}, 400);
+				onSubmit={(values, { setSubmitting, resetForm }) => {
+					setTimeout(() => {}, 400);
+					axios
+						.post('/api/gigs', {
+							gig: { ...values },
+						})
+						.then(() => {
+							resetForm();
+							setSubmitting(false);
+							alert('Invitation sent!Need figure out how to auto close modal');
+						});
 				}}
 			>
 				{({ isSubmitting }) => (
 					<Form>
 						<div className="form-group">
-							<label htmlFor="event">Event</label>
-							<Field name="event" as="select">
+							<label htmlFor="event_id">Event</label>
+							<Field name="event_id" as="select">
 								<option value="" disabled>
 									Pick an Event
 								</option>
@@ -54,13 +64,19 @@ const InvitationForm = ({ talent, events }) => {
 										</option>
 									))}
 							</Field>
-							<ErrorMessage name="event" component="div" />
+							<ErrorMessage name="event_id" component="div" />
 						</div>
 
 						<div className="form-group">
-							<label htmlFor="message">Message (Optional)</label>
+							<label htmlFor="time">Performance Date</label>
+							<Field name="time" type="date" />
+							<ErrorMessage name="time" component="div" />
+						</div>
+
+						<div className="form-group">
+							<label htmlFor="description">Message (Optional)</label>
 							<Field
-								name="message"
+								name="description"
 								as="textarea"
 								placeholder="Write a message to introduce yourself and your event!"
 								cols={30}

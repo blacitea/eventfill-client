@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import './form.scss';
+import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 const validate = values => {
 	const errors = {};
 	if (!values.name) {
 		errors.name = 'Please give us a name to promote you.';
 	}
-	if (!values.location) {
-		errors.location = 'Where are you located?';
+	if (!values.location_id) {
+		errors.location_id = 'Where are you located?';
 	}
-	if (!values.genre) {
-		errors.genre = 'Please give us a genre to promote your talent.';
+	if (!values.genre_id) {
+		errors.genre_id = 'Please give us a genre to promote your talent.';
 	}
 	if (!values.image_url) {
 		errors.image_url = 'Pick a photo to represent your talent profile!';
@@ -25,13 +28,14 @@ const validate = values => {
 
 const TalentForm = props => {
 	const [cookies] = useCookies();
+	const [redirect, setRedirect] = useState({ success: false, id: '' });
 	return (
 		<Formik
 			initialValues={{
 				user_id: cookies.user_id,
 				name: '',
-				location: '',
-				genre: '',
+				location_id: '',
+				genre_id: '',
 				image_url: '',
 				personal_link: '',
 				description: '',
@@ -39,16 +43,22 @@ const TalentForm = props => {
 				open_for_commission: false,
 			}}
 			validate={validate}
-			onSubmit={(values, { setSubmitting }) => {
-				console.log(values);
-				setTimeout(() => {
-					alert(JSON.stringify(values, null, 2));
-					setSubmitting(false);
-				}, 400);
+			onSubmit={(values, { setSubmitting, resetForm }) => {
+				axios
+					.post('/api/talent_profiles', {
+						talent_profile: { ...values },
+					})
+					.then(resolve => {
+						resetForm();
+						setSubmitting(false);
+						alert("All done! Let's take a look at your profile.");
+						setRedirect({ success: true, id: resolve.data.success.id });
+					});
 			}}
 		>
 			{({ isSubmitting }) => (
 				<Form>
+					{redirect.success && <Redirect to={`/talents/${redirect.id}`} />}
 					<div className="form-group">
 						<label htmlFor="name">Your Name</label>
 						<Field name="name" />
@@ -56,8 +66,8 @@ const TalentForm = props => {
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="location">Location</label>
-						<Field name="location" as="select">
+						<label htmlFor="location_id">Location</label>
+						<Field name="location_id" as="select">
 							<option value="" disabled>
 								Select a city
 							</option>
@@ -68,12 +78,12 @@ const TalentForm = props => {
 									</option>
 								))}
 						</Field>
-						<ErrorMessage name="location" component="div" />
+						<ErrorMessage name="location_id" component="div" />
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="genre">Genre</label>
-						<Field name="genre" as="select">
+						<label htmlFor="genre_id">Genre</label>
+						<Field name="genre_id" as="select">
 							<option value="" disabled>
 								Select a genre
 							</option>
@@ -84,7 +94,7 @@ const TalentForm = props => {
 									</option>
 								))}
 						</Field>
-						<ErrorMessage name="genre" component="div" />
+						<ErrorMessage name="genre_id" component="div" />
 					</div>
 
 					<div className="form-group">

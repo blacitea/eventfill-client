@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import './form.scss';
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 const validate = values => {
 	const errors = {};
 	if (!values.name) {
 		errors.name = 'Please give us a name to promote your event.';
 	}
-	if (!values.location) {
-		errors.location = 'Where are you hosting this event?';
+	if (!values.location_id) {
+		errors.location_id = 'Where are you hosting this event?';
 	}
-	if (!values.genre) {
-		errors.genre = 'Please give us a genre to promote your event.';
+	if (!values.genre_id) {
+		errors.genre_id = 'Please give us a genre to promote your event.';
 	}
 	if (!values.start) {
 		errors.start = 'When will the event start?';
@@ -31,29 +33,38 @@ const validate = values => {
 
 const EventForm = props => {
 	const [cookies] = useCookies();
+	const [redirect, setRedirect] = useState({ success: false, id: '' });
 	return (
 		<Formik
 			initialValues={{
 				user_id: cookies.user_id,
 				name: '',
-				location: '',
-				genre: '',
+				location_id: '',
+				genre_id: '',
 				start: '',
 				end: '',
 				image_url: '',
 				description: '',
+				max_attendees: '',
+				accepting_talent: true,
 			}}
 			validate={validate}
-			onSubmit={(values, { setSubmitting }) => {
-				console.log(values);
-				setTimeout(() => {
-					alert(JSON.stringify(values, null, 2));
-					setSubmitting(false);
-				}, 400);
+			onSubmit={(values, { setSubmitting, resetForm }) => {
+				axios
+					.post('/api/events', {
+						event: { ...values },
+					})
+					.then(resolve => {
+						resetForm();
+						setSubmitting(false);
+						alert("All done! Let's take a look at your event.");
+						setRedirect({ success: true, id: resolve.data.success.id });
+					});
 			}}
 		>
 			{({ isSubmitting }) => (
 				<Form>
+					{redirect.success && <Redirect to={`/events/${redirect.id}`} />}
 					<div className="form-group">
 						<label htmlFor="name">Event Name</label>
 						<Field name="name" />
@@ -61,8 +72,8 @@ const EventForm = props => {
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="location">Location</label>
-						<Field name="location" as="select">
+						<label htmlFor="location_id">Location</label>
+						<Field name="location_id" as="select">
 							<option value="" disabled>
 								Select a city
 							</option>
@@ -73,12 +84,12 @@ const EventForm = props => {
 									</option>
 								))}
 						</Field>
-						<ErrorMessage name="location" component="div" />
+						<ErrorMessage name="location_id" component="div" />
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="genre">Genre</label>
-						<Field name="genre" as="select">
+						<label htmlFor="genre_id">Genre</label>
+						<Field name="genre_id" as="select">
 							<option value="" disabled>
 								Select a genre
 							</option>
@@ -89,7 +100,7 @@ const EventForm = props => {
 									</option>
 								))}
 						</Field>
-						<ErrorMessage name="genre" component="div" />
+						<ErrorMessage name="genre_id" component="div" />
 					</div>
 
 					<div className="form-group">
@@ -111,6 +122,12 @@ const EventForm = props => {
 					</div>
 
 					<div className="form-group">
+						<label htmlFor="max_attendees">Maximum number of attendees</label>
+						<Field name="max_attendees" type="number" />
+						<ErrorMessage name="max_attendees" component="div" />
+					</div>
+
+					<div className="form-group">
 						<label htmlFor="description">Description</label>
 						<Field
 							name="description"
@@ -120,6 +137,11 @@ const EventForm = props => {
 							rows={3}
 						/>
 						<ErrorMessage name="description" component="div" />
+					</div>
+
+					<div className="form-group">
+						<label htmlFor="accepting_talent">Accepting Talents?</label>
+						<Field name="accepting_talent" type="checkbox" />
 					</div>
 
 					<button className="form-submit" type="submit" disabled={isSubmitting}>
