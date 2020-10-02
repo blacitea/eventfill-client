@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import './form.scss';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 const validate = values => {
 	const errors = {};
@@ -52,8 +52,8 @@ const TalentForm = props => {
 						talent_profile: { ...values },
 					})
 					.then(resolve => {
-						setSubmitting(false);
 						resetForm();
+						setSubmitting(false);
 						alert('Talent profile created! Need check redirect logic?????');
 					});
 			}}
