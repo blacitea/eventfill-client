@@ -11,6 +11,10 @@ import './Show.scss';
 const Show = ({ genres, locations, openModal }) => {
 	//Server check
 	//Set up
+
+	console.log(genres, 'genres');
+	console.log(locations, 'locations');
+
 	const { resource, id } = useParams();
 	const [cookies] = useCookies();
 	const owner = cookies.user_id;
@@ -23,6 +27,7 @@ const Show = ({ genres, locations, openModal }) => {
 		title: '',
 	});
 	const [invite, setInvite] = useState({ talent: {}, events: [] });
+	const [summary, setSummary] = useState('');
 
 	useEffect(() => {
 		// axios call to get relevant filtered data based on resource (event/talent) and id
@@ -43,6 +48,11 @@ const Show = ({ genres, locations, openModal }) => {
 						title: 'Talents showing at this event',
 					});
 					setAttendeeCount(data.attendees);
+					console.log(data.event);
+					const genreName = getByKey(genres, data.event.genre_id).name || '';
+					const locationName =
+						getByKey(locations, data.event.location_id).name || '';
+					setSummary(`${genreName} ${resource} in ${locationName}`);
 				} else {
 					console.log('talent', data);
 					setShowObj(data.talent);
@@ -51,7 +61,10 @@ const Show = ({ genres, locations, openModal }) => {
 						resource: 'events',
 						title: 'Attended events',
 					});
-					setAttendeeCount(data.attendees);
+					const genreName = getByKey(genres, data.talent.genre_id).name || '';
+					const locationName =
+						getByKey(locations, data.talent.location_id).name || '';
+					setSummary(`${genreName} ${resource} in ${locationName}`);
 				}
 				return data.talent;
 			})
@@ -80,15 +93,12 @@ const Show = ({ genres, locations, openModal }) => {
 		personal_link,
 	} = showObj;
 
-	const genreName = getByKey(genres, genre).name;
-	const locationName = getByKey(locations, location).name;
-
 	return (
 		<main>
 			<section className="show-display">
 				<article className="show-info">
 					<h1 className="show-info-title">{name}</h1>
-					<h2>{`${genreName} ${resource} in ${locationName}`}</h2>
+					<h2>{summary}</h2>
 					<p>{description}</p>
 					{resource === 'events' && (
 						<>
