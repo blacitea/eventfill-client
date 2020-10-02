@@ -31,11 +31,17 @@ const Explore = ({ locations, genres }) => {
 				dataArray = dataArray.all;
 			}
 			console.log('Data Array:', dataArray);
-			newCollection = dataArray.filter(
-				item =>
+			newCollection = dataArray.filter(item => {
+				console.log('location_id', item.location_id, 'location', location);
+				console.log('location match?', item.location_id === location);
+				console.log('genre_id', item.genre_id, 'genre', genre);
+				console.log('location match?', item.genre_id === genre);
+
+				return (
 					(!location || item.location_id === location) &&
 					(!genre || item.genre_id === genre)
-			);
+				);
+			});
 			console.log('New Collection:', newCollection);
 			setCollection(newCollection);
 		});
