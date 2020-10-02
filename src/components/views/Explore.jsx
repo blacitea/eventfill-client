@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import './Explore.scss';
 
 // mock data
-import { talents, events } from '../mockData';
+// import { talents, events } from '../mockData';
 
 // real data
 import axios from 'axios';
@@ -16,22 +16,27 @@ const Explore = ({ locations, genres }) => {
 	const [genre, setGenre] = useState('');
 
 	useEffect(() => {
+		// console.log('I am the newest version!!!!!');
 		// axios call to get relevant filtered list of events/profiles here
 		// set the results of call to collection to have it displayed in previewlist
-		console.log('Use effect happens');
+		// console.log('Use effect happens');
 		// simulating results of api call below
 		let axiosURL = `/api/${id === 'events' ? 'events' : 'talent_profiles'}`;
-		console.log('printing axios link:', axiosURL);
+		// console.log('printing axios link:', axiosURL);
 
 		let newCollection;
 		axios.get(axiosURL).then(response => {
-			console.log('Data from axios call');
-			console.log(response.data);
-			newCollection = response.data.filter(
+			let dataArray = response.data;
+			if (id === 'events') {
+				dataArray = dataArray.all;
+			}
+			console.log('Data Array:', dataArray);
+			newCollection = dataArray.filter(
 				item =>
-					(!location || item.location === location) &&
-					(!genre || item.genre === genre)
+					(!location || item.location_id === location) &&
+					(!genre || item.genre_id === genre)
 			);
+			console.log('New Collection:', newCollection);
 			setCollection(newCollection);
 		});
 
