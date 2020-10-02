@@ -17,6 +17,7 @@ const validate = values => {
 
 const InvitationForm = ({ talent, events, closeModal }) => {
 	const [cookies] = useCookies();
+	console.log(talent);
 	return (
 		<section className="talent-invite">
 			<img src={talent.image_url} alt={talent.name} />
@@ -47,7 +48,7 @@ const InvitationForm = ({ talent, events, closeModal }) => {
 							return axios.post(`/api/users/${values.sender_id}/messages`, {
 								message: {
 									sender_id: values.sender_id,
-									recipient_id: values.talent_profile_id,
+									recipient_id: talent.user_id,
 									content: `Score! You have an event invitation! \n ${
 										values.description
 											? `Note from organizer: ${values.description}`
