@@ -18,7 +18,7 @@ const Home = () => {
 			setEvents(resolve[0].data.upcoming);
 			setTalents(resolve[1].data);
 		});
-	});
+	}, []);
 	return (
 		<main className="home">
 			<section className="splash">
