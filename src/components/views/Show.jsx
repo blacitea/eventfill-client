@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 
 import './Show.scss';
 
-const Show = ({ events, talents, genres, locations, openModal }) => {
+const Show = ({ genres, locations, openModal }) => {
 	//Server check
 	//Set up
 	const { resource, id } = useParams();
@@ -22,7 +22,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 		resource: '',
 		title: '',
 	});
-	const [invite, setInvite] = useState({ talent: {}, list: [] });
+	const [invite, setInvite] = useState({ talent: {}, events: [] });
 
 	useEffect(() => {
 		// axios call to get relevant filtered data based on resource (event/talent) and id
@@ -60,7 +60,9 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 					axios.get('/api/events').then(response => {
 						setInvite({
 							talent: resolve,
-							list: response.data.all.filter(event => event.user_id === owner),
+							events: response.data.upcoming.filter(
+								event => event.user_id === parseInt(owner)
+							),
 						});
 					});
 				}
