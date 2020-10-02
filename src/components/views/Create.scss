@@ -1,0 +1,27 @@
+.create-panel {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .create-aside {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5em;
+    margin-right: 5vw;
+    width: 23em;
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+  }
+
+  .create-form {
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 2em;
+    padding: 2em;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+  }
+}
