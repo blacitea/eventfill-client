@@ -2,14 +2,22 @@ import React, { useState, useEffect } from 'react';
 import HighlightsList from '../HighlightsList';
 import InvitationForm from '../forms/InvitationForm';
 import { useParams, Link } from 'react-router-dom';
-
+import axios from 'axios';
 import getByKey from '../../helpers/getByKey';
+import { useCookies } from 'react-cookie';
 
 import './Show.scss';
 
-const Show = ({ events, talents, genres, locations, openModal }) => {
+const Show = ({ genres, locations, openModal }) => {
+	//Server check
 	//Set up
+
+	console.log(genres, 'genres');
+	console.log(locations, 'locations');
+
 	const { resource, id } = useParams();
+	const [cookies] = useCookies();
+	const owner = cookies.user_id;
 
 	const [showObj, setShowObj] = useState({});
 	const [attendeeCount, setAttendeeCount] = useState(0);
@@ -18,32 +26,62 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 		resource: '',
 		title: '',
 	});
+	const [invite, setInvite] = useState({ talent: {}, events: [] });
+	const [summary, setSummary] = useState('');
 
 	useEffect(() => {
 		// axios call to get relevant filtered data based on resource (event/talent) and id
-		const mainObj = // returnFromAxios.event/talent
-			resource === 'events'
-				? events.filter(event => event.id === parseInt(id))[0]
-				: talents.filter(talent => talent.id === parseInt(id))[0];
+		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
+		let axiosURL = `/api/${axiosresource}/${id}`;
 
-		const childObj = resource === 'events' ? talents : events; //returnFromAxios.event/talent
+		axios
+			.get(axiosURL)
+			.then(response => {
+				let data = response.data;
 
-		const attendees = Math.floor(Math.random() * 10);
-
-		const title =
-			resource === 'events'
-				? 'Talents showing at this event'
-				: 'Attended events';
-		const mode = resource === 'events' ? 'talents' : 'events';
-
-		setShowObj(mainObj);
-		setHighlights({ array: childObj, resource: mode, title: title });
-		setAttendeeCount(attendees);
+				if (resource === 'events') {
+					console.log('event', data);
+					setShowObj(data.event);
+					setHighlights({
+						array: data.talents,
+						resource: 'talents',
+						title: 'Talents showing at this event',
+					});
+					setAttendeeCount(data.attendees);
+					console.log(data.event);
+					const genreName = getByKey(genres, data.event.genre_id).name || '';
+					const locationName =
+						getByKey(locations, data.event.location_id).name || '';
+					setSummary(`${genreName} ${resource} in ${locationName}`);
+				} else {
+					console.log('talent', data);
+					setShowObj(data.talent);
+					setHighlights({
+						array: data.events,
+						resource: 'events',
+						title: 'Attended events',
+					});
+					const genreName = getByKey(genres, data.talent.genre_id).name || '';
+					const locationName =
+						getByKey(locations, data.talent.location_id).name || '';
+					setSummary(`${genreName} ${resource} in ${locationName}`);
+				}
+				return data.talent;
+			})
+			.then(resolve => {
+				if (resource === 'talents') {
+					axios.get('/api/events').then(response => {
+						setInvite({
+							talent: resolve,
+							events: response.data.upcoming.filter(
+								event => event.user_id === parseInt(owner)
+							),
+						});
+					});
+				}
+			});
 	}, [resource, id]);
 
-	const inviteForm = resource === 'talents' && (
-		<InvitationForm talent={showObj} events={events} />
-	);
 	// destructuring the data from axios call
 	const {
 		name,
@@ -55,15 +93,12 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 		personal_link,
 	} = showObj;
 
-	const genreName = getByKey(genres, genre).name;
-	const locationName = getByKey(locations, location).name;
-
 	return (
 		<main>
 			<section className="show-display">
 				<article className="show-info">
 					<h1 className="show-info-title">{name}</h1>
-					<h2>{`${genreName} ${resource} in ${locationName}`}</h2>
+					<h2>{summary}</h2>
 					<p>{description}</p>
 					{resource === 'events' && (
 						<>
@@ -90,7 +125,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Porfolio</button>
 							</a>
-							<button onClick={() => openModal(inviteForm)}>
+							<button onClick={() => openModal(<InvitationForm {...invite} />)}>
 								Invite To Event
 							</button>
 						</>

@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PreviewsList from '../PreviewsList';
 import HighlightsList from '../HighlightsList';
 import { Link } from 'react-router-dom';
 
-import './Index.scss';
+import './Home.scss';
+import axios from 'axios';
 
-const Index = props => {
+const Home = () => {
+	const [events, setEvents] = useState([]);
+	const [talents, setTalents] = useState([]);
+
+	useEffect(() => {
+		Promise.all([
+			axios.get('/api/events'),
+			axios.get('/api/talent_profiles'),
+		]).then(resolve => {
+			setEvents(resolve[0].data.upcoming);
+			setTalents(resolve[1].data);
+		});
+	}, []);
 	return (
-		<main className="index">
+		<main className="home">
 			<section className="splash">
 				<article className="splash-description">
 					<h1>{'Your Event\nStarts Here'}</h1>
@@ -31,19 +44,14 @@ const Index = props => {
 			</section>
 			<h2>Upcoming Events Near You</h2>
 			<h4>Check out these events and plan your attendance!</h4>
-			<PreviewsList
-				array={props.events}
-				onClick={props.onClick}
-				resource="events"
-			/>
+			<PreviewsList array={events} resource="events" />
 			<HighlightsList
-				array={props.talents}
-				onClick={props.onClick}
-        resource="talents"
-        title="Our hottest Talent profiles!"
+				array={talents}
+				resource="talents"
+				title="Our hottest Talent profiles!"
 			/>
 		</main>
 	);
 };
 
-export default Index;
+export default Home;
