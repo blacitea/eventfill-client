@@ -42,7 +42,7 @@ const Home = () => {
 					/>
 				</aside>
 			</section>
-			<h2>Upcoming Events Near You</h2>
+			<h2 className="upcoming-events-title">Upcoming Events Near You</h2>
 			<h4>Check out these events and plan your attendance!</h4>
 			<PreviewsList array={events} resource="events" />
 			<HighlightsList
