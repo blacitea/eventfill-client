@@ -91,11 +91,8 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 								<button>View Porfolio</button>
 							</a>
 							<button onClick={() => openModal(inviteForm)}>
-								Invite Talent
+								Invite To Event
 							</button>
-							<Link to="/explore/talents">
-								<button>See More Talents</button>
-							</Link>
 						</>
 					)}
 				</article>

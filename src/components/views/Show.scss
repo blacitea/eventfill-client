@@ -4,7 +4,7 @@
   flex-direction: row;
 
   .show-info {
-    width: 50%;
+    width: 20em;
     margin: 5em;
 
     h1 {
@@ -23,7 +23,7 @@
     img {
       box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
       height: 500px;
-      width: 600px;
+      width: 500px;
       object-fit: cover;
     }
   }
