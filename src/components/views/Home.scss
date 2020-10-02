@@ -1,13 +1,17 @@
 .home {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+  align-items: center;
+  
+  .upcoming-events-title {
+    margin-bottom: 0;
+  }
 }
 
 .splash {
 	display: flex;
 	align-items: center;
-	margin-bottom: 2em;
+	margin-bottom: 5em;
 
 	.splash-description {
 		margin: 3em 4em 3em 0;
