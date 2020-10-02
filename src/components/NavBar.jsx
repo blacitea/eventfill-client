@@ -12,7 +12,7 @@ const NavBar = props => {
 					<li>New Event</li>
 				</Link>
 				<Link to="/create/talent">
-					<li>New Talent Profile</li>
+					<li>New Talent</li>
 				</Link>
 			</ul>
 		);
