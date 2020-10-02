@@ -40,7 +40,6 @@ const TalentForm = props => {
 				personal_link: '',
 				description: '',
 				open_for_booking: false,
-				open_for_commission: false,
 			}}
 			validate={validate}
 			onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -52,8 +51,10 @@ const TalentForm = props => {
 						resetForm();
 						setSubmitting(false);
 						alert("All done! Let's take a look at your profile.");
+						console.log('resolved!', resolve.config.data);
 						setRedirect({ success: true, id: resolve.data.success.id });
-					});
+					})
+					.catch(error => console.log(error));
 			}}
 		>
 			{({ isSubmitting }) => (
