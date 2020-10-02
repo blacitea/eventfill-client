@@ -42,7 +42,22 @@ const InvitationForm = ({ talent, events, closeModal }) => {
 						.post('/api/gigs', {
 							gig: { ...values },
 						})
-						.then(() => {
+						.then(resolve => {
+							console.log(resolve.data);
+							return axios.post(`/api/users/${values.sender_id}/messages`, {
+								message: {
+									sender_id: values.sender_id,
+									recipient_id: values.talent_profile_id,
+									content: `Score! You have an event invitation! \n ${
+										values.description
+											? `Note from organizer: ${values.description}`
+											: null
+									} `,
+								},
+							});
+						})
+						.then(resolve => {
+							console.log(resolve);
 							resetForm();
 							setSubmitting(false);
 							alert('Invitation sent!Need figure out how to auto close modal');
