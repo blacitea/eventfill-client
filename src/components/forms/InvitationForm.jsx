@@ -37,7 +37,6 @@ const InvitationForm = ({ talent, events, closeModal }) => {
 				}}
 				validate={validate}
 				onSubmit={(values, { setSubmitting, resetForm }) => {
-					console.log(values);
 					setTimeout(() => {}, 400);
 					axios
 						.post('/api/gigs', {

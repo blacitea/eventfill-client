@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import './form.scss';
+import { Redirect } from 'react-router-dom';
 // import { Redirect } from 'react-router-dom';
 
 const validate = values => {
@@ -27,6 +28,7 @@ const validate = values => {
 
 const TalentForm = props => {
 	const [cookies] = useCookies();
+	const [redirect, setRedirect] = useState({ success: false, id: '' });
 	return (
 		<Formik
 			initialValues={{
@@ -42,11 +44,6 @@ const TalentForm = props => {
 			}}
 			validate={validate}
 			onSubmit={(values, { setSubmitting, resetForm }) => {
-				console.log(values);
-				setTimeout(() => {
-					// alert(JSON.stringify(values, null, 2));
-					setSubmitting(false);
-				}, 400);
 				axios
 					.post('/api/talent_profiles', {
 						talent_profile: { ...values },
@@ -54,12 +51,14 @@ const TalentForm = props => {
 					.then(resolve => {
 						resetForm();
 						setSubmitting(false);
-						alert('Talent profile created! Need check redirect logic?????');
+						alert("All done! Let's take a look at your profile.");
+						setRedirect({ success: true, id: resolve.data.success.id });
 					});
 			}}
 		>
 			{({ isSubmitting }) => (
 				<Form>
+					{redirect.success && <Redirect to={`/talents/${redirect.id}`} />}
 					<div className="form-group">
 						<label htmlFor="name">Your Name</label>
 						<Field name="name" />
