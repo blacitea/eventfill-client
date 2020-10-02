@@ -17,8 +17,8 @@ const EVENT_ASIDE = (
 
 const TALENT_ASIDE = (
 	<>
-		<h1>Let's put your skills on the map</h1>
-		<p>Just fill out the form and event planners can start discovering you</p>
+		<h1>Let's put your skills on the map.</h1>
+		<p>Just fill out the form and event planners can start discovering you!</p>
 	</>
 );
 
