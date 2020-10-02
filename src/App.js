@@ -46,12 +46,13 @@ const App = props => {
 	const { modalState, openModal, closeModal } = useModal();
 
 	//Setup
-	const [locations, setLocations] = useState([]);
-	const [genres, setGenres] = useState([]);
-
+	const [base, setBase] = useState({ locations: [], genres: [] });
 	useEffect(() => {
-		axios.get('/api/genres').then(resolve => setGenres(resolve.data));
-		axios.get('/api/locations').then(resolve => setLocations(resolve.data));
+		Promise.all([axios.get('/api/genres'), axios.get('/api/locations')]).then(
+			resolve => {
+				setBase({ genres: resolve[0].data, locations: resolve[1].data });
+			}
+		);
 	}, []);
 
 	return (
@@ -69,11 +70,11 @@ const App = props => {
 				</Route>
 
 				<Route path="/create/:id">
-					<Create locations={locations} genres={genres} />
+					<Create {...base} />
 				</Route>
 
 				<Route path="/explore/:id">
-					<Explore locations={locations} genres={genres} />
+					<Explore {...base} />
 				</Route>
 
 				<Route path="/messages">
@@ -81,7 +82,7 @@ const App = props => {
 				</Route>
 
 				<Route path="/:resource/:id">
-					<Show openModal={openModal} locations={locations} genres={genres} />
+					<Show openModal={openModal} {...base} />
 				</Route>
 
 				<Route path="/">
