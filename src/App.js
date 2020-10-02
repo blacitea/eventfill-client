@@ -50,20 +50,7 @@ import useModal from './hooks/useModal';
 const App = props => {
 	const [cookies, setCookie] = useCookies(['user_id']);
 
-	// const [message, setMessage] = useState('Click the button to load data!');
 	const { modalState, openModal, closeModal } = useModal();
-
-	// const fetchData = () => {
-	// 	axios
-	// 		.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-	// 		.then(response => {
-	// 			// handle success
-	// 			console.log(response.data); // The entire response from the Rails API
-
-	// 			console.log(response.data.message); // Just the message
-	// 			setMessage(response.data.message);
-	// 		});
-	// };
 
 	return (
 		<div className="App">

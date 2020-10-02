@@ -35,6 +35,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 				let data = response.data;
 
 				if (resource === 'events') {
+					console.log('event', data);
 					setShowObj(data.event);
 					setHighlights({
 						array: data.talents,
@@ -43,6 +44,7 @@ const Show = ({ events, talents, genres, locations, openModal }) => {
 					});
 					setAttendeeCount(data.attendees);
 				} else {
+					console.log('talent', data);
 					setShowObj(data.talent);
 					setHighlights({
 						array: data.events,
