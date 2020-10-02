@@ -1,0 +1,16 @@
+.create-panel {
+  display: flex;
+
+  .create-aside {
+    display: flex;
+    flex-direction: column;
+    min-width: 30vw;
+    max-width: 30vw;
+    margin-right: 5em;
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+  }
+}
