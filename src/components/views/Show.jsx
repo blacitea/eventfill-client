@@ -12,9 +12,6 @@ const Show = ({ genres, locations, openModal }) => {
 	//Server check
 	//Set up
 
-	console.log(genres, 'genres');
-	console.log(locations, 'locations');
-
 	const { resource, id } = useParams();
 	const [cookies] = useCookies();
 	const owner = cookies.user_id;
@@ -40,7 +37,6 @@ const Show = ({ genres, locations, openModal }) => {
 				let data = response.data;
 
 				if (resource === 'events') {
-					console.log('event', data);
 					setShowObj(data.event);
 					setHighlights({
 						array: data.talents,
@@ -48,13 +44,11 @@ const Show = ({ genres, locations, openModal }) => {
 						title: 'Talents showing at this event',
 					});
 					setAttendeeCount(data.attendees);
-					console.log(data.event);
 					const genreName = getByKey(genres, data.event.genre_id).name || '';
 					const locationName =
 						getByKey(locations, data.event.location_id).name || '';
 					setSummary(`${genreName} ${resource} in ${locationName}`);
 				} else {
-					console.log('talent', data);
 					setShowObj(data.talent);
 					setHighlights({
 						array: data.events,
@@ -87,8 +81,6 @@ const Show = ({ genres, locations, openModal }) => {
 		name,
 		description,
 		image_url,
-		genre,
-		location,
 		max_attendees,
 		personal_link,
 	} = showObj;
