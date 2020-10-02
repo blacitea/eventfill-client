@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-// import axios from 'axios';
+import axios from 'axios';
 import './App.scss';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
-import { talents, events, locations, genres } from './components/mockData';
-import Index from './components/views/Index';
+import Home from './components/views/Home';
 import Explore from './components/views/Explore';
 import Create from './components/views/Create';
 import Show from './components/views/Show';
@@ -18,12 +17,6 @@ import { Switch, Route } from 'react-router-dom';
 
 // hooks
 import useModal from './hooks/useModal';
-
-// modal elements
-// import Calendar from './components/Calendar';
-// import InvitationForm from './components/forms/InvitationForm';
-// import EventForm from './components/forms/EventForm';
-// import TalentForm from './components/forms/TalentForm';
 
 // const demoCalendar = (
 // 	<Calendar
@@ -52,6 +45,15 @@ const App = props => {
 
 	const { modalState, openModal, closeModal } = useModal();
 
+	//Setup
+	const [locations, setLocations] = useState([]);
+	const [genres, setGenres] = useState([]);
+
+	useEffect(() => {
+		axios.get('/api/genres').then(resolve => setGenres(resolve.data));
+		axios.get('/api/locations').then(resolve => setLocations(resolve.data));
+	}, []);
+
 	return (
 		<div className="App">
 			<Modal
@@ -79,13 +81,7 @@ const App = props => {
 				</Route>
 
 				<Route path="/:resource/:id">
-					<Show
-						openModal={openModal}
-						events={events}
-						talents={talents}
-						locations={locations}
-						genres={genres}
-					/>
+					<Show openModal={openModal} locations={locations} genres={genres} />
 				</Route>
 
 				<Route path="/">
@@ -100,13 +96,7 @@ const App = props => {
             </div>
           </div> */}
 
-					<Index
-						events={events}
-						talents={talents}
-						onClick={() =>
-							alert('Clicked! I do not know what do to about the click yet')
-						}
-					/>
+					<Home />
 				</Route>
 			</Switch>
 
