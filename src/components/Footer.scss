@@ -1,23 +1,35 @@
 .footer {
 	position: relative;
 	bottom: 0;
-	width: 100%;
+  width: 100%;
+  
+  .logo {
+    font-family: eventLogo;
+    font-weight: bold;
+  }
+
 	hr {
     width: 85vw;
     max-width: 75em;
-	}
+  }
+  
 	ul {
 		display: flex;
-		justify-content: center;
+    justify-content: center;
+    
 		li {
 			display: inline-block;
 			padding: 1em;
-		}
+    }
+    
+    a {
+      margin: 1em;
+    }
+
 		img {
 			height: 2em;
 			width: 2em;
 			border-radius: 50%;
-			margin: 1em;
 		}
 	}
 }

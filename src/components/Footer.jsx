@@ -7,7 +7,7 @@ const Footer = props => {
 			<ul className="footer-links">
 				<li>Events</li>
 				<li>Talents</li>
-				<li>EVENTFILL</li>
+				<li className="logo">EVENTFILL</li>
 				<li>About</li>
 				<li>Blog</li>
 			</ul>
