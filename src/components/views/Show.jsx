@@ -74,7 +74,7 @@ const Show = ({ genres, locations, openModal }) => {
 					});
 				}
 			});
-	}, [resource, id]);
+	}, [resource, id, locations, genres]);
 
 	// destructuring the data from axios call
 	const {
