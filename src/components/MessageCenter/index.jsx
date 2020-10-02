@@ -66,6 +66,7 @@ const MessageCenter = () => {
 						messages={messages}
 						contactList={contactList}
 						recipient={recipient}
+						setMessages={setMessages}
 					/>
 				)}
 			</section>

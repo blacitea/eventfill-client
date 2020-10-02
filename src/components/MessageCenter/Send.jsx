@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Send = props => {
-	const { sender, recipient } = props;
+const Send = ({ sender, recipient, setMessages }) => {
 	const [text, setText] = useState();
 	const changeHandler = event => setText(event.target.value);
 	const submitHandler = event => {
@@ -15,8 +14,9 @@ const Send = props => {
 					content: text,
 				},
 			})
-			.then(() => {
+			.then(resolve => {
 				setText('');
+				setMessages(prev => [...prev, resolve.data.success]);
 			})
 			.catch(err => console.log('something is not working', err));
 	};

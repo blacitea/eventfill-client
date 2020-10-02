@@ -2,7 +2,13 @@ import React from 'react';
 import Messages from './Messages';
 import Send from './Send';
 import getByKey from '../../helpers/getByKey';
-const MessageBoard = ({ owner, messages, contactList, recipient }) => {
+const MessageBoard = ({
+	owner,
+	messages,
+	contactList,
+	recipient,
+	setMessages,
+}) => {
 	return (
 		<>
 			<Messages
@@ -10,7 +16,7 @@ const MessageBoard = ({ owner, messages, contactList, recipient }) => {
 				messages={messages}
 				recipient={getByKey(contactList, recipient)}
 			/>
-			<Send sender={owner} recipient={recipient} />
+			<Send sender={owner} recipient={recipient} setMessages={setMessages} />
 		</>
 	);
 };
