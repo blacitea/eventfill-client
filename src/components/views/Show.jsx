@@ -93,7 +93,6 @@ const Show = ({ genres, locations, openModal }) => {
 			<section className="show-display">
 				<article className="show-info">
 					<h1 className="show-info-title">{name}</h1>
-          <section className="show-info-details">
             <h2>{summary}</h2>
             {start && end &&
               <section className="show-info-dates">
@@ -103,7 +102,6 @@ const Show = ({ genres, locations, openModal }) => {
               </section>
             }
             <p>{description}</p>
-          </section>
             {resource === 'events' && (
               <>
                 <h4 className="event-remaining-spots">

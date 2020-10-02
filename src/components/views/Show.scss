@@ -19,8 +19,14 @@
       text-align: center;
     }
 
-    .show-info-details {
-      align-self: start;
+      h2{
+        text-align: center;
+        margin-bottom: 0.4em;
+      }
+
+    .show-info-dates {
+      text-align: center;
+      font-style: italic;
     }
 
     .event-remaining-spots {
