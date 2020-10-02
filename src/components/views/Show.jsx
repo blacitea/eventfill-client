@@ -79,7 +79,9 @@ const Show = ({ genres, locations, openModal }) => {
 	// destructuring the data from axios call
 	const {
 		name,
-		description,
+    description,
+    start,
+    end,
 		image_url,
 		max_attendees,
 		personal_link,
@@ -92,6 +94,11 @@ const Show = ({ genres, locations, openModal }) => {
 					<h1 className="show-info-title">{name}</h1>
           <section className="show-info-details">
             <h2>{summary}</h2>
+            {start && end &&
+              <section className="show-info-dates">
+                {start} - {end}
+              </section>
+            }
             <p>{description}</p>
           </section>
             {resource === 'events' && (
