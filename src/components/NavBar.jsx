@@ -42,6 +42,7 @@ const NavBar = props => {
             <li>Talents</li>
           </Link>
           <li
+            className="nav-create"
             onClick={() => {
               setOpen(!open);
             }}

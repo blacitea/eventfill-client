@@ -29,15 +29,19 @@ nav {
 	}
 }
 
+.nav-create {
+  cursor: pointer;
+}
+
 .drop-down {
 	position: absolute;
-	top: 49px;
+	top: 51px;
 	right: 60px;
 	display: flex;
 	flex-direction: column;
 	background-color: #fff;
 	z-index: 11;
-	// box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 7px 5px rgba(0, 0, 0, 0.5);
 	li {
 		padding: 0.5em 0;
 		margin: 5px;
