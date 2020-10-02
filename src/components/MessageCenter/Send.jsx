@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const Send = props => {
-	const { sender, recipient } = props;
+const Send = ({ sender, recipient, setMessages }) => {
 	const [text, setText] = useState();
 	const changeHandler = event => setText(event.target.value);
 	const submitHandler = event => {
 		event.preventDefault();
-		const msg = { sender, recipient, text };
-		alert(JSON.stringify(msg));
-		setText('');
+		axios
+			.post(`/api/users/${sender}/messages`, {
+				message: {
+					sender_id: sender,
+					recipient_id: recipient,
+					content: text,
+				},
+			})
+			.then(resolve => {
+				setText('');
+				setMessages(prev => [...prev, resolve.data.success]);
+			})
+			.catch(err => console.log('something is not working', err));
 	};
 	return (
 		<form className="message-send" onSubmit={submitHandler}>

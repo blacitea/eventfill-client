@@ -3,26 +3,46 @@ import './MessageCenter.scss';
 
 import Contacts from './Contacts';
 import MessageBoard from './MessageBoard';
-import getByKey from '../../helpers/getByKey';
-import { users, msgs } from '../mockData';
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
-const MessageCenter = props => {
+const MessageCenter = () => {
 	const [messages, setMessages] = useState([]);
 	const [recipient, setRecipient] = useState('');
 	const [contactList, setContactList] = useState([]);
 	const [cookies] = useCookies();
 
-	const owner = cookies.user_id;
+	const owner = parseInt(cookies.user_id);
 
 	useEffect(() => {
 		//axios calls to BE for message data
-		document.title = getByKey(users, owner)
-			? `Message center for ${getByKey(users, owner).name}`
-			: 'Message center';
-		setMessages(msgs);
-		setContactList(users);
-	});
+		axios
+			.get(`api/users/${owner}`)
+			.then(resolve => {
+				resolve.data.user
+					? (document.title = `Message center for ${resolve.data.user.name}`)
+					: (document.title = 'Message center');
+			})
+			.catch(error => console.log('something is wrong here:', error));
+
+		axios
+			.get(`api/users/${owner}/messages`)
+			.then(response => {
+				setContactList(response.data.contacts);
+			})
+			.catch(error => {
+				console.log('something went wrong:', error);
+			});
+		recipient &&
+			axios
+				.get(`api/users/${owner}/messages/${recipient}`)
+				.then(response => {
+					setMessages(response.data.messages);
+				})
+				.catch(error => {
+					console.log('something went wrong:', error);
+				});
+	}, [recipient, owner]);
 
 	return (
 		<main className="message-center">
@@ -46,6 +66,7 @@ const MessageCenter = props => {
 						messages={messages}
 						contactList={contactList}
 						recipient={recipient}
+						setMessages={setMessages}
 					/>
 				)}
 			</section>
