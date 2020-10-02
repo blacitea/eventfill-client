@@ -3,6 +3,7 @@ import HighlightsList from '../HighlightsList';
 import InvitationForm from '../forms/InvitationForm';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment';
 import getByKey from '../../helpers/getByKey';
 import { useCookies } from 'react-cookie';
 
@@ -79,7 +80,9 @@ const Show = ({ genres, locations, openModal }) => {
 	// destructuring the data from axios call
 	const {
 		name,
-		description,
+    description,
+    start,
+    end,
 		image_url,
 		max_attendees,
 		personal_link,
@@ -90,10 +93,15 @@ const Show = ({ genres, locations, openModal }) => {
 			<section className="show-display">
 				<article className="show-info">
 					<h1 className="show-info-title">{name}</h1>
-          <section className="show-info-details">
             <h2>{summary}</h2>
+            {start && end &&
+              <section className="show-info-dates">
+                {start.slice(0, 10) !== end.slice(0, 10) && 
+                  moment(start).format('MMMM Do').concat(' - ')}
+                {moment(end).format('MMMM Do, YYYY')}
+              </section>
+            }
             <p>{description}</p>
-          </section>
             {resource === 'events' && (
               <>
                 <h4 className="event-remaining-spots">
