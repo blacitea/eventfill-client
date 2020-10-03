@@ -23,24 +23,25 @@
 		justify-items: center;
 		display: flex;
 		margin: 0 2em;
-	}
+  }
+  
+  .messages-recipient-name {
+    background-color: black;
+    color: azure;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+  }
+
 	.messages-board {
     display: flex;
     flex-direction: column;
 		background-color: #fff;
 		height: 30em;
-		width: 30em;
-		margin: 1em;
-		overflow-y: scroll;
-
-		.messages-board-recipient-name {
-			background-color: black;
-			color: azure;
-			text-align: center;
-			font-size: 2em;
-			font-weight: bold;
-			margin: 0;
-    }
+    width: 30em;
+    overflow-y: scroll;
+    margin-bottom: 1em;
 
     .message {
       display: flex;
