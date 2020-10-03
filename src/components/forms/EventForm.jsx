@@ -34,20 +34,26 @@ const validate = values => {
 const EventForm = props => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
+	console.log(props.populate.start);
+	console.log(props.populate.end);
 	return (
 		<Formik
-			initialValues={{
-				user_id: cookies.user_id,
-				name: '',
-				location_id: '',
-				genre_id: '',
-				start: '',
-				end: '',
-				image_url: '',
-				description: '',
-				max_attendees: '',
-				accepting_talent: true,
-			}}
+			initialValues={
+				props.populate
+					? { ...props.populate }
+					: {
+							user_id: cookies.user_id,
+							name: '',
+							location_id: '',
+							genre_id: '',
+							start: '',
+							end: '',
+							image_url: '',
+							description: '',
+							max_attendees: '',
+							accepting_talent: true,
+					  }
+			}
 			validate={validate}
 			onSubmit={(values, { setSubmitting, resetForm }) => {
 				console.log(values.end);

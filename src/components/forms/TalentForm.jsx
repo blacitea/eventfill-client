@@ -3,8 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import './form.scss';
-import { Redirect } from 'react-router-dom';
-// import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 const validate = values => {
 	const errors = {};
@@ -26,32 +25,49 @@ const validate = values => {
 	return errors;
 };
 
-const TalentForm = props => {
+const TalentForm = ({ setShowObj, populate, genres, locations }) => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
+	const [value, setValue] = useState({ ...populate });
+
+	useEffect(() => {
+		'Does this happened?';
+		setShowObj({ ...value });
+	}, [redirect]);
+
 	return (
 		<Formik
-			initialValues={{
-				user_id: cookies.user_id,
-				name: '',
-				location_id: '',
-				genre_id: '',
-				image_url: '',
-				personal_link: '',
-				description: '',
-				open_for_booking: false,
-			}}
+			initialValues={
+				populate
+					? { ...populate }
+					: {
+							user_id: cookies.user_id,
+							name: '',
+							location_id: '',
+							genre_id: '',
+							image_url: '',
+							personal_link: '',
+							description: '',
+							open_for_booking: false,
+					  }
+			}
 			validate={validate}
 			onSubmit={(values, { setSubmitting, resetForm }) => {
-				axios
-					.post('/api/talent_profiles', {
-						talent_profile: { ...values },
-					})
+				console.log(values);
+				axios({
+					url: populate
+						? `/api/talent_profiles/${populate.id}`
+						: '/api/talent_profiles',
+					method: populate ? 'patch' : 'post',
+					data: { talent_profile: { ...values } },
+				})
 					.then(resolve => {
 						resetForm();
 						setSubmitting(false);
+						// setShowObj({ ...resolve.data.success });
+						setValue({ ...values });
 						alert("All done! Let's take a look at your profile.");
-						console.log('resolved!', resolve.config.data);
+						// change(`/talents/${resolve.data.success.id}`);
 						setRedirect({ success: true, id: resolve.data.success.id });
 					})
 					.catch(error => console.log(error));
@@ -72,9 +88,9 @@ const TalentForm = props => {
 							<option value="" disabled>
 								Select a city
 							</option>
-							{props.locations &&
-								props.locations.map(location => (
-									<option key={location.id} value={location.id}>
+							{locations &&
+								locations.map(location => (
+									<option key={location.id} value={parseInt(location.id)}>
 										{location.name}
 									</option>
 								))}
@@ -88,9 +104,9 @@ const TalentForm = props => {
 							<option value="" disabled>
 								Select a genre
 							</option>
-							{props.genres &&
-								props.genres.map(genre => (
-									<option key={genre.id} value={genre.id}>
+							{genres &&
+								genres.map(genre => (
+									<option key={genre.id} value={parseInt(genre.id)}>
 										{genre.name}
 									</option>
 								))}
@@ -128,7 +144,7 @@ const TalentForm = props => {
 					</div>
 
 					<button className="form-submit" type="submit" disabled={isSubmitting}>
-						Submit
+						{populate ? 'Update my profile' : 'Submit'}
 					</button>
 				</Form>
 			)}

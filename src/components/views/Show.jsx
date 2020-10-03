@@ -4,8 +4,9 @@ import InvitationForm from '../forms/InvitationForm';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-import getByKey from '../../helpers/getByKey';
 import { useCookies } from 'react-cookie';
+import EventForm from '../forms/EventForm';
+import TalentForm from '../forms/TalentForm';
 
 import './Show.scss';
 import PendingInvite from '../PendingInvite';
@@ -28,7 +29,6 @@ const Show = ({ genres, locations, openModal }) => {
 		title: '',
 	});
 	const [invite, setInvite] = useState({ talent: {}, events: [] });
-	const [summary, setSummary] = useState('');
 
 	const updateHighlight = () => {
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
@@ -73,10 +73,6 @@ const Show = ({ genres, locations, openModal }) => {
 						title: 'Talents showing at this event',
 					});
 					setAttendeeCount(data.attendees);
-					const genreName = getByKey(genres, data.event.genre_id).name || '';
-					const locationName =
-						getByKey(locations, data.event.location_id).name || '';
-					setSummary(`${genreName} ${resource} in ${locationName}`);
 				} else {
 					data.talent.user_id === user ? setOwned(true) : setOwned(false);
 					setShowObj(data.talent);
@@ -85,10 +81,6 @@ const Show = ({ genres, locations, openModal }) => {
 						resource: 'events',
 						title: 'Attended events',
 					});
-					const genreName = getByKey(genres, data.talent.genre_id).name || '';
-					const locationName =
-						getByKey(locations, data.talent.location_id).name || '';
-					setSummary(`${genreName} ${resource} in ${locationName}`);
 				}
 				return data.talent;
 			})
@@ -115,7 +107,16 @@ const Show = ({ genres, locations, openModal }) => {
 		image_url,
 		max_attendees,
 		personal_link,
+		location_id,
+		genre_id,
 	} = showObj;
+
+	const location = locations.find(({ id }) => id === parseInt(location_id));
+	const genre = genres.find(({ id }) => id === parseInt(genre_id));
+
+	const locationName = location ? location.name : '';
+	const genreName = genre ? genre.name : '';
+	const summary = `${genreName} ${resource} in ${locationName}`;
 
 	return (
 		<main>
@@ -180,22 +181,54 @@ const Show = ({ genres, locations, openModal }) => {
 
 			{/* Prompt to invite talent/ promote to event if user = resource owner */}
 			{resource === 'events' && owned && (
-				<button
-					onClick={() => {
-						history.push('/explore/talents');
-					}}
-				>
-					Invite talents to your event!
-				</button>
+				<>
+					<button
+						onClick={() => {
+							history.push('/explore/talents');
+						}}
+					>
+						Invite talents to your event!
+					</button>
+					<button
+						onClick={() =>
+							openModal(
+								<EventForm
+									populate={showObj}
+									locations={locations}
+									genres={genres}
+									setShowObj={setShowObj}
+								/>
+							)
+						}
+					>
+						Edit Event
+					</button>
+				</>
 			)}
 			{resource !== 'events' && owned && (
-				<button
-					onClick={() => {
-						history.push('/explore/events');
-					}}
-				>
-					Find an event to showcase your talent!
-				</button>
+				<>
+					<button
+						onClick={() => {
+							history.push('/explore/events');
+						}}
+					>
+						Find an event to showcase your talent!
+					</button>
+					<button
+						onClick={() =>
+							openModal(
+								<TalentForm
+									populate={showObj}
+									locations={locations}
+									genres={genres}
+									setShowObj={setShowObj}
+								/>
+							)
+						}
+					>
+						Edit Talent Profile
+					</button>
+				</>
 			)}
 		</main>
 	);
