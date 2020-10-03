@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HighlightsList from '../HighlightsList';
 import InvitationForm from '../forms/InvitationForm';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import getByKey from '../../helpers/getByKey';
@@ -80,9 +80,9 @@ const Show = ({ genres, locations, openModal }) => {
 	// destructuring the data from axios call
 	const {
 		name,
-    description,
-    start,
-    end,
+		description,
+		start,
+		end,
 		image_url,
 		max_attendees,
 		personal_link,
@@ -93,48 +93,48 @@ const Show = ({ genres, locations, openModal }) => {
 			<section className="show-display">
 				<article className="show-info">
 					<h1 className="show-info-title">{name}</h1>
-            <h2>{summary}</h2>
-            {start && end &&
-              <section className="show-info-dates">
-                {start.slice(0, 10) !== end.slice(0, 10) && 
-                  moment(start).format('MMMM Do').concat(' - ')}
-                {moment(end).format('MMMM Do, YYYY')}
-              </section>
-            }
-            <p>{description}</p>
-            {resource === 'events' && (
-              <>
-                <h4 className="event-remaining-spots">
-                  {max_attendees - attendeeCount === 0 && 'Sold Out'}
-                  {max_attendees > attendeeCount &&
-                    `Remaining spots: ${
-                      max_attendees - attendeeCount
-                    }/${max_attendees}`}
-                </h4>
-                <button
-                  disabled={attendeeCount === max_attendees}
-                  onClick={() => alert('some logic to change remaining spots')}
-                >
-                  Claim Ticket
-                </button>
-              </>
-            )}
-            {resource !== 'events' && (
-              <section className="show-info-actions">
-                <a href={personal_link} rel="noopener noreferrer" target="_blank">
-                  <button>View Portfolio</button>
-                </a>
-                <button onClick={() => openModal(<InvitationForm {...invite} />)}>
-                  Invite To Event
-                </button>
-              </section>
-            )}
+					<h2>{summary}</h2>
+					{start && end && (
+						<section className="show-info-dates">
+							{start.slice(0, 10) !== end.slice(0, 10) &&
+								moment(start).format('MMMM Do').concat(' - ')}
+							{moment(end).format('MMMM Do, YYYY')}
+						</section>
+					)}
+					<p>{description}</p>
+					{resource === 'events' && (
+						<>
+							<h4 className="event-remaining-spots">
+								{max_attendees - attendeeCount === 0 && 'Sold Out'}
+								{max_attendees > attendeeCount &&
+									`Remaining spots: ${
+										max_attendees - attendeeCount
+									}/${max_attendees}`}
+							</h4>
+							<button
+								disabled={attendeeCount === max_attendees}
+								onClick={() => alert('some logic to change remaining spots')}
+							>
+								Claim Ticket
+							</button>
+						</>
+					)}
+					{resource !== 'events' && (
+						<section className="show-info-actions">
+							<a href={personal_link} rel="noopener noreferrer" target="_blank">
+								<button>View Portfolio</button>
+							</a>
+							<button onClick={() => openModal(<InvitationForm {...invite} />)}>
+								Invite To Event
+							</button>
+						</section>
+					)}
 				</article>
 				<article className="show-image">
 					<img src={image_url} alt={name} />
 				</article>
 			</section>
-			<HighlightsList {...highlights} />
+			{highlights.array.length > 0 && <HighlightsList {...highlights} />}
 		</main>
 	);
 };
