@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import './form.scss';
+import { Link } from 'react-router-dom';
 
 const validate = values => {
 	const errors = {};
@@ -45,15 +46,15 @@ const InvitationForm = ({ talent, events, closeModal }) => {
 						})
 						.then(resolve => {
 							console.log(resolve.data);
+							const message = `Score! You have an event invitation!
+							${values.description ? `Note from organizer: ${values.description}` : ''}
+							ref#${values.event_id}
+							`;
 							return axios.post(`/api/users/${values.sender_id}/messages`, {
 								message: {
 									sender_id: values.sender_id,
 									recipient_id: talent.user_id,
-									content: `Score! You have an event invitation! \n ${
-										values.description
-											? `Note from organizer: ${values.description}`
-											: null
-									} `,
+									content: message,
 								},
 							});
 						})
@@ -61,7 +62,7 @@ const InvitationForm = ({ talent, events, closeModal }) => {
 							console.log(resolve);
 							resetForm();
 							setSubmitting(false);
-							alert('Invitation sent!Need figure out how to auto close modal');
+							alert('Invitation sent! Need figure out how to auto close modal');
 						});
 				}}
 			>
