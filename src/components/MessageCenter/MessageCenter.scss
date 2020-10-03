@@ -24,6 +24,8 @@
     color: black;
     border: 1px solid black;
     background-color: transparent;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 
   .contact-selected:hover {
@@ -34,7 +36,9 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-items: center;
+    justify-content: center;
+    width: 30em;
+    height: 37em;
 		margin: 0 2em;
   }
   
@@ -51,8 +55,8 @@
 	.messages-list {
     display: flex;
     flex-direction: column;
-		background-color: #fff;
-		height: 30em;
+    background-color: #fff;
+    height: 30em;
     width: 30em;
     overflow-y: scroll;
     margin-bottom: 0.5em;
@@ -117,6 +121,7 @@
     textarea {
       flex-grow: 1;
       height: 3em;
+      resize: none;
     }
 
     button {
