@@ -1,0 +1,20 @@
+.event-invite {
+	margin: 2em;
+	padding: 1em;
+	width: 100%;
+	height: auto;
+	background-color: lightcyan;
+	.event-invite-tag {
+		text-align: center;
+	}
+	.event-invite-options {
+		display: flex;
+		justify-content: space-evenly;
+		justify-items: center;
+		align-items: center;
+	}
+	.event-invite-response {
+		text-align: center;
+		font-size: larger;
+	}
+}
