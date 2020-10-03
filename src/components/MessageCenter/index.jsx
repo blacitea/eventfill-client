@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './MessageCenter.scss';
+import './index.scss';
 
 import Contacts from './Contacts';
 import MessageBoard from './MessageBoard';

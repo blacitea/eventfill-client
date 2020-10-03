@@ -1,6 +1,8 @@
 import React from 'react';
 import Message from './Message';
 
+import './Messages.scss'
+
 const Messages = ({ messages, recipient, owner }) => {
 	return (
     <section>

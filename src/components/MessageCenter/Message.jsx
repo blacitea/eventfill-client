@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
+import './Message.scss'
+
 const Message = ({ content, timeStamp, sender, owner }) => {
 	const cs =
 		sender === owner ? /*cookie.user_id*/ 'message-me' : 'message-them';

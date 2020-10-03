@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import './Send.scss'
+
 const Send = ({ sender, recipient, setMessages }) => {
 	const [text, setText] = useState();
 	const changeHandler = event => setText(event.target.value);

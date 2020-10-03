@@ -1,0 +1,19 @@
+.messages-recipient-name {
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0.2em 0;
+  margin: 0;
+}
+
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  height: 30em;
+  width: 30em;
+  overflow-y: scroll;
+  margin-bottom: 0.5em;
+}

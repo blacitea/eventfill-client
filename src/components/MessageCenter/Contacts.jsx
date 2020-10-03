@@ -1,6 +1,8 @@
 import React from 'react';
 import Contact from './Contact';
 
+import './Contacts.scss'
+
 const Contacts = ({ contactList, setRecipient, recipient }) => {
 	const toggleRecipient = id => {
 		id === recipient ? setRecipient('') : setRecipient(id);
