@@ -31,16 +31,23 @@ const validate = values => {
 	return errors;
 };
 
-const EventForm = props => {
+const EventForm = ({ setShowObj, populate, locations, genres }) => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
-	console.log(props.populate.start);
-	console.log(props.populate.end);
+	const [value, setValue] = useState({ ...populate });
+	useEffect(() => {
+		setShowObj({ ...value });
+	}, [redirect]);
+
 	return (
 		<Formik
 			initialValues={
-				props.populate
-					? { ...props.populate }
+				populate
+					? {
+							...populate,
+							start: populate.start.slice(0, 10),
+							end: populate.end.slice(0, 10),
+					  }
 					: {
 							user_id: cookies.user_id,
 							name: '',
@@ -57,16 +64,18 @@ const EventForm = props => {
 			validate={validate}
 			onSubmit={(values, { setSubmitting, resetForm }) => {
 				console.log(values.end);
-				axios
-					.post('/api/events', {
-						event: { ...values },
-					})
-					.then(resolve => {
-						resetForm();
-						setSubmitting(false);
-						alert("All done! Let's take a look at your event.");
-						setRedirect({ success: true, id: resolve.data.success.id });
-					});
+
+				axios({
+					url: populate ? `/api/events/${populate.id}` : '/api/events',
+					method: populate ? 'patch' : 'post',
+					data: { event: { ...values } },
+				}).then(resolve => {
+					resetForm();
+					setSubmitting(false);
+					setValue({ ...values });
+					alert("All done! Let's take a look at your event.");
+					setRedirect({ success: true, id: resolve.data.success.id });
+				});
 			}}
 		>
 			{({ isSubmitting }) => (
@@ -84,8 +93,8 @@ const EventForm = props => {
 							<option value="" disabled>
 								Select a city
 							</option>
-							{props.locations &&
-								props.locations.map(location => (
+							{locations &&
+								locations.map(location => (
 									<option key={location.id} value={location.id}>
 										{location.name}
 									</option>
@@ -100,8 +109,8 @@ const EventForm = props => {
 							<option value="" disabled>
 								Select a genre
 							</option>
-							{props.genres &&
-								props.genres.map(genre => (
+							{genres &&
+								genres.map(genre => (
 									<option key={genre.id} value={genre.id}>
 										{genre.name}
 									</option>
@@ -152,7 +161,7 @@ const EventForm = props => {
 					</div>
 
 					<button className="form-submit" type="submit" disabled={isSubmitting}>
-						Submit
+						{populate ? 'Update my event' : 'Submit'}
 					</button>
 				</Form>
 			)}
