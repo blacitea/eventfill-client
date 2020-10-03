@@ -2,6 +2,8 @@ import React from 'react';
 import Message from './Message';
 
 const Messages = ({ messages, recipient, owner }) => {
+  console.log(messages)
+
 	return (
 		<section className="messages-board">
 			<p className="messages-board-recipient-name">
@@ -15,7 +17,7 @@ const Messages = ({ messages, recipient, owner }) => {
 						key={message.id}
 						content={message.content}
 						sender={message.sender_id}
-						timeStamp={message.sent_at}
+						timeStamp={message.created_at}
 					/>
 				))}
 		</section>
