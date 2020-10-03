@@ -1,15 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import moment from 'moment';
 import './Calendar.scss';
 
+import axios from 'axios';
+
 const Calendar = props => {
+	const [events, setEvents] = useState([]);
+	useEffect(() => {
+		console.log('Did this happen?');
+		axios.get('/api/events').then(resolve => {
+			const eList = resolve.data.all.map(e => {
+				console.log('before change start', e.start);
+				let startd = moment(e.start).add(1, 'days').toISOString();
+
+				console.log('after changed', startd);
+
+				console.log('before change end', e.end);
+				let endd = moment(e.end).add(1, 'days').toISOString();
+				console.log('after changed', endd);
+				return {
+					...e,
+					url: `/events/${e.id}`,
+					start: startd,
+					end: endd,
+				};
+			});
+
+			setEvents(eList);
+		});
+	}, []);
 	//Control what data to display in grid
 	function renderEventContent(eventInfo) {
+		console.log(eventInfo);
 		return (
 			<article className="calendar-grid">
-				<p>{eventInfo.event.name}</p>
-				{/* <p>{eventInfo.event.extendedProps.description}</p> */}
+				<p>{eventInfo.event.extendedProps.name}</p>
 				<img
 					className="calendar-grid-thumbnail"
 					src={eventInfo.event.extendedProps.image_url}
@@ -18,6 +45,7 @@ const Calendar = props => {
 			</article>
 		);
 	}
+
 	return (
 		<section className="calendar">
 			<FullCalendar
@@ -25,16 +53,20 @@ const Calendar = props => {
 				// contentHeight="100"
 				// width to height ration (https://fullcalendar.io/docs/aspectRatio)
 				aspectRatio="1"
+				// eventBackgroundColor="#C4EADB"
+				// eventColor="#C4EADB"
+				eventColor="#A8CBE1"
 				plugins={[dayGridPlugin]}
 				initialView="dayGridMonth"
-				initialEvents={props.events}
-				eventClick={props.onClick}
+				initialEvents={[]}
+				events={events}
+				// eventClick={props.onClick}
 				eventContent={renderEventContent}
 				// setup (https://fullcalendar.io/docs/headerToolbar)
 				headerToolbar={{
-					start: 'prev,next today',
+					start: 'prev,next',
 					center: 'title',
-					end: `${props.buttonName || 'customs'}`,
+					end: 'today', //`${props.buttonName || 'customs'}`,
 				}}
 				// setup (https://fullcalendar.io/docs/customButtons)
 				customButtons={{

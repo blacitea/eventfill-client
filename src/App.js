@@ -11,28 +11,13 @@ import Create from './components/views/Create';
 import Show from './components/views/Show';
 import Login from './components/Login';
 import MessageCenter from './components/MessageCenter';
+// Test Calendar
 
 // React router
 import { Switch, Route } from 'react-router-dom';
 
 // hooks
 import useModal from './hooks/useModal';
-
-// const demoCalendar = (
-// 	<Calendar
-// 		events={events}
-// 		onClick={() => alert('Event clicked! pending url')}
-// 		buttonName={'Whatever'}
-// 		customButtons={{
-// 			Whatever: {
-// 				text: 'Whatever button you want',
-// 				click: () => {
-// 					alert('add logic for button click');
-// 				},
-// 			},
-// 		}}
-// 	/>
-// );
 
 // const demoInviteForm = <InvitationForm talent={talents[0]} events={events} />;
 
@@ -50,7 +35,10 @@ const App = props => {
 	useEffect(() => {
 		Promise.all([axios.get('/api/genres'), axios.get('/api/locations')]).then(
 			resolve => {
-				setBase({ genres: resolve[0].data, locations: resolve[1].data });
+				setBase({
+					genres: resolve[0].data,
+					locations: resolve[1].data,
+				});
 			}
 		);
 	}, []);
@@ -62,7 +50,7 @@ const App = props => {
 				close={closeModal}
 				content={modalState.content}
 			/>
-			<NavBar cookies={cookies} />
+			<NavBar openModal={openModal} />
 
 			<Switch>
 				<Route path="/login/:id">
@@ -86,16 +74,24 @@ const App = props => {
 				</Route>
 
 				<Route path="/">
-					{/* <div className="debug-panel">
-            <h1>{message}</h1>
-            <button onClick={fetchData}>Fetch Data</button>
-            <div>
-              <button onClick={() => openModal(demoCalendar)}>Calendar Modal</button>
-              <button onClick={() => openModal(demoEventForm)}>Event Modal</button>
-              <button onClick={() => openModal(demoTalentForm)}>Talent Modal</button>
-              <button onClick={() => openModal(demoInviteForm)}>Invite Modal</button>
-            </div>
-          </div> */}
+					<div className="debug-panel">
+						{/* <h1>{'Debug'}</h1> */}
+						{/* <button onClick={fetchData}>Fetch Data</button> */}
+						<div>
+							{/* <button onClick={() => openModal(demoCalendar)}>
+								Calendar Modal
+							</button> */}
+							{/* <button onClick={() => openModal(demoEventForm)}>
+								Event Modal
+							</button>
+							<button onClick={() => openModal(demoTalentForm)}>
+								Talent Modal
+							</button>
+							<button onClick={() => openModal(demoInviteForm)}>
+								Invite Modal
+							</button> */}
+						</div>
+					</div>
 
 					<Home />
 				</Route>
