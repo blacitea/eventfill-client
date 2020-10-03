@@ -1,12 +1,12 @@
 import React from 'react';
-import Messages from './Messages';
-import Send from './Send';
+import MessageList from './MessageList';
+import Compose from './Compose';
 import getByKey from '../../helpers/getByKey';
 import { useEffect } from 'react';
 
 const MessageBoard = ({owner, messages, contactList, recipient, setMessages,}) => {
   const updateMessageScroll = () => {
-    const messageList = document.getElementById("messages-list");
+    const messageList = document.getElementById("message-list");
     messageList.scrollTop = messageList.scrollHeight;
   }
 
@@ -14,12 +14,12 @@ const MessageBoard = ({owner, messages, contactList, recipient, setMessages,}) =
 
 	return (
 		<>
-			<Messages
+			<MessageList
 				owner={owner}
 				messages={messages}
 				recipient={getByKey(contactList, recipient)}
 			/>
-			<Send sender={owner} recipient={recipient} setMessages={setMessages} />
+			<Compose sender={owner} recipient={recipient} setMessages={setMessages} />
 		</>
 	);
 };

@@ -1,15 +1,15 @@
 import React from 'react';
 import Message from './Message';
 
-import './Messages.scss'
+import './MessageList.scss'
 
 const Messages = ({ messages, recipient, owner }) => {
 	return (
     <section>
-      <p className="messages-recipient-name">
+      <p className="recipient-name">
         {recipient.name && recipient.name}
       </p>
-      <section id="messages-list" className="messages-list">
+      <section id="message-list" className="message-list">
         {recipient.name &&
           messages &&
           messages.map(message => (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import './Send.scss'
+import './Compose.scss'
 
 const Send = ({ sender, recipient, setMessages }) => {
 	const [text, setText] = useState();
@@ -23,7 +23,7 @@ const Send = ({ sender, recipient, setMessages }) => {
 			.catch(err => console.log('something is not working', err));
 	};
 	return (
-		<form className="message-send" onSubmit={submitHandler}>
+		<form className="compose" onSubmit={submitHandler}>
 			<textarea value={text} onChange={changeHandler} />
 			<button type="submit">Send</button>
 		</form>

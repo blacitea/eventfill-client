@@ -1,15 +1,15 @@
 import React from 'react';
 import Contact from './Contact';
 
-import './Contacts.scss'
+import './ContactList.scss'
 
-const Contacts = ({ contactList, setRecipient, recipient }) => {
+const Contacts = ({ contacts, setRecipient, recipient }) => {
 	const toggleRecipient = id => {
 		id === recipient ? setRecipient('') : setRecipient(id);
 	};
 	return (
-		<section className="message-center-contacts">
-			{contactList.map(contact => {
+		<section className="contact-list">
+			{contacts.map(contact => {
 				return (
 					<Contact
             selected={recipient === contact.id}

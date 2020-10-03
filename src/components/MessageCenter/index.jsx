@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
 
-import Contacts from './Contacts';
+import ContactList from './ContactList';
 import MessageBoard from './MessageBoard';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
@@ -48,8 +48,8 @@ const MessageCenter = () => {
 		<main className="message-center">
 			<section className="message-center-nav">
 				<p className="message-center-title">Message Center</p>
-				<Contacts
-					contactList={contactList}
+				<ContactList
+					contacts={contactList}
 					setRecipient={setRecipient}
 					recipient={recipient}
 				/>
