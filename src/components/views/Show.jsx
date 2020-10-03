@@ -192,12 +192,15 @@ const Show = ({ genres, locations, openModal }) => {
 					<button
 						onClick={() =>
 							openModal(
-								<EventForm
-									populate={showObj}
-									locations={locations}
-									genres={genres}
-									setShowObj={setShowObj}
-								/>
+								<>
+									<h1 className="modal-title">Edit your event</h1>
+									<EventForm
+										populate={showObj}
+										locations={locations}
+										genres={genres}
+										setShowObj={setShowObj}
+									/>
+								</>
 							)
 						}
 					>
@@ -217,12 +220,15 @@ const Show = ({ genres, locations, openModal }) => {
 					<button
 						onClick={() =>
 							openModal(
-								<TalentForm
-									populate={showObj}
-									locations={locations}
-									genres={genres}
-									setShowObj={setShowObj}
-								/>
+								<>
+									<h1 className="modal-title">Edit your talent profile</h1>
+									<TalentForm
+										populate={showObj}
+										locations={locations}
+										genres={genres}
+										setShowObj={setShowObj}
+									/>
+								</>
 							)
 						}
 					>
