@@ -25,6 +25,8 @@
 		margin: 0 2em;
 	}
 	.messages-board {
+    display: flex;
+    flex-direction: column;
 		background-color: #fff;
 		height: 40vh;
 		width: 50vw;
@@ -38,14 +40,45 @@
 			font-size: 2em;
 			font-weight: bold;
 			margin: 0;
-		}
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      max-width: 60%;
+      margin-top: 0.1em;
+      margin-bottom: 0.2em;
+    }
+
+    .message-content {
+      padding: 0.3em;
+      margin: 0;
+    }
+
+    .message-time {
+      color: grey;
+      text-align: end;
+      font-size: smaller;
+      padding: 0 0.1em;
+    }
+    
 		.message-me {
-			background-color: peachpuff;
-			text-align: right;
+      align-self: flex-end;
+      
+      .message-content {
+        background-color: peachpuff;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+      }
 		}
 		.message-them {
-			background-color: cadetblue;
-			text-align: left;
+      align-self: flex-start;
+      
+      .message-content {
+        background-color: cadetblue;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+      }
 		}
 	}
 }
