@@ -10,6 +10,7 @@ const Contacts = ({ contactList, setRecipient, recipient }) => {
 			{contactList.map(contact => {
 				return (
 					<Contact
+            selected={recipient === contact.id}
 						key={contact.id}
 						onClick={() => toggleRecipient(contact.id)}
 						name={contact.name}
