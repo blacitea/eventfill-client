@@ -164,7 +164,7 @@ const Show = ({ genres, locations, openModal }) => {
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Portfolio</button>
 							</a>
-							<button onClick={() => openModal(<InvitationForm {...invite} />)}>
+							<button onClick={() => openModal(<InvitationForm {...invite} showSuccess={true} />)}>
 								Invite To Event
 							</button>
 						</section>

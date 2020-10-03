@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import './form.scss';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const validate = values => {
 	const errors = {};
@@ -16,8 +17,14 @@ const validate = values => {
 	return errors;
 };
 
-const InvitationForm = ({ talent, events, closeModal }) => {
-	const [cookies] = useCookies();
+const InvitationForm = ({ talent, events, showSuccess }) => {
+  const [cookies] = useCookies();
+  const [successful, setSuccessful] = useState(false);
+
+  if (showSuccess && successful) {
+    return <p className="success-message">Invitation sent successfully!</p>
+  }
+
 	console.log(talent);
 	return (
 		<section className="talent-invite">
@@ -61,8 +68,10 @@ const InvitationForm = ({ talent, events, closeModal }) => {
 						.then(resolve => {
 							console.log(resolve);
 							resetForm();
-							setSubmitting(false);
-							alert('Invitation sent! Need figure out how to auto close modal');
+              setSubmitting(false);
+              if (showSuccess) {
+                setSuccessful(true);
+              }
 						});
 				}}
 			>
