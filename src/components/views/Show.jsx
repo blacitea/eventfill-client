@@ -8,6 +8,7 @@ import getByKey from '../../helpers/getByKey';
 import { useCookies } from 'react-cookie';
 
 import './Show.scss';
+import PendingInvite from '../PendingInvite';
 
 const Show = ({ genres, locations, openModal }) => {
 	//Server check
@@ -17,6 +18,7 @@ const Show = ({ genres, locations, openModal }) => {
 	const [cookies] = useCookies();
 	const user = parseInt(cookies.user_id);
 	const [owned, setOwned] = useState(false);
+	const [pendingGig, setPendingGig] = useState({});
 
 	const [showObj, setShowObj] = useState({});
 	const [attendeeCount, setAttendeeCount] = useState(0);
@@ -33,8 +35,22 @@ const Show = ({ genres, locations, openModal }) => {
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
 		let axiosURL = `/api/${axiosresource}/${id}`;
 
-		axios.get();
+		if (resource === 'events') {
+			axios.get(`/api/users/${user}`).then(resolve => {
+				console.log('gigs from axios:', resolve.data.gigs);
+				console.log(resolve.data.gigs !== undefined);
+				if (resolve.data.gigs !== undefined) {
+					console.log('going to set pending gig now');
+					const gigsList = resolve.data.gigs;
+					const [key, value] = Object.entries(gigsList)[0];
 
+					const gig = value.find(({ event_id }) => {
+						return resource === 'events' && event_id === parseInt(id);
+					});
+					gig && setPendingGig(gig);
+				}
+			});
+		}
 		axios
 			.get(axiosURL)
 			.then(response => {
@@ -107,6 +123,9 @@ const Show = ({ genres, locations, openModal }) => {
 						</section>
 					)}
 					<p>{description}</p>
+
+					{/** Logic to display different button depends on resource */}
+
 					{resource === 'events' && (
 						<>
 							<h4 className="event-remaining-spots">
@@ -122,9 +141,11 @@ const Show = ({ genres, locations, openModal }) => {
 							>
 								Claim Ticket
 							</button>
+							{console.log(pendingGig)}
+							{pendingGig.event_id && <PendingInvite pendingGig={pendingGig} />}
 						</>
 					)}
-					{resource !== 'events' && (
+					{resource === 'talents' && (
 						<section className="show-info-actions">
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Portfolio</button>
@@ -135,12 +156,16 @@ const Show = ({ genres, locations, openModal }) => {
 						</section>
 					)}
 				</article>
+
 				<article className="show-image">
 					<img src={image_url} alt={name} />
 				</article>
 			</section>
+
+			{/**Show list of connected talents / events if found */}
 			{highlights.array.length > 0 && <HighlightsList {...highlights} />}
 
+			{/* Prompt to invite talent/ promote to event if user = resource owner */}
 			{resource === 'events' && owned && (
 				<button
 					onClick={() => {
