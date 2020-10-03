@@ -54,24 +54,13 @@ const MessageCenter = () => {
 					recipient={recipient}
 				/>
 			</section>
-			<section className="message-center-messages">
-				{recipient === '' && (
-          <div className="no-message">
-            <p className="message-center-no-recipient">
-              Select a user to get in touch!
-            </p>
-          </div>
-				)}
-				{recipient && (
-					<MessageBoard
-						owner={owner}
-						messages={messages}
-						contactList={contactList}
-						recipient={recipient}
-						setMessages={setMessages}
-					/>
-				)}
-			</section>
+      <MessageBoard
+        owner={owner}
+        messages={messages}
+        contactList={contactList}
+        recipient={recipient}
+        setMessages={setMessages}
+      />
 		</main>
 	);
 };
