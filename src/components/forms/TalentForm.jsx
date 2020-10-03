@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import './form.scss';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const validate = values => {
 	const errors = {};
@@ -31,7 +31,6 @@ const TalentForm = ({ setShowObj, populate, genres, locations }) => {
 	const [value, setValue] = useState({ ...populate });
 
 	useEffect(() => {
-		'Does this happened?';
 		setShowObj({ ...value });
 	}, [redirect]);
 
@@ -64,10 +63,10 @@ const TalentForm = ({ setShowObj, populate, genres, locations }) => {
 					.then(resolve => {
 						resetForm();
 						setSubmitting(false);
-						// setShowObj({ ...resolve.data.success });
+
 						setValue({ ...values });
 						alert("All done! Let's take a look at your profile.");
-						// change(`/talents/${resolve.data.success.id}`);
+
 						setRedirect({ success: true, id: resolve.data.success.id });
 					})
 					.catch(error => console.log(error));
