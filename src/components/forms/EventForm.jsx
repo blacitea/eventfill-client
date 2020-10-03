@@ -50,6 +50,7 @@ const EventForm = props => {
 			}}
 			validate={validate}
 			onSubmit={(values, { setSubmitting, resetForm }) => {
+				console.log(values.end);
 				axios
 					.post('/api/events', {
 						event: { ...values },
