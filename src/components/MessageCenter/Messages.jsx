@@ -2,14 +2,12 @@ import React from 'react';
 import Message from './Message';
 
 const Messages = ({ messages, recipient, owner }) => {
-  console.log(messages)
-
 	return (
     <section>
       <p className="messages-recipient-name">
         {recipient.name && recipient.name}
       </p>
-      <section className="messages-board">
+      <section id="messages-list" className="messages-list">
         {recipient.name &&
           messages &&
           messages.map(message => (
