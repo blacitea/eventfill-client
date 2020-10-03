@@ -27,10 +27,11 @@
   
   .messages-recipient-name {
     background-color: black;
-    color: azure;
+    color: white;
     text-align: center;
     font-size: 2em;
     font-weight: bold;
+    padding: 0.2em 0;
     margin: 0;
   }
 
@@ -41,7 +42,7 @@
 		height: 30em;
     width: 30em;
     overflow-y: scroll;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 
     .message {
       display: flex;
@@ -70,26 +71,45 @@
     }
     
 		.message-me {
-      background-color: #f7f6f1;
+      background-color: #fcfafa;
       align-self: stretch;
       
       .message-bubble {
         align-self: flex-end;
         background-color: peachpuff;
-        border-bottom-left-radius: 8px;
-        border-top-left-radius: 8px;
-        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
       }
 		}
 		.message-them {
       align-self: flex-start;
       
       .message-bubble {
-        background-color: cadetblue;
-        border-bottom-right-radius: 8px;
-        border-top-right-radius: 8px;
-        border-bottom-left-radius: 8px;
+        background-color: rgb(148, 230, 233);
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
       }
 		}
-	}
+  }
+  
+  .message-send {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-self: start;
+    align-items: center;
+
+    textarea {
+      flex-grow: 1;
+      height: 3em;
+    }
+
+    button {
+      height: 100%;
+      margin: 0 0 0 0.5em;
+      height: 3em;
+    }
+  }
 }
