@@ -1,0 +1,19 @@
+.compose {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-self: start;
+  align-items: center;
+
+  textarea {
+    flex-grow: 1;
+    height: 3em;
+    resize: none;
+  }
+
+  button {
+    height: 100%;
+    margin: 0 0 0 0.5em;
+    height: 3em;
+  }
+}

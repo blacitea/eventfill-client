@@ -1,22 +1,32 @@
 import React from 'react';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
+
+import './Message.scss'
+
 const Message = ({ content, timeStamp, sender, owner }) => {
 	const cs =
-		sender === owner ? /*cookie.user_id*/ 'message-me' : 'message-them';
+    sender === owner ? /*cookie.user_id*/ 'message-me' : 'message-them';
+    
 	const eventId = content.includes('Score')
 		? content.slice(content.indexOf('#') + 1)
 		: null;
-	console.log(eventId);
+
 	const link = (
 		<Link to={`/events/${eventId}`}>
 			<p>Go check out the event!</p>
 		</Link>
-	);
+  );
+  
 	return (
-		<article className={cs}>
-			<p>{content}</p>
-			{eventId && link}
-			<footer>{timeStamp}</footer>
+		<article className={"message " + cs}>
+			<div className="message-bubble">
+        <p className="message-content">
+          {content}
+          {eventId && link}
+        </p>
+      </div>
+      <footer className="message-time">{sender === owner ? "You, " : "Them, "}{moment(timeStamp).fromNow()}</footer>
 		</article>
 	);
 };
