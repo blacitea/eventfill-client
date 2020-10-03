@@ -1,6 +1,6 @@
 .message-center {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-items: center;
 
 	.message-center-nav {
@@ -9,7 +9,9 @@
 		margin: 0 2em;
 
 		.message-center-title {
-			font-size: 2em;
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 0.5em;
 		}
 
 		.message-center-contacts {
@@ -29,10 +31,10 @@
   }
   
 	.message-center-messages {
+		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-items: center;
-		display: flex;
 		margin: 0 2em;
   }
   
