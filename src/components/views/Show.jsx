@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HighlightsList from '../HighlightsList';
 import InvitationForm from '../forms/InvitationForm';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import getByKey from '../../helpers/getByKey';
@@ -12,10 +12,11 @@ import './Show.scss';
 const Show = ({ genres, locations, openModal }) => {
 	//Server check
 	//Set up
-
+	const history = useHistory();
 	const { resource, id } = useParams();
 	const [cookies] = useCookies();
-	const owner = cookies.user_id;
+	const user = parseInt(cookies.user_id);
+	const [owned, setOwned] = useState(false);
 
 	const [showObj, setShowObj] = useState({});
 	const [attendeeCount, setAttendeeCount] = useState(0);
@@ -32,12 +33,15 @@ const Show = ({ genres, locations, openModal }) => {
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
 		let axiosURL = `/api/${axiosresource}/${id}`;
 
+		axios.get();
+
 		axios
 			.get(axiosURL)
 			.then(response => {
 				let data = response.data;
 
 				if (resource === 'events') {
+					data.event.user_id === user ? setOwned(true) : setOwned(false);
 					setShowObj(data.event);
 					setHighlights({
 						array: data.talents,
@@ -50,6 +54,7 @@ const Show = ({ genres, locations, openModal }) => {
 						getByKey(locations, data.event.location_id).name || '';
 					setSummary(`${genreName} ${resource} in ${locationName}`);
 				} else {
+					data.talent.user_id === user ? setOwned(true) : setOwned(false);
 					setShowObj(data.talent);
 					setHighlights({
 						array: data.events,
@@ -69,7 +74,7 @@ const Show = ({ genres, locations, openModal }) => {
 						setInvite({
 							talent: resolve,
 							events: response.data.upcoming.filter(
-								event => event.user_id === parseInt(owner)
+								event => event.user_id === parseInt(user)
 							),
 						});
 					});
@@ -135,6 +140,25 @@ const Show = ({ genres, locations, openModal }) => {
 				</article>
 			</section>
 			{highlights.array.length > 0 && <HighlightsList {...highlights} />}
+
+			{resource === 'events' && owned && (
+				<button
+					onClick={() => {
+						history.push('/explore/talents');
+					}}
+				>
+					Invite talents to your event!
+				</button>
+			)}
+			{resource !== 'events' && owned && (
+				<button
+					onClick={() => {
+						history.push('/explore/events');
+					}}
+				>
+					Find an event to showcase your talent!
+				</button>
+			)}
 		</main>
 	);
 };
