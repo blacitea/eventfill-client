@@ -30,6 +30,16 @@ const Show = ({ genres, locations, openModal }) => {
 	const [invite, setInvite] = useState({ talent: {}, events: [] });
 	const [summary, setSummary] = useState('');
 
+	const updateHighlight = () => {
+		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
+		axios.get(`/api/${axiosresource}/${id}`).then(resolve => {
+			setHighlights({
+				...highlights,
+				array: resolve.data.talents,
+			});
+		});
+	};
+
 	useEffect(() => {
 		// axios call to get relevant filtered data based on resource (event/talent) and id
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
@@ -37,9 +47,7 @@ const Show = ({ genres, locations, openModal }) => {
 
 		if (resource === 'events') {
 			axios.get(`/api/users/${user}`).then(resolve => {
-				console.log('gigs from axios:', resolve.data.gigs);
-				console.log(resolve.data.gigs !== undefined);
-				if (resolve.data.gigs !== undefined) {
+				if (Object.keys(resolve.data.gigs).length !== 0) {
 					console.log('going to set pending gig now');
 					const gigsList = resolve.data.gigs;
 					const [key, value] = Object.entries(gigsList)[0];
@@ -141,8 +149,13 @@ const Show = ({ genres, locations, openModal }) => {
 							>
 								Claim Ticket
 							</button>
-							{console.log(pendingGig)}
-							{pendingGig.event_id && <PendingInvite pendingGig={pendingGig} />}
+							{console.log('pending gig', pendingGig)}
+							{pendingGig.event_id && (
+								<PendingInvite
+									pendingGig={pendingGig}
+									updateHighlight={updateHighlight}
+								/>
+							)}
 						</>
 					)}
 					{resource === 'talents' && (

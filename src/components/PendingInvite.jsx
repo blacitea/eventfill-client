@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './PendingInvite.scss';
 
-const PendingInvite = ({ pendingGig }) => {
+const PendingInvite = ({ pendingGig, updateHighlight }) => {
 	console.log(pendingGig);
 	const [rvsp, setRVSP] = useState(pendingGig.accepted);
 	const handleClick = response => {
@@ -11,7 +11,10 @@ const PendingInvite = ({ pendingGig }) => {
 			.patch(`/api/gigs/${pendingGig.id}`, {
 				gig: { ...pendingGig, accepted: response },
 			})
-			.then(resolve => setRVSP(response))
+			.then(resolve => {
+				setRVSP(response);
+				updateHighlight();
+			})
 			.catch(error => console.log('Error!', error));
 	};
 
