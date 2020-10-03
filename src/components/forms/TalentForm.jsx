@@ -31,7 +31,9 @@ const TalentForm = ({ setShowObj, populate, genres, locations }) => {
 	const [value, setValue] = useState({ ...populate });
 
 	useEffect(() => {
-		setShowObj({ ...value });
+		if (populate) {
+			setShowObj({ ...value });
+		}
 	}, [redirect]);
 
 	return (

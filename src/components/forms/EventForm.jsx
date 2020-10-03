@@ -35,8 +35,11 @@ const EventForm = ({ setShowObj, populate, locations, genres }) => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
 	const [value, setValue] = useState({ ...populate });
+
 	useEffect(() => {
-		setShowObj({ ...value });
+		if (populate) {
+			setShowObj({ ...value });
+		}
 	}, [redirect]);
 
 	return (
