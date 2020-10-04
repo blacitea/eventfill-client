@@ -47,7 +47,11 @@ const MessageCenter = () => {
 			setMessages([]);
 			setRecipient('');
 			setContactList([]);
+			document.title = 'Message center';
 		}
+		return () => {
+			document.title = 'EVENTFILL';
+		};
 	}, [recipient, owner]);
 
 	return (

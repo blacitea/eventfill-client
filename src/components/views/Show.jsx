@@ -67,6 +67,11 @@ const Show = ({ genres, locations, openModal }) => {
 	useEffect(() => {
 		// axios call to get relevant filtered data based on resource (event/talent) and id
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
+
+		resource === 'events'
+			? (document.title = 'EVENTFILL - Event details')
+			: (document.title = 'EVENTFILL - Talent details');
+
 		let axiosURL = `/api/${axiosresource}/${id}`;
 
 		if (resource === 'events') {
@@ -131,6 +136,9 @@ const Show = ({ genres, locations, openModal }) => {
 					});
 				}
 			});
+		return () => {
+			document.title = 'EVENTFILL';
+		};
 	}, [resource, id, locations, genres]);
 
 	// destructuring the data from axios call

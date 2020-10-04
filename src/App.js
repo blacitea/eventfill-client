@@ -41,6 +41,7 @@ const App = props => {
 				});
 			}
 		);
+		document.title = 'Welcome to EVENTFILL!';
 	}, []);
 
 	return (
