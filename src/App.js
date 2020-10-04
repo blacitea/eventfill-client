@@ -57,7 +57,7 @@ const App = props => {
 				{/* <Route path="/login/:id">{<Login setCookie={setCookie} />}</Route> */}
 
 				<Route path="/create/:id">
-					<Create {...base} />
+					<Create {...base} openModal={openModal} />
 				</Route>
 
 				<Route path="/explore/:id">

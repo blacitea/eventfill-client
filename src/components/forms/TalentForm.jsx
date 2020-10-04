@@ -25,7 +25,7 @@ const validate = values => {
 	return errors;
 };
 
-const TalentForm = ({ setShowObj, populate, genres, locations }) => {
+const TalentForm = ({ setShowObj, populate, genres, locations, openModal }) => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
 	const [value, setValue] = useState({ ...populate });
@@ -34,7 +34,9 @@ const TalentForm = ({ setShowObj, populate, genres, locations }) => {
 		if (populate) {
 			setShowObj({ ...value });
 		}
-	}, [redirect]);
+  }, [redirect]);
+  
+  const successMessage = <p className="success-message">Talent profile submitted successfully!</p>
 
 	return (
 		<Formik
@@ -67,9 +69,12 @@ const TalentForm = ({ setShowObj, populate, genres, locations }) => {
 						setSubmitting(false);
 
 						setValue({ ...values });
-						alert("All done! Let's take a look at your profile.");
+            openModal(successMessage);
+            
+            setTimeout(() => {
+              setRedirect({ success: true, id: resolve.data.success.id });
+            }, 1000);
 
-						setRedirect({ success: true, id: resolve.data.success.id });
 					})
 					.catch(error => console.log(error));
 			}}

@@ -27,7 +27,7 @@ const MessageCenter = () => {
 				.catch(error => console.log('something is wrong here:', error));
 
 			axios
-				.get(`api/users/${owner}/messages`)
+				.get(`api/messages`)
 				.then(response => {
 					setContactList(response.data.contacts);
 				})
@@ -36,7 +36,7 @@ const MessageCenter = () => {
 				});
 			recipient &&
 				axios
-					.get(`api/users/${owner}/messages/${recipient}`)
+					.get(`api/messages/${recipient}`)
 					.then(response => {
 						setMessages(response.data.messages);
 					})

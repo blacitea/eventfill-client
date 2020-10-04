@@ -22,7 +22,8 @@ const TALENT_ASIDE = (
 	</>
 );
 
-const Create = ({ locations, genres }) => {
+
+const Create = ({ locations, genres, openModal }) => {
 	let { id } = useParams();
 	useEffect(() => {
 		document.title = 'EVENTFILL - Creation';
@@ -37,9 +38,9 @@ const Create = ({ locations, genres }) => {
 				{id === 'talent' && TALENT_ASIDE}
 			</aside>
 			<section className="create-form">
-				{id === 'event' && <EventForm locations={locations} genres={genres} />}
+				{id === 'event' && <EventForm locations={locations} genres={genres} openModal={openModal} />}
 				{id === 'talent' && (
-					<TalentForm locations={locations} genres={genres} />
+					<TalentForm locations={locations} genres={genres} openModal={openModal} />
 				)}
 			</section>
 		</main>
