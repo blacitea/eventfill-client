@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import EventForm from '../forms/EventForm';
 import TalentForm from '../forms/TalentForm';
 
-import "./Create.scss"
+import './Create.scss';
 
 const EVENT_ASIDE = (
 	<>
@@ -25,6 +25,12 @@ const TALENT_ASIDE = (
 
 const Create = ({ locations, genres, openModal }) => {
 	let { id } = useParams();
+	useEffect(() => {
+		document.title = 'EVENTFILL - Creation';
+		return () => {
+			document.title = 'EVENTFILL';
+		};
+	}, []);
 	return (
 		<main className="create-panel">
 			<aside className="create-aside">
