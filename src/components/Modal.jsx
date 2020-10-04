@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import './Modal.scss'
 
@@ -11,7 +13,7 @@ const Modal = ({isOpen, close, ...props}) => {
       className='modal-container'
       overlayClassName='modal-overlay'
     >
-      <span className='modal-close' onClick={close}>x</span>
+      <span id='modal-close' className='modal-close' onClick={close}><FontAwesomeIcon icon={faTimes} /></span>
       <section className='modal-content'>
         {props.content}
         {props.children}
