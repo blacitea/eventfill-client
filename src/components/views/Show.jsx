@@ -44,7 +44,7 @@ const Show = ({ genres, locations, openModal }) => {
 	const claimTicket = () => {
 		if (attending) {
 			axios
-				.delete(`/api/users/${user}/registrations/${attending}`)
+				.delete(`/api/registrations/${attending}`, { event_id: id })
 				.then(resolve => {
 					// console.log(resolve);
 					setAttending(false);
@@ -53,7 +53,7 @@ const Show = ({ genres, locations, openModal }) => {
 				});
 		} else {
 			axios
-				.post(`/api/events/${id}/registrations`)
+				.post(`/api/registrations`, { event_id: id })
 				.then(resolve => {
 					// console.log(resolve);
 					setAttending(resolve.data.id);
