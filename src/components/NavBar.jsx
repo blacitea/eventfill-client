@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Calendar from './Calendar';
 import CreateDown from './CreateDown';
 import LoginDown from './LoginDown';
+import { useCookies } from 'react-cookie';
+
 const NavBar = ({ openModal }) => {
 	const [openCreate, setopenCreate] = useState(false);
 	const [openLogin, setopenLogin] = useState(false);
@@ -17,7 +19,7 @@ const NavBar = ({ openModal }) => {
 			setopenLogin(false);
 		}
 	};
-
+	const [cookies, setCookie] = useCookies();
 	return (
 		<>
 			{openCreate && (
@@ -56,7 +58,7 @@ const NavBar = ({ openModal }) => {
 							setopenLogin(!openLogin);
 						}}
 					>
-						Login
+						{Object.keys(cookies).length === 0 ? 'Login' : 'Logout'}
 					</li>
 					{openLogin && <LoginDown />}
 				</ul>
