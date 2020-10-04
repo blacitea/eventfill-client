@@ -34,7 +34,7 @@ const Create = ({ locations, genres, openModal }) => {
 			<section className="create-form">
 				{id === 'event' && <EventForm locations={locations} genres={genres} openModal={openModal} />}
 				{id === 'talent' && (
-					<TalentForm locations={locations} genres={genres} />
+					<TalentForm locations={locations} genres={genres} openModal={openModal} />
 				)}
 			</section>
 		</main>

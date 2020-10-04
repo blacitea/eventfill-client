@@ -80,8 +80,11 @@ const EventForm = ({ setShowObj, populate, locations, genres, openModal }) => {
 					resetForm();
 					setSubmitting(false);
 					setValue({ ...values });
-					openModal(successMessage);
-					setRedirect({ success: true, id: resolve.data.success.id });
+          openModal(successMessage);
+          
+          setTimeout(() => {
+            setRedirect({ success: true, id: resolve.data.success.id });
+          }, 1000)
 				});
 			}}
 		>
