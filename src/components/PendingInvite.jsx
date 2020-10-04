@@ -4,7 +4,7 @@ import axios from 'axios';
 import './PendingInvite.scss';
 
 const PendingInvite = ({ pendingGig, updateHighlight }) => {
-	console.log(pendingGig);
+	// console.log(pendingGig);
 	const [rvsp, setRVSP] = useState(pendingGig.accepted);
 	const handleClick = response => {
 		axios
