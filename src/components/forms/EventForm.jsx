@@ -21,7 +21,9 @@ const validate = values => {
 	}
 	if (!values.end) {
 		errors.end = 'When will the event end?';
-	}
+	} else if (values.start && values.start > values.end) {
+    errors.end = 'Event must end on or after its start date.'
+  }
 	if (!values.image_url) {
 		errors.image_url = 'Pick a photo to show off your event!';
 	}
@@ -31,16 +33,18 @@ const validate = values => {
 	return errors;
 };
 
-const EventForm = ({ setShowObj, populate, locations, genres }) => {
+const EventForm = ({ setShowObj, populate, locations, genres, openModal }) => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
-	const [value, setValue] = useState({ ...populate });
+  const [value, setValue] = useState({ ...populate });
 
 	useEffect(() => {
 		if (populate) {
 			setShowObj({ ...value });
 		}
-	}, [redirect]);
+  }, [redirect]);
+  
+  const successMessage = <p className="success-message">Event submitted successfully!</p>
 
 	return (
 		<Formik
@@ -76,7 +80,7 @@ const EventForm = ({ setShowObj, populate, locations, genres }) => {
 					resetForm();
 					setSubmitting(false);
 					setValue({ ...values });
-					alert("All done! Let's take a look at your event.");
+					openModal(successMessage);
 					setRedirect({ success: true, id: resolve.data.success.id });
 				});
 			}}

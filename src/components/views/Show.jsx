@@ -164,7 +164,7 @@ const Show = ({ genres, locations, openModal }) => {
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Portfolio</button>
 							</a>
-							<button onClick={() => openModal(<InvitationForm {...invite} showSuccess={true} />)}>
+							<button onClick={() => openModal(<InvitationForm {...invite} openModal={openModal} />)}>
 								Invite To Event
 							</button>
 						</section>
@@ -198,7 +198,8 @@ const Show = ({ genres, locations, openModal }) => {
 										populate={showObj}
 										locations={locations}
 										genres={genres}
-										setShowObj={setShowObj}
+                    setShowObj={setShowObj}
+                    openModal={openModal}
 									/>
 								</>
 							)

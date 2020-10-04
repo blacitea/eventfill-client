@@ -58,7 +58,7 @@ const App = props => {
 				</Route>
 
 				<Route path="/create/:id">
-					<Create {...base} />
+					<Create {...base} openModal={openModal} />
 				</Route>
 
 				<Route path="/explore/:id">
