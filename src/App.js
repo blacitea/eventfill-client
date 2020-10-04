@@ -26,7 +26,7 @@ import useModal from './hooks/useModal';
 // const demoTalentForm = <TalentForm locations={locations} categories={genres} />;
 
 const App = props => {
-	const [cookies, setCookie] = useCookies(['user_id']);
+	// const [cookies, setCookie] = useCookies(['user_id']);
 
 	const { modalState, openModal, closeModal } = useModal();
 
@@ -53,9 +53,7 @@ const App = props => {
 			<NavBar openModal={openModal} />
 
 			<Switch>
-				<Route path="/login/:id">
-					<Login setCookie={setCookie} />
-				</Route>
+				{/* <Route path="/login/:id">{<Login setCookie={setCookie} />}</Route> */}
 
 				<Route path="/create/:id">
 					<Create {...base} />

@@ -16,32 +16,38 @@ const MessageCenter = () => {
 
 	useEffect(() => {
 		//axios calls to BE for message data
-		axios
-			.get(`api/users/${owner}`)
-			.then(resolve => {
-				resolve.data.user
-					? (document.title = `Message center for ${resolve.data.user.name}`)
-					: (document.title = 'Message center');
-			})
-			.catch(error => console.log('something is wrong here:', error));
-
-		axios
-			.get(`api/users/${owner}/messages`)
-			.then(response => {
-				setContactList(response.data.contacts);
-			})
-			.catch(error => {
-				console.log('something went wrong:', error);
-			});
-		recipient &&
+		if (owner) {
 			axios
-				.get(`api/users/${owner}/messages/${recipient}`)
+				.get(`api/users/${owner}`)
+				.then(resolve => {
+					resolve.data.user
+						? (document.title = `Message center for ${resolve.data.user.name}`)
+						: (document.title = 'Message center');
+				})
+				.catch(error => console.log('something is wrong here:', error));
+
+			axios
+				.get(`api/users/${owner}/messages`)
 				.then(response => {
-					setMessages(response.data.messages);
+					setContactList(response.data.contacts);
 				})
 				.catch(error => {
 					console.log('something went wrong:', error);
 				});
+			recipient &&
+				axios
+					.get(`api/users/${owner}/messages/${recipient}`)
+					.then(response => {
+						setMessages(response.data.messages);
+					})
+					.catch(error => {
+						console.log('something went wrong:', error);
+					});
+		} else {
+			setMessages([]);
+			setRecipient('');
+			setContactList([]);
+		}
 	}, [recipient, owner]);
 
 	return (
@@ -54,13 +60,13 @@ const MessageCenter = () => {
 					recipient={recipient}
 				/>
 			</section>
-      <MessageBoard
-        owner={owner}
-        messages={messages}
-        contactList={contactList}
-        recipient={recipient}
-        setMessages={setMessages}
-      />
+			<MessageBoard
+				owner={owner}
+				messages={messages}
+				contactList={contactList}
+				recipient={recipient}
+				setMessages={setMessages}
+			/>
 		</main>
 	);
 };
