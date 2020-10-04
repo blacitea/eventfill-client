@@ -29,6 +29,7 @@ const Show = ({ genres, locations, openModal }) => {
 		title: '',
 	});
 	const [invite, setInvite] = useState({ talent: {}, events: [] });
+	const [attending, setAttending] = useState(false);
 
 	const updateHighlight = () => {
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
@@ -40,6 +41,29 @@ const Show = ({ genres, locations, openModal }) => {
 		});
 	};
 
+	const claimTicket = () => {
+		if (attending) {
+			axios
+				.delete(`/api/users/${user}/registrations/${attending}`)
+				.then(resolve => {
+					// console.log(resolve);
+					setAttending(false);
+					setAttendeeCount(prev => prev - 1);
+					alert('Your reservation is cancelled!');
+				});
+		} else {
+			axios
+				.post(`/api/events/${id}/registrations`)
+				.then(resolve => {
+					// console.log(resolve);
+					setAttending(resolve.data.id);
+					setAttendeeCount(prev => prev + 1);
+					alert('Your ticket is secured!');
+				})
+				.catch(error => console.log(error));
+		}
+	};
+
 	useEffect(() => {
 		// axios call to get relevant filtered data based on resource (event/talent) and id
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
@@ -48,7 +72,7 @@ const Show = ({ genres, locations, openModal }) => {
 		if (resource === 'events') {
 			axios.get(`/api/users/${user}`).then(resolve => {
 				if (Object.keys(resolve.data.gigs).length !== 0) {
-					console.log('going to set pending gig now');
+					// console.log('going to set pending gig now');
 					const gigsList = resolve.data.gigs;
 					const [key, value] = Object.entries(gigsList)[0];
 
@@ -56,6 +80,17 @@ const Show = ({ genres, locations, openModal }) => {
 						return resource === 'events' && event_id === parseInt(id);
 					});
 					gig && setPendingGig(gig);
+				}
+				// console.log('It got here - print user profile');
+				// console.log(resolve.data.attending);
+				const attend = resolve.data.attending.find(
+					({ event_id }) => event_id === parseInt(id)
+				);
+				// console.log('any result from find?', attend);
+				// console.log('It reaches here - checking registration id');
+				if (attend) {
+					// console.log(attend.id);
+					setAttending(attend.id);
 				}
 			});
 		}
@@ -144,13 +179,15 @@ const Show = ({ genres, locations, openModal }) => {
 										max_attendees - attendeeCount
 									}/${max_attendees}`}
 							</h4>
-							<button
-								disabled={attendeeCount === max_attendees}
-								onClick={() => alert('some logic to change remaining spots')}
-							>
-								Claim Ticket
-							</button>
-							{console.log('pending gig', pendingGig)}
+							{!owned && (
+								<button
+									disabled={attendeeCount === max_attendees}
+									onClick={claimTicket}
+								>
+									{attending ? 'Cancel Ticket' : 'Claim Ticket'}
+								</button>
+							)}
+							{/* {console.log('pending gig', pendingGig)} */}
 							{pendingGig.event_id && (
 								<PendingInvite
 									pendingGig={pendingGig}
@@ -163,10 +200,14 @@ const Show = ({ genres, locations, openModal }) => {
 						<section className="show-info-actions">
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Portfolio</button>
-							</a>
-							<button onClick={() => openModal(<InvitationForm {...invite} />)}>
-								Invite To Event
-							</button>
+							</a>{' '}
+							{!owned && (
+								<button
+									onClick={() => openModal(<InvitationForm {...invite} />)}
+								>
+									Invite To Event
+								</button>
+							)}
 						</section>
 					)}
 				</article>
