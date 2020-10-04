@@ -1,9 +1,11 @@
 import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
-const Login = props => {
+const Login = () => {
+	const [cookies, setCookie] = useCookies();
 	const { id } = useParams();
-	props.setCookie('user_id', id, { path: '/' });
+	setCookie('user_id', id, { path: '/' });
 	return <Redirect to="/" />;
 };
 

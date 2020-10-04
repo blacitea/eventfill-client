@@ -18,6 +18,7 @@ const Home = () => {
 			setEvents(resolve[0].data.upcoming);
 			setTalents(resolve[1].data);
 		});
+		document.title = 'EVENTFILL';
 	}, []);
 	return (
 		<main className="home">

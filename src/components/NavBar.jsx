@@ -2,32 +2,29 @@ import React, { useState } from 'react';
 import './NavBar.scss';
 import { Link } from 'react-router-dom';
 import Calendar from './Calendar';
+import CreateDown from './CreateDown';
+import LoginDown from './LoginDown';
+import { useCookies } from 'react-cookie';
 
 const NavBar = ({ openModal }) => {
-	const [open, setOpen] = useState(false);
+	const [openCreate, setopenCreate] = useState(false);
+	const [openLogin, setopenLogin] = useState(false);
 
-	const Dropdown = () => {
-		return (
-			<ul className="drop-down">
-				<Link to="/create/event">
-					<li>New Event</li>
-				</Link>
-				<Link to="/create/talent">
-					<li>New Talent</li>
-				</Link>
-			</ul>
-		);
-	};
 	const demoCalendar = <Calendar />;
 	const closeDropDown = () => {
-		if (open) {
-			setOpen(false);
+		if (openCreate) {
+			setopenCreate(false);
+		}
+		if (openLogin) {
+			setopenLogin(false);
 		}
 	};
-
+	const [cookies, setCookie] = useCookies();
 	return (
 		<>
-			{open && <div className="drop-down__overlay" onClick={closeDropDown} />}
+			{openCreate && (
+				<div className="drop-down__overlay" onClick={closeDropDown} />
+			)}
 			<nav onClick={closeDropDown}>
 				<Link className="router-link" to="/">
 					<section className="logo">EVENTFILL</section>
@@ -46,15 +43,24 @@ const NavBar = ({ openModal }) => {
 					<li
 						className="nav-create"
 						onClick={() => {
-							setOpen(!open);
+							setopenCreate(!openCreate);
 						}}
 					>
 						Create
 					</li>
-					{open && <Dropdown />}
+					{openCreate && <CreateDown />}
 					<Link to="/messages">
 						<li>My Messages</li>
 					</Link>
+
+					<li
+						onClick={() => {
+							setopenLogin(!openLogin);
+						}}
+					>
+						{Object.keys(cookies).length === 0 ? 'Login' : 'Logout'}
+					</li>
+					{openLogin && <LoginDown />}
 				</ul>
 			</nav>
 		</>
