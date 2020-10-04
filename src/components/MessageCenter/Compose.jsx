@@ -3,15 +3,14 @@ import axios from 'axios';
 
 import './Compose.scss'
 
-const Send = ({ sender, recipient, setMessages }) => {
+const Send = ({ recipient, setMessages }) => {
 	const [text, setText] = useState();
 	const changeHandler = event => setText(event.target.value);
 	const submitHandler = event => {
 		event.preventDefault();
 		axios
-			.post(`/api/users/${sender}/messages`, {
+			.post(`/api/messages`, {
 				message: {
-					sender_id: sender,
 					recipient_id: recipient,
 					content: text,
 				},

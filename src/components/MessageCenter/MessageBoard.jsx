@@ -25,7 +25,7 @@ const MessageBoard = ({owner, messages, contactList, recipient, setMessages,}) =
             messages={messages}
             recipient={getByKey(contactList, recipient)}
           />
-          <Compose sender={owner} recipient={recipient} setMessages={setMessages} />
+          <Compose recipient={recipient} setMessages={setMessages} />
         </>
       )}
       {!recipient && (

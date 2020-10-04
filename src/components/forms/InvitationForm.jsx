@@ -1,29 +1,19 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import './form.scss';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 const validate = values => {
 	const errors = {};
 	if (!values.event_id) {
 		errors.event_id = 'Event required to send invitation.';
 	}
-	if (!values.time) {
-		errors.time = 'Event required to send invitation.';
-	}
 	return errors;
 };
 
-const InvitationForm = ({ talent, events, showSuccess }) => {
-  const [cookies] = useCookies();
-  const [successful, setSuccessful] = useState(false);
+const InvitationForm = ({ talent, events, openModal }) => {
 
-  if (showSuccess && successful) {
-    return <p className="success-message">Invitation sent successfully!</p>
-  }
+  const successMessage = <p className="success-message">Invitation sent successfully!</p>
 
 	console.log(talent);
 	return (
@@ -38,9 +28,7 @@ const InvitationForm = ({ talent, events, showSuccess }) => {
 			</section>
 			<Formik
 				initialValues={{
-					sender_id: cookies.user_id,
 					talent_profile_id: talent.id,
-					time: '',
 					event_id: '',
 					description: '',
 				}}
@@ -57,9 +45,8 @@ const InvitationForm = ({ talent, events, showSuccess }) => {
 							${values.description ? `Note from organizer: ${values.description}` : ''}
 							ref#${values.event_id}
 							`;
-							return axios.post(`/api/users/${values.sender_id}/messages`, {
+							return axios.post(`/api/messages`, {
 								message: {
-									sender_id: values.sender_id,
 									recipient_id: talent.user_id,
 									content: message,
 								},
@@ -69,9 +56,7 @@ const InvitationForm = ({ talent, events, showSuccess }) => {
 							console.log(resolve);
 							resetForm();
               setSubmitting(false);
-              if (showSuccess) {
-                setSuccessful(true);
-              }
+              openModal(successMessage);
 						});
 				}}
 			>
@@ -91,12 +76,6 @@ const InvitationForm = ({ talent, events, showSuccess }) => {
 									))}
 							</Field>
 							<ErrorMessage name="event_id" component="div" />
-						</div>
-
-						<div className="form-group">
-							<label htmlFor="time">Performance Date</label>
-							<Field name="time" type="date" />
-							<ErrorMessage name="time" component="div" />
 						</div>
 
 						<div className="form-group">
