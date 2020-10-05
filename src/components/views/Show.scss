@@ -27,7 +27,12 @@
 		.show-info-dates {
 			text-align: center;
 			font-style: italic;
-		}
+    }
+    
+    .show-description {
+      max-width: 100%;
+      word-wrap: break-word;
+    }
 
 		.event-remaining-spots {
 			margin: 0.2em 0 0.4em;
