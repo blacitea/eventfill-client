@@ -19,7 +19,7 @@ const NavBar = ({ openModal }) => {
 			setopenLogin(false);
 		}
 	};
-	const [cookies, setCookie] = useCookies();
+	const [cookies] = useCookies();
 	return (
 		<>
 			{openCreate && (
@@ -51,9 +51,6 @@ const NavBar = ({ openModal }) => {
 					{openCreate && <CreateDown />}
 					<Link to="/messages">
 						<li>My Messages</li>
-					</Link>
-					<Link to="/profile">
-						<li>My Profile</li>
 					</Link>
 
 					<li
