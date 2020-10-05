@@ -10,26 +10,26 @@ const NavBar = ({ openModal }) => {
 	const [openCreate, setopenCreate] = useState(false);
 	const [openLogin, setopenLogin] = useState(false);
 
-	const demoCalendar = <Calendar />;
 	const closeDropDown = () => {
 		if (openCreate) {
-			setopenCreate(false);
-		}
+      setopenCreate(false);
+    }
 		if (openLogin) {
 			setopenLogin(false);
 		}
-	};
-	const [cookies, setCookie] = useCookies();
+  };
+  
+	const [cookies] = useCookies();
 	return (
 		<>
-			{openCreate && (
+			{(openCreate || openLogin) && (
 				<div className="drop-down__overlay" onClick={closeDropDown} />
 			)}
 			<nav onClick={closeDropDown}>
 				<Link className="router-link" to="/">
 					<section className="logo">EVENTFILL</section>
 				</Link>
-				<button onClick={() => openModal(demoCalendar)}>Calendar Modal</button>
+				<button onClick={() => openModal(<Calendar />)}>Calendar Modal</button>
 				<ul className="links">
 					<Link to="/">
 						<li>Home</li>
