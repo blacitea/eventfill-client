@@ -14,6 +14,7 @@ const AccountDropdown = ({isOpen}) => {
   
   return (
     <ul className={classes}>
+      {!cookies.user_id &&
         <>
           <li onClick={() => setCookie('user_id', 1, { path: '/' })}>User 1</li>
           <li onClick={() => setCookie('user_id', 2, { path: '/' })}>User 2</li>
@@ -22,7 +23,7 @@ const AccountDropdown = ({isOpen}) => {
           <li onClick={() => setCookie('user_id', 5, { path: '/' })}>User 5</li>
         </>
       }
-      {Object.keys(cookies).length !== 0 &&
+      {cookies.user_id &&
         <>
           <Link to="/messages">
             Messages
