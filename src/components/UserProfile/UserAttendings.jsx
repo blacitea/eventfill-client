@@ -8,8 +8,8 @@ const UserAttendings = ({ attending }) => {
 			{attending &&
 				attending.map(attend => {
 					return (
-						<article>
-							<p>{attend.name}</p>
+						<article className="profile-sub-item">
+							<p className="profile-sub-item-title">Event: {attend.name}</p>
 							<p>
 								Event period: {moment(attend.start).format('LL')} to{' '}
 								{moment(attend.end).format('LL')}

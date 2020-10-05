@@ -10,8 +10,8 @@ const UserEvents = ({ events }) => {
 				events.map(event => {
 					console.log(event);
 					return (
-						<article key={event.id}>
-							<p>Event: {event.name}</p>
+						<article className="profile-sub-item" key={event.id}>
+							<p className="profile-sub-item-title">Event: {event.name}</p>
 							<p>
 								Period: {moment(event.start).format('LL')} to{' '}
 								{moment(event.end).format('LL')}
