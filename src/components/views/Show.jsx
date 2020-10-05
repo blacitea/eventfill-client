@@ -182,7 +182,7 @@ const Show = ({ genres, locations, openModal }) => {
 
 	const locationName = location ? location.name : '';
 	const genreName = genre ? genre.name : '';
-	const summary = `${genreName} ${resource} in ${locationName}`;
+	const summary = `${genreName} ${resource.slice(0,-1)} in ${locationName}`;
 
 	return (
 		<main>
