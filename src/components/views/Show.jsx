@@ -288,7 +288,8 @@ const Show = ({ genres, locations, openModal }) => {
 										populate={showObj}
 										locations={locations}
 										genres={genres}
-										setShowObj={setShowObj}
+                    setShowObj={setShowObj}
+                    openModal={openModal}
 									/>
 								</>
 							)
