@@ -74,7 +74,6 @@ const TalentForm = ({ setShowObj, populate, genres, locations, openModal }) => {
             setTimeout(() => {
               setRedirect({ success: true, id: resolve.data.success.id });
             }, 1000);
-
 					})
 					.catch(error => console.log(error));
 			}}

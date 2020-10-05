@@ -94,7 +94,7 @@ const Show = ({ genres, locations, openModal }) => {
 
 		let axiosURL = `/api/${axiosresource}/${id}`;
 
-		if (resource === 'events' && !isNaN(user)) {
+		if (resource === 'events') {
 			axios.get(`/api/users/${user}`).then(resolve => {
 				if (Object.keys(resolve.data.gigs).length !== 0) {
 					// console.log('going to set pending gig now');
@@ -229,17 +229,15 @@ const Show = ({ genres, locations, openModal }) => {
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Portfolio</button>
 							</a>
-							{!owned && !isNaN(user) && (
-								<button
-									onClick={() =>
-										openModal(
-											<InvitationForm {...invite} openModal={openModal} />
-										)
-									}
-								>
-									Invite To Event
-								</button>
-							)}
+							<button
+								onClick={() =>
+									openModal(
+										<InvitationForm {...invite} openModal={openModal} />
+									)
+								}
+							>
+								Invite To Event
+							</button>
 						</section>
 					)}
 				</article>
@@ -302,6 +300,7 @@ const Show = ({ genres, locations, openModal }) => {
 										locations={locations}
 										genres={genres}
 										setShowObj={setShowObj}
+										openModal={openModal}
 									/>
 								</>
 							)

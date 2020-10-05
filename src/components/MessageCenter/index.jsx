@@ -8,9 +8,10 @@ import axios from 'axios';
 
 const MessageCenter = () => {
 	const [messages, setMessages] = useState([]);
-	const [recipient, setRecipient] = useState(undefined);
+	const [recipient, setRecipient] = useState('');
 	const [contactList, setContactList] = useState([]);
 	const [cookies] = useCookies();
+
 	const owner = parseInt(cookies.user_id);
 
 	useEffect(() => {
@@ -33,11 +34,10 @@ const MessageCenter = () => {
 				.catch(error => {
 					console.log('something went wrong:', error);
 				});
-			(recipient || recipient === 0) &&
+			recipient &&
 				axios
 					.get(`api/messages/${recipient}`)
 					.then(response => {
-						console.log(response.data.messages);
 						setMessages(response.data.messages);
 					})
 					.catch(error => {
@@ -45,7 +45,7 @@ const MessageCenter = () => {
 					});
 		} else {
 			setMessages([]);
-			setRecipient(undefined);
+			setRecipient('');
 			setContactList([]);
 			document.title = 'Message center';
 		}
@@ -53,7 +53,7 @@ const MessageCenter = () => {
 			document.title = 'EVENTFILL';
 		};
 	}, [recipient, owner]);
-	console.log(owner);
+
 	return (
 		<main className="message-center">
 			<section className="message-center-nav">
@@ -64,23 +64,13 @@ const MessageCenter = () => {
 					recipient={recipient}
 				/>
 			</section>
-			{!isNaN(owner) ? (
-				<MessageBoard
-					owner={owner}
-					messages={messages}
-					contactList={contactList}
-					recipient={recipient}
-					setMessages={setMessages}
-				/>
-			) : (
-				<section className="message-board">
-					<div className="no-message">
-						<p className="message-center-no-recipient">
-							Please login to enable Message Center
-						</p>
-					</div>
-				</section>
-			)}
+			<MessageBoard
+				owner={owner}
+				messages={messages}
+				contactList={contactList}
+				recipient={recipient}
+				setMessages={setMessages}
+			/>
 		</main>
 	);
 };
