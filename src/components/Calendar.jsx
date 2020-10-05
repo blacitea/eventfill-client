@@ -11,7 +11,7 @@ const Calendar = props => {
 	useEffect(() => {
 		console.log('Did this happen?');
 		axios.get('/api/events').then(resolve => {
-			const eList = resolve.data.all.map(e => {
+			const eList = resolve.data.map(e => {
 				console.log('before change start', e.start);
 				let startd = moment(e.start).add(1, 'days').toISOString();
 
@@ -36,11 +36,11 @@ const Calendar = props => {
 		console.log(eventInfo);
 		return (
 			<article className="calendar-grid">
-				<p>{eventInfo.event.extendedProps.name}</p>
+				<span className ="calendar-tooltip">{eventInfo.event.extendedProps.name}</span>
 				<img
 					className="calendar-grid-thumbnail"
 					src={eventInfo.event.extendedProps.image_url}
-					alt="event thumbnail"
+					alt={eventInfo.event.extendedProps.name}
 				/>
 			</article>
 		);
