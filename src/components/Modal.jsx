@@ -1,11 +1,13 @@
 import React from 'react';
-import ReactModal from 'react-modal';
+import ReactModal, { setAppElement } from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import './Modal.scss'
 
 const Modal = ({isOpen, close, ...props}) => {
+  setAppElement('#root');
+
   return (
     <ReactModal
       isOpen={isOpen}
