@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import Calendar from './Calendar';
 import { useCookies } from 'react-cookie';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+
 const LoginDown = () => {
 	const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
 
@@ -74,6 +77,7 @@ const NavBar = ({ openModal }) => {
 						}}
 					>
 						Create
+            <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
 					{openCreate && <CreateDown />}
 					<Link to="/messages">
@@ -87,6 +91,7 @@ const NavBar = ({ openModal }) => {
 						}}
 					>
 						{Object.keys(cookies).length === 0 ? 'Login' : 'Logout'}
+            <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
 					{openLogin && <LoginDown />}
 				</ul>

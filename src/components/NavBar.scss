@@ -30,7 +30,12 @@ nav {
 }
 
 .nav-action {
-	cursor: pointer;
+  cursor: pointer;
+  
+  .nav-action__icon {
+    margin-left: 0.4em;
+    font-size: smaller;
+  }
 }
 
 .dropdown {
