@@ -1,4 +1,5 @@
 import React from 'react';
+import UserGig from './UserGig';
 
 const UserGigs = ({ gigs }) => {
 	console.log(gigs);
