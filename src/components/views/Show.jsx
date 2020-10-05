@@ -12,8 +12,6 @@ import './Show.scss';
 import PendingInvite from '../PendingInvite';
 
 const Show = ({ genres, locations, openModal }) => {
-	//Server check
-	//Set up
 	const history = useHistory();
 	const { resource, id } = useParams();
 	const [cookies] = useCookies();
@@ -57,7 +55,6 @@ const Show = ({ genres, locations, openModal }) => {
 			axios
 				.delete(`/api/registrations/${attending}`, { event_id: id })
 				.then(resolve => {
-					// console.log(resolve);
 					setAttending(false);
 					setAttendeeCount(prev => prev - 1);
 					alert('Your reservation is cancelled!');
@@ -66,7 +63,6 @@ const Show = ({ genres, locations, openModal }) => {
 			axios
 				.post(`/api/registrations`, { event_id: id })
 				.then(resolve => {
-					// console.log(resolve);
 					setAttending(resolve.data.id);
 					setAttendeeCount(prev => prev + 1);
 					alert('Your ticket is secured!');
@@ -85,7 +81,8 @@ const Show = ({ genres, locations, openModal }) => {
 					history.push('/explore/events');
 				});
 		}
-	};
+  };
+  
 	useEffect(() => {
 		// axios call to get relevant filtered data based on resource (event/talent) and id
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
@@ -99,7 +96,6 @@ const Show = ({ genres, locations, openModal }) => {
 		if (resource === 'events') {
 			axios.get(`/api/users/${user}`).then(resolve => {
 				if (Object.keys(resolve.data.gigs).length !== 0) {
-					// console.log('going to set pending gig now');
 					const gigsList = resolve.data.gigs;
 					const [key, value] = Object.entries(gigsList)[0];
 
@@ -108,15 +104,10 @@ const Show = ({ genres, locations, openModal }) => {
 					});
 					gig && setPendingGig(gig);
 				}
-				// console.log('It got here - print user profile');
-				// console.log(resolve.data.attending);
 				const attend = resolve.data.attending.find(
 					({ event_id }) => event_id === parseInt(id)
 				);
-				// console.log('any result from find?', attend);
-				// console.log('It reaches here - checking registration id');
 				if (attend) {
-					// console.log(attend.id);
 					setAttending(attend.id);
 				}
 			});
@@ -218,7 +209,6 @@ const Show = ({ genres, locations, openModal }) => {
 									{attending ? 'Cancel Ticket' : 'Claim Ticket'}
 								</button>
 							)}
-							{/* {console.log('pending gig', pendingGig)} */}
 							{pendingGig.event_id && (
 								<PendingInvite
 									pendingGig={pendingGig}
