@@ -255,6 +255,28 @@ const Show = ({ genres, locations, openModal }) => {
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Portfolio</button>
 							</a>
+							{owned && !isNaN(user) && (
+								<button
+									onClick={() =>
+										openModal(
+											<>
+												<h1 className="modal-title">
+													Edit your talent profile
+												</h1>
+												<TalentForm
+													populate={showObj}
+													locations={locations}
+													genres={genres}
+													setShowObj={setShowObj}
+													openModal={openModal}
+												/>
+											</>
+										)
+									}
+								>
+									Edit Talent Profile
+								</button>
+							)}
 							{!owned && !isNaN(user) && (
 								<button
 									onClick={() =>
