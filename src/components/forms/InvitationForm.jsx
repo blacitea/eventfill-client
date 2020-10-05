@@ -41,10 +41,7 @@ const InvitationForm = ({ talent, events, openModal }) => {
 						})
 						.then(resolve => {
 							console.log(resolve.data);
-							const message = `Score! You have an event invitation!
-							${values.description ? `Note from organizer: ${values.description}` : ''}
-							ref#${values.event_id}
-							`;
+							const message = `Score! You have an event invitation! ${values.description ? `Note from organizer: ${values.description}` : ''} ref#${values.event_id}`;
 							return axios.post(`/api/messages`, {
 								message: {
 									recipient_id: talent.user_id,
