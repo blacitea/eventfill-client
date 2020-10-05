@@ -7,12 +7,14 @@ import { useCookies } from 'react-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const AccountDropdown = () => {
+const AccountDropdown = ({isOpen}) => {
   const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
+
+  const classes = `dropdown dropdown__login${isOpen ? ' dropdown__open' : ''}`
   
   return (
-    <ul className="dropdown dropdown__login">
-      {Object.keys(cookies).length === 0 &&
+    <ul className={classes}>
+      {!cookies.user_id &&
         <>
           <li onClick={() => setCookie('user_id', 1, { path: '/' })}>User 1</li>
           <li onClick={() => setCookie('user_id', 2, { path: '/' })}>User 2</li>
@@ -21,7 +23,7 @@ const AccountDropdown = () => {
           <li onClick={() => setCookie('user_id', 5, { path: '/' })}>User 5</li>
         </>
       }
-      {Object.keys(cookies).length !== 0 &&
+      {cookies.user_id &&
         <>
           <Link to="/messages">
             Messages
@@ -37,9 +39,12 @@ const AccountDropdown = () => {
   );
 };
 
-const CreateDropdown = () => {
+const CreateDropdown = ({isOpen}) => {
+
+  const classes = `dropdown dropdown__create${isOpen ? ' dropdown__open' : ''}`
+
 	return (
-		<ul className="dropdown dropdown__create">
+		<ul className={classes}>
 			<Link to="/create/event">
 				New Event
 			</Link>
@@ -51,22 +56,21 @@ const CreateDropdown = () => {
 };
 
 const NavBar = ({ openModal }) => {
-	const [openCreate, setopenCreate] = useState(false);
-	const [openLogin, setopenLogin] = useState(false);
+	const [openCreate, setOpenCreate] = useState(false);
+	const [openAccount, setOpenAccount] = useState(false);
 
 	const closeDropDown = () => {
 		if (openCreate) {
-      setopenCreate(false);
+      setOpenCreate(false);
     }
-		if (openLogin) {
-			setopenLogin(false);
+		if (openAccount) {
+			setOpenAccount(false);
 		}
-
   };
 
 	return (
 		<>
-			{(openCreate || openLogin) && (
+			{(openCreate || openAccount) && (
 				<div className="drop-down__overlay" onClick={closeDropDown} />
 			)}
 			<nav onClick={closeDropDown}>
@@ -92,24 +96,24 @@ const NavBar = ({ openModal }) => {
 					<li
 						className="nav-action"
 						onClick={() => {
-							setopenCreate(!openCreate);
+							setOpenCreate(!openCreate);
 						}}
 					>
 						Create
             <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
-					{openCreate && <CreateDropdown />}
+					<CreateDropdown isOpen={openCreate} />
 
 					<li
             className="nav-action"
 						onClick={() => {
-							setopenLogin(!openLogin);
+							setOpenAccount(!openAccount);
 						}}
 					>
 						My Account
             <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
-					{openLogin && <AccountDropdown />}
+					<AccountDropdown isOpen={openAccount} />
 				</ul>
 			</nav>
 		</>
