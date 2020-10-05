@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const UserEvents = ({ events }) => {
 	console.log(events);
@@ -11,7 +12,9 @@ const UserEvents = ({ events }) => {
 					console.log(event);
 					return (
 						<article className="profile-sub-item" key={event.id}>
-							<p className="profile-sub-item-title">Event: {event.name}</p>
+							<Link to={`/events/${event.id}`}>
+								<p className="profile-sub-item-title">Event: {event.name}</p>
+							</Link>
 							<p>
 								Period: {moment(event.start).format('LL')} to{' '}
 								{moment(event.end).format('LL')}

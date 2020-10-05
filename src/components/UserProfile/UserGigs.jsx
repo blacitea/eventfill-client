@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const UserGigs = ({ gigs }) => {
 	console.log(gigs);
@@ -7,18 +8,20 @@ const UserGigs = ({ gigs }) => {
 		<article>
 			<h3>My Performances</h3>
 			{gigs &&
-				Object.keys(gigs).map((gig, index) => {
+				Object.keys(gigs).map(gig => {
 					console.log(gigs[gig]);
 					return (
-						<article key={index}>
+						<article key={gig.id}>
 							<p className="profile-talent-profile-name">
 								Talent Profile: {gig}
 							</p>
 							{gigs[gig].map(gigDetail => (
 								<article className="profile-sub-item">
-									<p className="profile-sub-item-title">
-										Event: {gigDetail.event_name}
-									</p>
+									<Link to={`/events/${gigDetail.event_id}`}>
+										<p className="profile-sub-item-title">
+											Event: {gigDetail.event_name}
+										</p>
+									</Link>
 									<p>
 										Performance period: {moment(gigDetail.start).format('LL')}{' '}
 										to {moment(gigDetail.end).format('LL')}
