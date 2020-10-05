@@ -53,6 +53,7 @@ const App = props => {
 				content={modalState.content}
 			/>
 			<NavBar openModal={openModal} />
+      <div className="nav-spacer" />
 
 			<Switch>
 				<Route path="/login/:id">{<Login setCookie={setCookie} />}</Route>
