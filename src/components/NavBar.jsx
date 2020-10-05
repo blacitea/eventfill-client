@@ -7,12 +7,13 @@ import { useCookies } from 'react-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const AccountDropdown = () => {
+const AccountDropdown = ({isOpen}) => {
   const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
+
+  const classes = `dropdown dropdown__login${isOpen ? ' dropdown__open' : ''}`
   
   return (
-    <ul className="dropdown dropdown__login">
-      {Object.keys(cookies).length === 0 &&
+    <ul className={classes}>
         <>
           <li onClick={() => setCookie('user_id', 1, { path: '/' })}>User 1</li>
           <li onClick={() => setCookie('user_id', 2, { path: '/' })}>User 2</li>
@@ -37,9 +38,12 @@ const AccountDropdown = () => {
   );
 };
 
-const CreateDropdown = () => {
+const CreateDropdown = ({isOpen}) => {
+
+  const classes = `dropdown dropdown__create${isOpen ? ' dropdown__open' : ''}`
+
 	return (
-		<ul className="dropdown dropdown__create">
+		<ul className={classes}>
 			<Link to="/create/event">
 				New Event
 			</Link>
@@ -61,7 +65,6 @@ const NavBar = ({ openModal }) => {
 		if (openLogin) {
 			setopenLogin(false);
 		}
-
   };
 
 	return (
@@ -98,7 +101,7 @@ const NavBar = ({ openModal }) => {
 						Create
             <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
-					{openCreate && <CreateDropdown />}
+					<CreateDropdown isOpen={openCreate} />
 
 					<li
             className="nav-action"
@@ -109,7 +112,7 @@ const NavBar = ({ openModal }) => {
 						My Account
             <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
-					{openLogin && <AccountDropdown />}
+					<AccountDropdown isOpen={openLogin} />
 				</ul>
 			</nav>
 		</>
