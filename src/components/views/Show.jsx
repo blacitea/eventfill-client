@@ -31,6 +31,13 @@ const Show = ({ genres, locations, openModal }) => {
 	const [invite, setInvite] = useState({ talent: {}, events: [] });
 	const [attending, setAttending] = useState(false);
 
+	const loginMessage = (
+		<>
+			<h1 className="modal-title">Login Required</h1>
+			<p className="login-required">Please login to claim a ticket!</p>
+		</>
+	);
+
 	const updateHighlight = () => {
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
 		axios.get(`/api/${axiosresource}/${id}`).then(resolve => {
@@ -42,7 +49,11 @@ const Show = ({ genres, locations, openModal }) => {
 	};
 
 	const claimTicket = () => {
-		if (attending) {
+		console.log('user?', user);
+		if (isNaN(user)) {
+			console.log('user is NaN');
+			openModal(loginMessage);
+		} else if (attending) {
 			axios
 				.delete(`/api/registrations/${attending}`, { event_id: id })
 				.then(resolve => {
@@ -196,7 +207,7 @@ const Show = ({ genres, locations, openModal }) => {
 							</h4>
 							{!owned && (
 								<button
-									disabled={attendeeCount === max_attendees}
+									// disabled={attendeeCount === max_attendees}
 									onClick={claimTicket}
 								>
 									{attending ? 'Cancel Ticket' : 'Claim Ticket'}
