@@ -5,10 +5,9 @@ import './MessageList.scss';
 
 const Messages = ({ messages, recipient, owner }) => {
 	console.log(recipient);
-	console.log(messages);
 	return (
 		<section>
-			<p className="recipient-name">{recipient.name && recipient.name}</p>
+			<p className="recipient-name">{recipient.name}</p>
 			<section id="message-list" className="message-list">
 				{recipient.name &&
 					messages &&

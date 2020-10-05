@@ -21,27 +21,22 @@ const MessageBoard = ({
 	};
 
 	useEffect(updateMessageScroll);
-	console.log('recipient', recipient);
 
 	return (
 		<section className="message-board">
-			{recipient !== undefined && (
+			{recipient !== '' && (
 				<>
 					<MessageList
 						owner={owner}
 						messages={messages}
-						recipient={
-							recipient === 0
-								? { id: 0, name: 'System' }
-								: getByKey(contactList, recipient)
-						}
+						recipient={getByKey(contactList, recipient)}
 					/>
 					{recipient !== 0 && (
 						<Compose recipient={recipient} setMessages={setMessages} />
 					)}
 				</>
 			)}
-			{recipient === undefined && (
+			{recipient === '' && (
 				<div className="no-message">
 					<p className="message-center-no-recipient">
 						Select a user to get in touch!

@@ -31,6 +31,13 @@ const Show = ({ genres, locations, openModal }) => {
 	const [invite, setInvite] = useState({ talent: {}, events: [] });
 	const [attending, setAttending] = useState(false);
 
+	const loginMessage = (
+		<>
+			<h1 className="modal-title">Login Required</h1>
+			<p className="login-required">Please login to claim a ticket!</p>
+		</>
+	);
+
 	const updateHighlight = () => {
 		let axiosresource = resource === 'events' ? 'events' : 'talent_profiles';
 		axios.get(`/api/${axiosresource}/${id}`).then(resolve => {
@@ -42,7 +49,11 @@ const Show = ({ genres, locations, openModal }) => {
 	};
 
 	const claimTicket = () => {
-		if (attending) {
+		console.log('user?', user);
+		if (isNaN(user)) {
+			console.log('user is NaN');
+			openModal(loginMessage);
+		} else if (attending) {
 			axios
 				.delete(`/api/registrations/${attending}`, { event_id: id })
 				.then(resolve => {
@@ -64,12 +75,16 @@ const Show = ({ genres, locations, openModal }) => {
 		}
 	};
 
-	const deleteEvent = () => {
-		axios.delete(`/api/events/${id}`).then(resolve => {
-			console.log(resolve);
-			alert('Event deleted!');
-			history.push('/explore/events');
-		});
+	const cancelEvent = () => {
+		if (window.confirm('Confirm cancel this event?')) {
+			axios
+				.patch(`/api/events/${id}`, { event: { ...showObj, cancelled: true } })
+				.then(resolve => {
+					console.log(resolve);
+					alert('Event cancelled!');
+					history.push('/explore/events');
+				});
+		}
 	};
 	useEffect(() => {
 		// axios call to get relevant filtered data based on resource (event/talent) and id
@@ -81,7 +96,7 @@ const Show = ({ genres, locations, openModal }) => {
 
 		let axiosURL = `/api/${axiosresource}/${id}`;
 
-		if (resource === 'events' && !isNaN(user)) {
+		if (resource === 'events') {
 			axios.get(`/api/users/${user}`).then(resolve => {
 				if (Object.keys(resolve.data.gigs).length !== 0) {
 					// console.log('going to set pending gig now');
@@ -196,7 +211,7 @@ const Show = ({ genres, locations, openModal }) => {
 							</h4>
 							{!owned && (
 								<button
-									disabled={attendeeCount === max_attendees}
+									// disabled={attendeeCount === max_attendees}
 									onClick={claimTicket}
 								>
 									{attending ? 'Cancel Ticket' : 'Claim Ticket'}
@@ -216,17 +231,15 @@ const Show = ({ genres, locations, openModal }) => {
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Portfolio</button>
 							</a>
-							{!owned && !isNaN(user) && (
-								<button
-									onClick={() =>
-										openModal(
-											<InvitationForm {...invite} openModal={openModal} />
-										)
-									}
-								>
-									Invite To Event
-								</button>
-							)}
+							<button
+								onClick={() =>
+									openModal(
+										<InvitationForm {...invite} openModal={openModal} />
+									)
+								}
+							>
+								Invite To Event
+							</button>
 						</section>
 					)}
 				</article>
@@ -267,7 +280,7 @@ const Show = ({ genres, locations, openModal }) => {
 					>
 						Edit Event
 					</button>
-					<button onClick={deleteEvent}>Delete Event</button>
+					<button onClick={cancelEvent}>Cancel Event</button>
 				</>
 			)}
 			{resource !== 'events' && owned && (
@@ -288,8 +301,8 @@ const Show = ({ genres, locations, openModal }) => {
 										populate={showObj}
 										locations={locations}
 										genres={genres}
-                    setShowObj={setShowObj}
-                    openModal={openModal}
+										setShowObj={setShowObj}
+										openModal={openModal}
 									/>
 								</>
 							)
