@@ -209,6 +209,33 @@ const Show = ({ genres, locations, openModal }) => {
 									{attending ? 'Cancel Ticket' : 'Claim Ticket'}
 								</button>
 							)}
+
+							{resource === 'events' && owned && (
+								<section className="show-info-actions">
+									<button
+										onClick={() =>
+											openModal(
+												<>
+													<h1 className="modal-title">Edit your event</h1>
+													<EventForm
+														populate={showObj}
+														locations={locations}
+														genres={genres}
+														setShowObj={setShowObj}
+														openModal={openModal}
+													/>
+												</>
+											)
+										}
+									>
+										Edit Event
+									</button>
+									<button onClick={cancelEvent}>Cancel Event</button>
+								</section>
+							)}
+
+
+
 							{pendingGig.event_id && (
 								<PendingInvite
 									pendingGig={pendingGig}
@@ -222,7 +249,29 @@ const Show = ({ genres, locations, openModal }) => {
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Portfolio</button>
 							</a>
-							{!owned && (
+							{owned && !isNaN(user) && (
+								<button
+									onClick={() =>
+										openModal(
+											<>
+												<h1 className="modal-title">
+													Edit your talent profile
+												</h1>
+												<TalentForm
+													populate={showObj}
+													locations={locations}
+													genres={genres}
+													setShowObj={setShowObj}
+													openModal={openModal}
+												/>
+											</>
+										)
+									}
+								>
+									Edit Talent Profile
+								</button>
+							)}
+							{!owned && !isNaN(user) && (
 								<button
 									onClick={() =>
 										openModal(
@@ -242,69 +291,33 @@ const Show = ({ genres, locations, openModal }) => {
 				</article>
 			</section>
 
-			{/**Show list of connected talents / events if found */}
-			{highlights.array.length > 0 && <HighlightsList {...highlights} />}
-
-			{/* Prompt to invite talent/ promote to event if user = resource owner */}
-			{resource === 'events' && owned && (
-				<>
+			<section className="button-explore">
+				{/**Show list of connected talents / events if found */}
+				{resource === 'events' && owned && (
 					<button
+						className="button-explore-btn"
 						onClick={() => {
 							history.push('/explore/talents');
 						}}
 					>
 						Invite talents to your event!
 					</button>
+				)}
+				{resource !== 'events' && owned && (
 					<button
-						onClick={() =>
-							openModal(
-								<>
-									<h1 className="modal-title">Edit your event</h1>
-									<EventForm
-										populate={showObj}
-										locations={locations}
-										genres={genres}
-										setShowObj={setShowObj}
-										openModal={openModal}
-									/>
-								</>
-							)
-						}
-					>
-						Edit Event
-					</button>
-					<button onClick={cancelEvent}>Cancel Event</button>
-				</>
-			)}
-			{resource !== 'events' && owned && (
-				<>
-					<button
+						className="button-explore-btn"
 						onClick={() => {
 							history.push('/explore/events');
 						}}
 					>
 						Find an event to showcase your talent!
 					</button>
-					<button
-						onClick={() =>
-							openModal(
-								<>
-									<h1 className="modal-title">Edit your talent profile</h1>
-									<TalentForm
-										populate={showObj}
-										locations={locations}
-										genres={genres}
-										setShowObj={setShowObj}
-										openModal={openModal}
-									/>
-								</>
-							)
-						}
-					>
-						Edit Talent Profile
-					</button>
-				</>
-			)}
+				)}
+
+				{highlights.array.length > 0 && <HighlightsList {...highlights} />}
+			</section>
+
+			{/* Prompt to invite talent/ promote to event if user = resource owner */}
 		</main>
 	);
 };
