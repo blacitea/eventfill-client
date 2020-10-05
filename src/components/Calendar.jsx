@@ -11,7 +11,7 @@ const Calendar = props => {
 	useEffect(() => {
 		console.log('Did this happen?');
 		axios.get('/api/events').then(resolve => {
-			const eList = resolve.data.all.map(e => {
+			const eList = resolve.data.map(e => {
 				console.log('before change start', e.start);
 				let startd = moment(e.start).add(1, 'days').toISOString();
 
