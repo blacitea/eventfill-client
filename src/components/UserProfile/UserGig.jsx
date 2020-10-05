@@ -1,7 +1,18 @@
 import React from 'react';
-import UserGigs from './UserGigs';
+import moment from 'moment';
 
-const UserGig = props => {
-	return <article>User gig goes here</article>;
+const UserGig = ({ gigDetails }) => {
+	return (
+		<article>
+			<p>Event: {gigDetails.event_name}</p>
+			<p>
+				Performance period: {moment(gigDetails.start).format('LL')} to{' '}
+				{moment(gigDetails.end).format('LL')}
+			</p>
+			{gigDetails.description && (
+				<p>Message from organizer: {gigDetails.description}</p>
+			)}
+		</article>
+	);
 };
 export default UserGig;
