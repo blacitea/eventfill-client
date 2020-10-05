@@ -4,6 +4,7 @@
   
   .nav {
     display: flex;
+    align-items: center;
     .create-button {
       margin-left: auto;
     }
@@ -11,5 +12,21 @@
 
   .previewslist {
     margin-bottom: 3em;
+  }
+
+  .filter-select {
+    background-color: #000;
+    color: #fff;
+    height: 2.2em;
+    padding: 0 0.5em;
+    border-radius: 3px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    margin: 6px 8px;
+  }
+
+  .filter-select:hover {
+    background-color: #303030;
   }
 }

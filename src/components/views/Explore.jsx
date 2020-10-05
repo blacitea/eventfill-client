@@ -43,7 +43,7 @@ const Explore = ({ locations, genres }) => {
 				</h1>
 				<section className="nav">
 					<select
-						className="location-select"
+						className="filter-select"
 						defaultValue=""
 						onChange={event => setLocation(parseInt(event.target.value))}
 					>
@@ -56,7 +56,7 @@ const Explore = ({ locations, genres }) => {
 							))}
 					</select>
 					<select
-						className="location-select"
+						className="filter-select"
 						defaultValue=""
 						onChange={event => setGenre(parseInt(event.target.value))}
 					>
