@@ -75,13 +75,15 @@ const Show = ({ genres, locations, openModal }) => {
 		}
 	};
 
-	const deleteEvent = () => {
+	const cancelEvent = () => {
 		if (window.confirm('Confirm cancel this event?')) {
-			axios.delete(`/api/events/${id}`).then(resolve => {
-				console.log(resolve);
-				alert('Event deleted!');
-				history.push('/explore/events');
-			});
+			axios
+				.patch(`/api/events/${id}`, { event: { ...showObj, cancelled: true } })
+				.then(resolve => {
+					console.log(resolve);
+					alert('Event cancelled!');
+					history.push('/explore/events');
+				});
 		}
 	};
 	useEffect(() => {
@@ -278,7 +280,7 @@ const Show = ({ genres, locations, openModal }) => {
 					>
 						Edit Event
 					</button>
-					<button onClick={deleteEvent}>Delete Event</button>
+					<button onClick={cancelEvent}>Cancel Event</button>
 				</>
 			)}
 			{resource !== 'events' && owned && (
