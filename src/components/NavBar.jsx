@@ -56,21 +56,21 @@ const CreateDropdown = ({isOpen}) => {
 };
 
 const NavBar = ({ openModal }) => {
-	const [openCreate, setopenCreate] = useState(false);
-	const [openLogin, setopenLogin] = useState(false);
+	const [openCreate, setOpenCreate] = useState(false);
+	const [openAccount, setOpenAccount] = useState(false);
 
 	const closeDropDown = () => {
 		if (openCreate) {
-      setopenCreate(false);
+      setOpenCreate(false);
     }
-		if (openLogin) {
-			setopenLogin(false);
+		if (openAccount) {
+			setOpenAccount(false);
 		}
   };
 
 	return (
 		<>
-			{(openCreate || openLogin) && (
+			{(openCreate || openAccount) && (
 				<div className="drop-down__overlay" onClick={closeDropDown} />
 			)}
 			<nav onClick={closeDropDown}>
@@ -96,7 +96,7 @@ const NavBar = ({ openModal }) => {
 					<li
 						className="nav-action"
 						onClick={() => {
-							setopenCreate(!openCreate);
+							setOpenCreate(!openCreate);
 						}}
 					>
 						Create
@@ -107,13 +107,13 @@ const NavBar = ({ openModal }) => {
 					<li
             className="nav-action"
 						onClick={() => {
-							setopenLogin(!openLogin);
+							setOpenAccount(!openAccount);
 						}}
 					>
 						My Account
             <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
-					<AccountDropdown isOpen={openLogin} />
+					<AccountDropdown isOpen={openAccount} />
 				</ul>
 			</nav>
 		</>
