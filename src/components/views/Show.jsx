@@ -188,7 +188,7 @@ const Show = ({ genres, locations, openModal }) => {
 							{moment(end).format('MMMM Do, YYYY')}
 						</section>
 					)}
-					<p>{description}</p>
+					<p className="show-description">{description}</p>
 
 					{/** Logic to display different button depends on resource */}
 
