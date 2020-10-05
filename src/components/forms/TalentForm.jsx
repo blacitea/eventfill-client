@@ -28,13 +28,6 @@ const validate = values => {
 const TalentForm = ({ setShowObj, populate, genres, locations, openModal }) => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
-	const [value, setValue] = useState({ ...populate });
-
-	useEffect(() => {
-		if (populate) {
-			setShowObj({ ...value });
-		}
-  }, [redirect]);
   
   const successMessage = <p className="success-message">Talent profile submitted successfully!</p>
 
@@ -55,8 +48,7 @@ const TalentForm = ({ setShowObj, populate, genres, locations, openModal }) => {
 					  }
 			}
 			validate={validate}
-			onSubmit={(values, { setSubmitting, resetForm }) => {
-				console.log(values);
+			onSubmit={(values) => {
 				axios({
 					url: populate
 						? `/api/talent_profiles/${populate.id}`
@@ -65,13 +57,10 @@ const TalentForm = ({ setShowObj, populate, genres, locations, openModal }) => {
 					data: { talent_profile: { ...values } },
 				})
 					.then(resolve => {
-						resetForm();
-						setSubmitting(false);
-
-						setValue({ ...values });
+            populate && setShowObj && setShowObj(values);
             openModal(successMessage);
             
-            setTimeout(() => {
+            !populate && setTimeout(() => {
               setRedirect({ success: true, id: resolve.data.success.id });
             }, 1000);
 					})

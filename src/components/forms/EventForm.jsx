@@ -36,13 +36,6 @@ const validate = values => {
 const EventForm = ({ setShowObj, populate, locations, genres, openModal }) => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
-  const [value, setValue] = useState({ ...populate });
-
-	useEffect(() => {
-		if (populate) {
-			setShowObj({ ...value });
-		}
-  }, [redirect]);
   
   const successMessage = <p className="success-message">Event submitted successfully!</p>
 
@@ -69,20 +62,16 @@ const EventForm = ({ setShowObj, populate, locations, genres, openModal }) => {
 					  }
 			}
 			validate={validate}
-			onSubmit={(values, { setSubmitting, resetForm }) => {
-				console.log(values.end);
-
+			onSubmit={(values) => {
 				axios({
 					url: populate ? `/api/events/${populate.id}` : '/api/events',
 					method: populate ? 'patch' : 'post',
 					data: { event: { ...values } },
 				}).then(resolve => {
-					resetForm();
-					setSubmitting(false);
-					setValue({ ...values });
+          populate && setShowObj && setShowObj(values);
           openModal(successMessage);
           
-          setTimeout(() => {
+          !populate && setTimeout(() => {
             setRedirect({ success: true, id: resolve.data.success.id });
           }, 1000)
 				});
