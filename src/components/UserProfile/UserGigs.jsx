@@ -12,6 +12,9 @@ const UserGigs = ({ gigs }) => {
 					return (
 						<article key={index}>
 							<p>Talent Profile's Name: {gig}</p>
+							<p>
+								<UserGig gigDetails={gigs[gig]} />
+							</p>
 						</article>
 					);
 				})}
