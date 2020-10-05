@@ -76,11 +76,13 @@ const Show = ({ genres, locations, openModal }) => {
 	};
 
 	const deleteEvent = () => {
-		axios.delete(`/api/events/${id}`).then(resolve => {
-			console.log(resolve);
-			alert('Event deleted!');
-			history.push('/explore/events');
-		});
+		if (window.confirm('Confirm cancel this event?')) {
+			axios.delete(`/api/events/${id}`).then(resolve => {
+				console.log(resolve);
+				alert('Event deleted!');
+				history.push('/explore/events');
+			});
+		}
 	};
 	useEffect(() => {
 		// axios call to get relevant filtered data based on resource (event/talent) and id
