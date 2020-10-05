@@ -21,7 +21,7 @@ const MessageBoard = ({
 	};
 
 	useEffect(updateMessageScroll);
-
+	console.log(owner);
 	return (
 		<section className="message-board">
 			{recipient !== '' && (
@@ -36,10 +36,17 @@ const MessageBoard = ({
 					)}
 				</>
 			)}
-			{recipient === '' && (
+			{!isNaN(owner) && recipient === '' && (
 				<div className="no-message">
 					<p className="message-center-no-recipient">
 						Select a user to get in touch!
+					</p>
+				</div>
+			)}
+			{isNaN(owner) && (
+				<div className="no-message">
+					<p className="message-center-no-recipient">
+						Please login to see your messages
 					</p>
 				</div>
 			)}
