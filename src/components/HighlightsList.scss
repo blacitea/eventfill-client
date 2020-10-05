@@ -1,15 +1,15 @@
 .highlightslist {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3em;
-  
-  .highlightslist-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 730px;
-    padding: 0;
-  }
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 1em;
+
+	.highlightslist-list {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		max-width: 730px;
+		padding: 0;
+	}
 }

@@ -219,7 +219,7 @@ const Show = ({ genres, locations, openModal }) => {
 								</button>
 							)}
 							{resource === 'events' && owned && (
-								<>
+								<section className="show-info-actions">
 									<button
 										onClick={() =>
 											openModal(
@@ -239,7 +239,7 @@ const Show = ({ genres, locations, openModal }) => {
 										Edit Event
 									</button>
 									<button onClick={cancelEvent}>Cancel Event</button>
-								</>
+								</section>
 							)}
 							{/* {console.log('pending gig', pendingGig)} */}
 							{pendingGig.event_id && (
@@ -297,25 +297,26 @@ const Show = ({ genres, locations, openModal }) => {
 				</article>
 			</section>
 
-			{/**Show list of connected talents / events if found */}
-			{resource !== 'events' && owned && (
-				<button
-					className="button-explore-event"
-					onClick={() => {
-						history.push('/explore/events');
-					}}
-				>
-					Find an event to showcase your talent!
-				</button>
-			)}
-			<section>
+			<section className="button-explore">
+				{/**Show list of connected talents / events if found */}
 				{resource === 'events' && owned && (
 					<button
+						className="button-explore-btn"
 						onClick={() => {
 							history.push('/explore/talents');
 						}}
 					>
 						Invite talents to your event!
+					</button>
+				)}
+				{resource !== 'events' && owned && (
+					<button
+						className="button-explore-btn"
+						onClick={() => {
+							history.push('/explore/events');
+						}}
+					>
+						Find an event to showcase your talent!
 					</button>
 				)}
 
