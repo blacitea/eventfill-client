@@ -33,7 +33,7 @@ const InvitationForm = ({ talent, events, openModal }) => {
 					description: '',
 				}}
 				validate={validate}
-				onSubmit={(values, { setSubmitting, resetForm }) => {
+				onSubmit={(values) => {
 					setTimeout(() => {}, 400);
 					axios
 						.post('/api/gigs', {
@@ -52,10 +52,7 @@ const InvitationForm = ({ talent, events, openModal }) => {
 								},
 							});
 						})
-						.then(resolve => {
-							console.log(resolve);
-							resetForm();
-              setSubmitting(false);
+						.then(() => {
               openModal(successMessage);
 						});
 				}}

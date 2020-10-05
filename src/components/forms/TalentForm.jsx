@@ -49,7 +49,6 @@ const TalentForm = ({ setShowObj, populate, genres, locations, openModal }) => {
 			}
 			validate={validate}
 			onSubmit={(values) => {
-				console.log(values);
 				axios({
 					url: populate
 						? `/api/talent_profiles/${populate.id}`
