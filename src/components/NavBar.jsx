@@ -2,11 +2,39 @@ import React, { useState } from 'react';
 import './NavBar.scss';
 import { Link } from 'react-router-dom';
 import Calendar from './Calendar';
-import CreateDown from './CreateDown';
-import LoginDown from './LoginDown';
 import { useCookies } from 'react-cookie';
 
+const LoginDown = () => {
+	const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
+
+	return (
+		<ul className="dropdown dropdown__login">
+			<li onClick={() => setCookie('user_id', 1, { path: '/' })}>User 1</li>
+			<li onClick={() => setCookie('user_id', 2, { path: '/' })}>User 2</li>
+			<li onClick={() => setCookie('user_id', 3, { path: '/' })}>User 3</li>
+			<li onClick={() => setCookie('user_id', 4, { path: '/' })}>User 4</li>
+			<li onClick={() => setCookie('user_id', 5, { path: '/' })}>User 5</li>
+
+			<li onClick={() => removeCookie('user_id')}>Logout</li>
+		</ul>
+	);
+};
+
+const CreateDown = () => {
+	return (
+		<ul className="dropdown dropdown__create">
+			<Link to="/create/event">
+				New Event
+			</Link>
+			<Link to="/create/talent">
+				New Talent
+			</Link>
+		</ul>
+	);
+};
+
 const NavBar = ({ openModal }) => {
+  const [cookies] = useCookies();
 	const [openCreate, setopenCreate] = useState(false);
 	const [openLogin, setopenLogin] = useState(false);
 
@@ -19,7 +47,6 @@ const NavBar = ({ openModal }) => {
 		}
   };
   
-	const [cookies] = useCookies();
 	return (
 		<>
 			{(openCreate || openLogin) && (
