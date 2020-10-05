@@ -68,7 +68,7 @@ const NavBar = ({ openModal }) => {
 						<li>Talents</li>
 					</Link>
 					<li
-						className="nav-create"
+						className="nav-action"
 						onClick={() => {
 							setopenCreate(!openCreate);
 						}}
@@ -81,6 +81,7 @@ const NavBar = ({ openModal }) => {
 					</Link>
 
 					<li
+            className="nav-action"
 						onClick={() => {
 							setopenLogin(!openLogin);
 						}}
