@@ -18,6 +18,7 @@ import { Switch, Route } from 'react-router-dom';
 
 // hooks
 import useModal from './hooks/useModal';
+import UserProfile from './components/UserProfile';
 
 // const demoInviteForm = <InvitationForm talent={talents[0]} events={events} />;
 
@@ -66,6 +67,10 @@ const App = props => {
 
 				<Route path="/messages">
 					<MessageCenter />
+				</Route>
+
+				<Route path="/profile">
+					<UserProfile />
 				</Route>
 
 				<Route path="/:resource/:id">
