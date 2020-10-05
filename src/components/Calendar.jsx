@@ -36,11 +36,11 @@ const Calendar = props => {
 		console.log(eventInfo);
 		return (
 			<article className="calendar-grid">
-				<p>{eventInfo.event.extendedProps.name}</p>
+				<span className ="calendar-tooltip">{eventInfo.event.extendedProps.name}</span>
 				<img
 					className="calendar-grid-thumbnail"
 					src={eventInfo.event.extendedProps.image_url}
-					alt="event thumbnail"
+					alt={eventInfo.event.extendedProps.name}
 				/>
 			</article>
 		);

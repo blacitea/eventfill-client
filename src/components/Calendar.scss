@@ -6,11 +6,32 @@
 }
 .calendar {
 	width: 50vw;
-	margin: auto;
+  margin: auto;
+  
+  .fc-event {
+    justify-content: center;
+  }
 
 	.calendar-grid {
 		display: flex;
 		align-items: center;
-		justify-content: center;
-	}
+    justify-content: center;
+    
+    .calendar-tooltip {
+      visibility: hidden;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      text-align: center;
+      padding: 0.2em;
+      border-radius: 5px;
+
+      position: absolute;
+    }
+  }
+  
+  .fc-event:hover {
+    .calendar-tooltip {
+      visibility: visible;
+    }
+  }
 }
