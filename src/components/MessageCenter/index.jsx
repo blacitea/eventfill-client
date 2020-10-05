@@ -34,15 +34,14 @@ const MessageCenter = () => {
 				.catch(error => {
 					console.log('something went wrong:', error);
 				});
-			recipient &&
-				axios
-					.get(`api/messages/${recipient}`)
-					.then(response => {
-						setMessages(response.data.messages);
-					})
-					.catch(error => {
-						console.log('something went wrong:', error);
-					});
+			axios
+				.get(`api/messages/${recipient}`)
+				.then(response => {
+					setMessages(response.data.messages);
+				})
+				.catch(error => {
+					console.log('something went wrong:', error);
+				});
 		} else {
 			setMessages([]);
 			setRecipient('');

@@ -46,63 +46,66 @@ const App = props => {
 	}, []);
 
 	return (
-		<div className="App">
-			<Modal
-				isOpen={modalState.open}
-				close={closeModal}
-				content={modalState.content}
-			/>
-			<NavBar openModal={openModal} />
+    <>
+      <div className="App">
+        <Modal
+          isOpen={modalState.open}
+          close={closeModal}
+          content={modalState.content}
+        />
+        <NavBar openModal={openModal} />
+        <div className="nav-spacer" />
 
-			<Switch>
-				<Route path="/login/:id">{<Login setCookie={setCookie} />}</Route>
+        <Switch>
+          <Route path="/login/:id">{<Login setCookie={setCookie} />}</Route>
 
-				<Route path="/create/:id">
-					<Create {...base} openModal={openModal} />
-				</Route>
+          <Route path="/create/:id">
+            <Create {...base} openModal={openModal} />
+          </Route>
 
-				<Route path="/explore/:id">
-					<Explore {...base} />
-				</Route>
+          <Route path="/explore/:id">
+            <Explore {...base} />
+          </Route>
 
-				<Route path="/messages">
-					<MessageCenter />
-				</Route>
+          <Route path="/messages">
+            <MessageCenter />
+          </Route>
 
-				<Route path="/profile">
-					<UserProfile />
-				</Route>
+          <Route path="/profile">
+            <UserProfile />
+          </Route>
 
-				<Route path="/:resource/:id">
-					<Show openModal={openModal} {...base} />
-				</Route>
+          <Route path="/:resource/:id">
+            <Show openModal={openModal} {...base} />
+          </Route>
 
-				<Route path="/">
-					<div className="debug-panel">
-						{/* <h1>{'Debug'}</h1> */}
-						{/* <button onClick={fetchData}>Fetch Data</button> */}
-						<div>
-							{/* <button onClick={() => openModal(demoCalendar)}>
-								Calendar Modal
-							</button> */}
-							{/* <button onClick={() => openModal(demoEventForm)}>
-								Event Modal
-							</button>
-							<button onClick={() => openModal(demoTalentForm)}>
-								Talent Modal
-							</button>
-							<button onClick={() => openModal(demoInviteForm)}>
-								Invite Modal
-							</button> */}
-						</div>
-					</div>
+          <Route path="/">
+            <div className="debug-panel">
+              {/* <h1>{'Debug'}</h1> */}
+              {/* <button onClick={fetchData}>Fetch Data</button> */}
+              <div>
+                {/* <button onClick={() => openModal(demoCalendar)}>
+                  Calendar Modal
+                </button> */}
+                {/* <button onClick={() => openModal(demoEventForm)}>
+                  Event Modal
+                </button>
+                <button onClick={() => openModal(demoTalentForm)}>
+                  Talent Modal
+                </button>
+                <button onClick={() => openModal(demoInviteForm)}>
+                  Invite Modal
+                </button> */}
+              </div>
+            </div>
 
-					<Home />
-				</Route>
-			</Switch>
+            <Home />
+          </Route>
+        </Switch>
 
-			<Footer />
-		</div>
+      </div>
+      <Footer />
+    </>
 	);
 };
 

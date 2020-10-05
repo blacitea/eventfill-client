@@ -21,7 +21,6 @@ const MessageBoard = ({
 	};
 
 	useEffect(updateMessageScroll);
-	console.log(owner);
 	return (
 		<section className="message-board">
 			{recipient !== '' && (
