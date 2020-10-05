@@ -24,10 +24,6 @@ const Explore = ({ locations, genres }) => {
 		let newCollection;
 		axios.get(axiosURL).then(response => {
 			let dataArray = response.data;
-			if (id === 'events') {
-				dataArray = dataArray.all;
-			}
-
 			newCollection = dataArray.filter(item => {
 				return (
 					(!location || item.location_id === location) &&
