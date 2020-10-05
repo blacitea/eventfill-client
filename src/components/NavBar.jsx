@@ -2,34 +2,81 @@ import React, { useState } from 'react';
 import './NavBar.scss';
 import { Link } from 'react-router-dom';
 import Calendar from './Calendar';
-import CreateDown from './CreateDown';
-import LoginDown from './LoginDown';
 import { useCookies } from 'react-cookie';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+
+const AccountDropdown = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
+  
+  return (
+    <ul className="dropdown dropdown__login">
+      {Object.keys(cookies).length === 0 &&
+        <>
+          <li onClick={() => setCookie('user_id', 1, { path: '/' })}>User 1</li>
+          <li onClick={() => setCookie('user_id', 2, { path: '/' })}>User 2</li>
+          <li onClick={() => setCookie('user_id', 3, { path: '/' })}>User 3</li>
+          <li onClick={() => setCookie('user_id', 4, { path: '/' })}>User 4</li>
+          <li onClick={() => setCookie('user_id', 5, { path: '/' })}>User 5</li>
+        </>
+      }
+      {Object.keys(cookies).length !== 0 &&
+        <>
+          <Link to="/messages">
+            Messages
+          </Link>
+          <Link to="/profile">
+            Profile
+          </Link>
+        
+          <li onClick={() => removeCookie('user_id')}>Logout</li>
+        </>
+      }
+    </ul>
+  );
+};
+
+const CreateDropdown = () => {
+	return (
+		<ul className="dropdown dropdown__create">
+			<Link to="/create/event">
+				New Event
+			</Link>
+			<Link to="/create/talent">
+				New Talent
+			</Link>
+		</ul>
+	);
+};
+
 const NavBar = ({ openModal }) => {
+  const [cookies] = useCookies();
 	const [openCreate, setopenCreate] = useState(false);
 	const [openLogin, setopenLogin] = useState(false);
 
-	const demoCalendar = <Calendar />;
 	const closeDropDown = () => {
 		if (openCreate) {
-			setopenCreate(false);
-		}
+      setopenCreate(false);
+    }
 		if (openLogin) {
 			setopenLogin(false);
 		}
-	};
+
+  };
+  
+
+
 	const [cookies] = useCookies();
 	return (
 		<>
-			{openCreate && (
+			{(openCreate || openLogin) && (
 				<div className="drop-down__overlay" onClick={closeDropDown} />
 			)}
 			<nav onClick={closeDropDown}>
 				<Link className="router-link" to="/">
 					<section className="logo">EVENTFILL</section>
 				</Link>
-				<button onClick={() => openModal(demoCalendar)}>Calendar Modal</button>
 				<ul className="links">
 					<Link to="/">
 						<li>Home</li>
@@ -40,27 +87,33 @@ const NavBar = ({ openModal }) => {
 					<Link to="/explore/talents">
 						<li>Talents</li>
 					</Link>
+          <li 
+            className="nav-action" 
+            onClick={() => openModal(<Calendar />)}
+          >
+            Calendar
+          </li>
 					<li
-						className="nav-create"
+						className="nav-action"
 						onClick={() => {
 							setopenCreate(!openCreate);
 						}}
 					>
 						Create
+            <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
-					{openCreate && <CreateDown />}
-					<Link to="/messages">
-						<li>My Messages</li>
-					</Link>
+					{openCreate && <CreateDropdown />}
 
 					<li
+            className="nav-action"
 						onClick={() => {
 							setopenLogin(!openLogin);
 						}}
 					>
-						{Object.keys(cookies).length === 0 ? 'Login' : 'Logout'}
+						My Account
+            <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
-					{openLogin && <LoginDown />}
+					{openLogin && <AccountDropdown />}
 				</ul>
 			</nav>
 		</>

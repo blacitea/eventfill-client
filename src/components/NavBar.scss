@@ -29,11 +29,17 @@ nav {
 	}
 }
 
-.nav-create {
-	cursor: pointer;
+.nav-action {
+  cursor: pointer;
+  
+  .nav-action__icon {
+    margin-left: 0.4em;
+    font-size: smaller;
+    margin-right: -5px;
+  }
 }
 
-.drop-down-create {
+.dropdown {
 	position: absolute;
 	top: 51px;
 	right: 170px;
@@ -43,35 +49,26 @@ nav {
 	z-index: 11;
 	box-shadow: 0px 7px 5px rgba(0, 0, 0, 0.5);
 
-	a {
+	li, a {
 		padding: 0.2em 0.5em;
 		margin: 5px;
-		border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
 	}
 
-	a:hover {
+	li:hover, a:hover {
 		background-color: lightgrey;
-	}
+  }
 }
 
-.drop-down-login {
-	position: absolute;
+.dropdown__create {
+  top: 51px;
+	right: 115px;
+}
+
+.dropdown__login {
 	top: 51px;
-	right: 0;
-	display: flex;
-	flex-direction: column;
-	background-color: #fff;
-	z-index: 11;
-	box-shadow: 0px 7px 5px rgba(0, 0, 0, 0.5);
-
-	li {
-		padding: 0.2em 0.5em;
-		margin: 5px;
-	}
-
-	li:hover {
-		background-color: lightgrey;
-	}
+	right: 0px;
 }
 
 .drop-down__overlay {
