@@ -35,6 +35,7 @@ nav {
   .nav-action__icon {
     margin-left: 0.4em;
     font-size: smaller;
+    margin-right: -5px;
   }
 }
 
@@ -62,12 +63,12 @@ nav {
 
 .dropdown__create {
   top: 51px;
-	right: 190px;
+	right: 115px;
 }
 
 .dropdown__login {
 	top: 51px;
-	right: 0;
+	right: 0px;
 }
 
 .drop-down__overlay {

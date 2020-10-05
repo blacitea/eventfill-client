@@ -7,23 +7,37 @@ import { useCookies } from 'react-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const LoginDown = () => {
-	const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
-
-	return (
-		<ul className="dropdown dropdown__login">
-			<li onClick={() => setCookie('user_id', 1, { path: '/' })}>User 1</li>
-			<li onClick={() => setCookie('user_id', 2, { path: '/' })}>User 2</li>
-			<li onClick={() => setCookie('user_id', 3, { path: '/' })}>User 3</li>
-			<li onClick={() => setCookie('user_id', 4, { path: '/' })}>User 4</li>
-			<li onClick={() => setCookie('user_id', 5, { path: '/' })}>User 5</li>
-
-			<li onClick={() => removeCookie('user_id')}>Logout</li>
-		</ul>
-	);
+const AccountDropdown = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
+  
+  return (
+    <ul className="dropdown dropdown__login">
+      {Object.keys(cookies).length === 0 &&
+        <>
+          <li onClick={() => setCookie('user_id', 1, { path: '/' })}>User 1</li>
+          <li onClick={() => setCookie('user_id', 2, { path: '/' })}>User 2</li>
+          <li onClick={() => setCookie('user_id', 3, { path: '/' })}>User 3</li>
+          <li onClick={() => setCookie('user_id', 4, { path: '/' })}>User 4</li>
+          <li onClick={() => setCookie('user_id', 5, { path: '/' })}>User 5</li>
+        </>
+      }
+      {Object.keys(cookies).length !== 0 &&
+        <>
+          <Link to="/messages">
+            Messages
+          </Link>
+          <Link to="/profile">
+            Profile
+          </Link>
+        
+          <li onClick={() => removeCookie('user_id')}>Logout</li>
+        </>
+      }
+    </ul>
+  );
 };
 
-const CreateDown = () => {
+const CreateDropdown = () => {
 	return (
 		<ul className="dropdown dropdown__create">
 			<Link to="/create/event">
@@ -79,10 +93,7 @@ const NavBar = ({ openModal }) => {
 						Create
             <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
-					{openCreate && <CreateDown />}
-					<Link to="/messages">
-						<li>My Messages</li>
-					</Link>
+					{openCreate && <CreateDropdown />}
 
 					<li
             className="nav-action"
@@ -90,10 +101,10 @@ const NavBar = ({ openModal }) => {
 							setopenLogin(!openLogin);
 						}}
 					>
-						{Object.keys(cookies).length === 0 ? 'Login' : 'Logout'}
+						My Account
             <FontAwesomeIcon className="nav-action__icon" icon={faChevronDown} />
 					</li>
-					{openLogin && <LoginDown />}
+					{openLogin && <AccountDropdown />}
 				</ul>
 			</nav>
 		</>
