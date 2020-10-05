@@ -4,7 +4,6 @@ import Message from './Message';
 import './MessageList.scss';
 
 const Messages = ({ messages, recipient, owner }) => {
-	console.log(recipient);
 	return (
 		<section>
 			<p className="recipient-name">{recipient.name}</p>
