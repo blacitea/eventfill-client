@@ -125,6 +125,7 @@ const Show = ({ genres, locations, openModal }) => {
 			.get(axiosURL)
 			.then(response => {
 				let data = response.data;
+				console.log(data.events);
 
 				if (resource === 'events') {
 					data.event.user_id === user ? setOwned(true) : setOwned(false);
@@ -151,7 +152,7 @@ const Show = ({ genres, locations, openModal }) => {
 					axios.get('/api/events').then(response => {
 						setInvite({
 							talent: resolve,
-							events: response.data.upcoming.filter(
+							events: response.data.filter(
 								event => event.user_id === parseInt(user)
 							),
 						});
@@ -231,15 +232,17 @@ const Show = ({ genres, locations, openModal }) => {
 							<a href={personal_link} rel="noopener noreferrer" target="_blank">
 								<button>View Portfolio</button>
 							</a>
-							<button
-								onClick={() =>
-									openModal(
-										<InvitationForm {...invite} openModal={openModal} />
-									)
-								}
-							>
-								Invite To Event
-							</button>
+							{!owned && (
+								<button
+									onClick={() =>
+										openModal(
+											<InvitationForm {...invite} openModal={openModal} />
+										)
+									}
+								>
+									Invite To Event
+								</button>
+							)}
 						</section>
 					)}
 				</article>

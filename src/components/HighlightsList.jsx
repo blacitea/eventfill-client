@@ -9,6 +9,7 @@ const HighlightsList = ({ title, array, resource }) => {
 			<h2>{title}</h2>
 			<ul className="highlightslist-list">
 				{array.map(item => {
+					console.log(item);
 					return (
 						<Link to={`/${resource}/${item.id}`} key={item.id}>
 							<Highlight name={item.name} imageURL={item.image_url} />
