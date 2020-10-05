@@ -52,6 +52,9 @@ const NavBar = ({ openModal }) => {
 					<Link to="/messages">
 						<li>My Messages</li>
 					</Link>
+					<Link to="/profile">
+						<li>My Profile</li>
+					</Link>
 
 					<li
 						onClick={() => {
