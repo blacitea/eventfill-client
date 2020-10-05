@@ -67,7 +67,7 @@ const NavBar = ({ openModal }) => {
   
 
 
-	const [cookies] = useCookies();
+
 	return (
 		<>
 			{(openCreate || openLogin) && (
