@@ -51,7 +51,6 @@ const CreateDropdown = () => {
 };
 
 const NavBar = ({ openModal }) => {
-  const [cookies] = useCookies();
 	const [openCreate, setopenCreate] = useState(false);
 	const [openLogin, setopenLogin] = useState(false);
 
@@ -64,9 +63,6 @@ const NavBar = ({ openModal }) => {
 		}
 
   };
-  
-
-
 
 	return (
 		<>
