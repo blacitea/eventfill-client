@@ -73,7 +73,6 @@ const NavBar = ({ openModal }) => {
 				<Link className="router-link" to="/">
 					<section className="logo">EVENTFILL</section>
 				</Link>
-				<button onClick={() => openModal(<Calendar />)}>Calendar Modal</button>
 				<ul className="links">
 					<Link to="/">
 						<li>Home</li>
@@ -84,6 +83,12 @@ const NavBar = ({ openModal }) => {
 					<Link to="/explore/talents">
 						<li>Talents</li>
 					</Link>
+          <li 
+            className="nav-action" 
+            onClick={() => openModal(<Calendar />)}
+          >
+            Calendar
+          </li>
 					<li
 						className="nav-action"
 						onClick={() => {
