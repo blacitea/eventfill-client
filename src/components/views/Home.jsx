@@ -15,8 +15,8 @@ const Home = () => {
 			axios.get('/api/events'),
 			axios.get('/api/talent_profiles'),
 		]).then(resolve => {
-			setEvents(resolve[0].data);
-			setTalents(resolve[1].data);
+			setEvents(resolve[0].data.slice(0,4));
+			setTalents(resolve[1].data.slice(0,5));
 		});
 		document.title = 'EVENTFILL';
 	}, []);
