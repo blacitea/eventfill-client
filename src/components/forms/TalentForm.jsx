@@ -29,7 +29,7 @@ const TalentForm = ({ setShowObj, populate, genres, locations, openModal }) => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
   
-  const successMessage = <p className="success-message">Talent profile submitted successfully!</p>
+  const successMessage = <p className="modal-success">Talent profile submitted successfully!</p>
 
 	return (
 		<Formik

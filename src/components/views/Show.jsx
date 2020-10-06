@@ -57,15 +57,15 @@ const Show = ({ genres, locations, openModal }) => {
 				.then(resolve => {
 					setAttending(false);
 					setAttendeeCount(prev => prev - 1);
-					alert('Your reservation is cancelled!');
+					openModal(<p className='modal-success'>Your reservation is cancelled!</p>);
 				});
 		} else {
 			axios
 				.post(`/api/registrations`, { event_id: id })
 				.then(resolve => {
 					setAttending(resolve.data.id);
-					setAttendeeCount(prev => prev + 1);
-					alert('Your ticket is secured!');
+          setAttendeeCount(prev => prev + 1);
+          openModal(<p className='modal-success'>Your ticket is secured!</p>);
 				})
 				.catch(error => console.log(error));
 		}
@@ -76,8 +76,8 @@ const Show = ({ genres, locations, openModal }) => {
 			axios
 				.patch(`/api/events/${id}`, { event: { ...showObj, cancelled: true } })
 				.then(resolve => {
-					console.log(resolve);
-					alert('Event cancelled!');
+          console.log(resolve);
+          openModal(<p className='modal-success'>Event cancelled!</p>);
 					history.push('/explore/events');
 				});
 		}
@@ -93,7 +93,7 @@ const Show = ({ genres, locations, openModal }) => {
 
 		let axiosURL = `/api/${axiosresource}/${id}`;
 
-		if (resource === 'events') {
+		if (resource === 'events' && !isNaN(user)) {
 			axios.get(`/api/users/${user}`).then(resolve => {
 				if (Object.keys(resolve.data.gigs).length !== 0) {
 					const gigsList = resolve.data.gigs;
@@ -166,7 +166,9 @@ const Show = ({ genres, locations, openModal }) => {
 		personal_link,
 		location_id,
 		genre_id,
-	} = showObj;
+  } = showObj;
+  
+  console.log(start,end)
 
 	const location = locations.find(({ id }) => id === parseInt(location_id));
 	const genre = genres.find(({ id }) => id === parseInt(genre_id));
@@ -184,8 +186,8 @@ const Show = ({ genres, locations, openModal }) => {
 					{start && end && (
 						<section className="show-info-dates">
 							{start.slice(0, 10) !== end.slice(0, 10) &&
-								moment(start).format('MMMM Do').concat(' - ')}
-							{moment(end).format('MMMM Do, YYYY')}
+								moment(start.slice(0, 10)).format('MMMM Do').concat(' - ')}
+							{moment(end.slice(0, 10)).format('MMMM Do, YYYY')}
 						</section>
 					)}
 					<p className="show-description">{description}</p>
