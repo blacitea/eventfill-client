@@ -57,15 +57,15 @@ const Show = ({ genres, locations, openModal }) => {
 				.then(resolve => {
 					setAttending(false);
 					setAttendeeCount(prev => prev - 1);
-					alert('Your reservation is cancelled!');
+					openModal(<p className='modal-success'>Your reservation is cancelled!</p>);
 				});
 		} else {
 			axios
 				.post(`/api/registrations`, { event_id: id })
 				.then(resolve => {
 					setAttending(resolve.data.id);
-					setAttendeeCount(prev => prev + 1);
-					alert('Your ticket is secured!');
+          setAttendeeCount(prev => prev + 1);
+          openModal(<p className='modal-success'>Your ticket is secured!</p>);
 				})
 				.catch(error => console.log(error));
 		}
@@ -76,8 +76,8 @@ const Show = ({ genres, locations, openModal }) => {
 			axios
 				.patch(`/api/events/${id}`, { event: { ...showObj, cancelled: true } })
 				.then(resolve => {
-					console.log(resolve);
-					alert('Event cancelled!');
+          console.log(resolve);
+          openModal(<p className='modal-success'>Event cancelled!</p>);
 					history.push('/explore/events');
 				});
 		}

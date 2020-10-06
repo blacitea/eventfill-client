@@ -37,7 +37,7 @@ const EventForm = ({ setShowObj, populate, locations, genres, openModal }) => {
 	const [cookies] = useCookies();
 	const [redirect, setRedirect] = useState({ success: false, id: '' });
   
-  const successMessage = <p className="success-message">Event submitted successfully!</p>
+  const successMessage = <p className="modal-success">Event submitted successfully!</p>
 
 	return (
 		<Formik

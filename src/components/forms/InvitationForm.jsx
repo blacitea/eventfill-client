@@ -13,7 +13,7 @@ const validate = values => {
 
 const InvitationForm = ({ talent, events, openModal }) => {
 
-  const successMessage = <p className="success-message">Invitation sent successfully!</p>
+  const successMessage = <p className="modal-success">Invitation sent successfully!</p>
 
 	console.log(talent);
 	return (
