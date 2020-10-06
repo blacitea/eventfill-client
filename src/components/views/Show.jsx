@@ -166,7 +166,9 @@ const Show = ({ genres, locations, openModal }) => {
 		personal_link,
 		location_id,
 		genre_id,
-	} = showObj;
+  } = showObj;
+  
+  console.log(start,end)
 
 	const location = locations.find(({ id }) => id === parseInt(location_id));
 	const genre = genres.find(({ id }) => id === parseInt(genre_id));
@@ -184,8 +186,8 @@ const Show = ({ genres, locations, openModal }) => {
 					{start && end && (
 						<section className="show-info-dates">
 							{start.slice(0, 10) !== end.slice(0, 10) &&
-								moment(start).format('MMMM Do').concat(' - ')}
-							{moment(end).format('MMMM Do, YYYY')}
+								moment(start.slice(0, 10)).format('MMMM Do').concat(' - ')}
+							{moment(end.slice(0, 10)).format('MMMM Do, YYYY')}
 						</section>
 					)}
 					<p className="show-description">{description}</p>
