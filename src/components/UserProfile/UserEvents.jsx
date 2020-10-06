@@ -6,7 +6,12 @@ const UserEvents = ({ events }) => {
 	console.log(events);
 	return (
 		<article>
-			<h3>My Events</h3>
+			{events.length < 1 && (
+				<p className="profile-error">
+					You don't have any yet!{' \n'}
+					<Link to="/explore/events">Let's change that! </Link>
+				</p>
+			)}
 			{events &&
 				events.map(event => {
 					console.log(event);
@@ -19,7 +24,7 @@ const UserEvents = ({ events }) => {
 								Period: {moment(event.start).format('LL')} to{' '}
 								{moment(event.end).format('LL')}
 							</p>
-							<p>Description: {event.description}</p>
+							{/* <p>Description: {event.description}</p> */}
 						</article>
 					);
 				})}

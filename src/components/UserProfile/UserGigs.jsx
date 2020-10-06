@@ -6,17 +6,21 @@ const UserGigs = ({ gigs }) => {
 	console.log(gigs);
 	return (
 		<article>
-			<h3>My Performances</h3>
+			{Object.keys(gigs).length < 1 && (
+				<p className="profile-error">
+					You don't have any yet!{' \n   '}
+					<Link to="/explore/events">Let's change that! </Link>
+				</p>
+			)}
 			{gigs &&
-				Object.keys(gigs).map(gig => {
-					console.log(gigs[gig]);
+				Object.keys(gigs).map((gig, index) => {
 					return (
-						<article key={gig.id}>
+						<article key={index * 3}>
 							<p className="profile-talent-profile-name">
 								Talent Profile: {gig}
 							</p>
-							{gigs[gig].map(gigDetail => (
-								<article className="profile-sub-item">
+							{gigs[gig].map((gigDetail, index) => (
+								<article key={index * 100} className="profile-sub-item">
 									<Link to={`/events/${gigDetail.event_id}`}>
 										<p className="profile-sub-item-title">
 											Event: {gigDetail.event_name}
@@ -26,9 +30,6 @@ const UserGigs = ({ gigs }) => {
 										Performance period: {moment(gigDetail.start).format('LL')}{' '}
 										to {moment(gigDetail.end).format('LL')}
 									</p>
-									{gigDetail.description && (
-										<p>Message from organizer: {gigDetail.description}</p>
-									)}
 								</article>
 							))}
 						</article>
