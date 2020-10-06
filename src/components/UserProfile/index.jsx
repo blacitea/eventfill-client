@@ -15,14 +15,23 @@ const UserProfile = props => {
 		attending: [],
 		gigs: [],
 	});
+
+	const [display, setDisplay] = useState({
+		showEvent: false,
+		showGig: false,
+		showAttend: false,
+	});
+
 	useEffect(() => {
 		if (owner !== undefined) {
 			axios.get(`api/users/${owner}`).then(resolve => {
 				let data = resolve.data;
+				console.log(data);
 				setUserData({ ...data });
 			});
 		}
 	}, [owner]);
+
 	return (
 		<main className="user-profile">
 			{!owner && <h1>Please login to view your profile</h1>}
@@ -37,15 +46,38 @@ const UserProfile = props => {
 					</section>
 
 					<section className="profile-events">
-						<UserEvents events={userData.owned_events} />
+						<button
+							onClick={() =>
+								setDisplay(prev => ({ ...prev, showEvent: !prev.showEvent }))
+							}
+						>
+							<p>My Events</p>
+						</button>
+						{display.showEvent && <UserEvents events={userData.owned_events} />}
 					</section>
 
 					<section className="profile-gigs">
-						<UserGigs gigs={userData.gigs} />
+						<button
+							onClick={() =>
+								setDisplay(prev => ({ ...prev, showGig: !prev.showGig }))
+							}
+						>
+							<p>My Performances</p>
+						</button>
+						{display.showGig && <UserGigs gigs={userData.gigs} />}
 					</section>
 
 					<section className="profile-attendings">
-						<UserAttendings attending={userData.attending} />
+						<button
+							onClick={() =>
+								setDisplay(prev => ({ ...prev, showAttend: !prev.showAttend }))
+							}
+						>
+							<p>Attending events</p>
+						</button>
+						{display.showAttend && (
+							<UserAttendings attending={userData.attending} />
+						)}
 					</section>
 				</>
 			)}
