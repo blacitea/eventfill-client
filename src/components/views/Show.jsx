@@ -93,7 +93,7 @@ const Show = ({ genres, locations, openModal }) => {
 
 		let axiosURL = `/api/${axiosresource}/${id}`;
 
-		if (resource === 'events') {
+		if (resource === 'events' && !isNaN(user)) {
 			axios.get(`/api/users/${user}`).then(resolve => {
 				if (Object.keys(resolve.data.gigs).length !== 0) {
 					const gigsList = resolve.data.gigs;
