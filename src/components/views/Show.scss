@@ -17,22 +17,25 @@
 			margin-bottom: 0.5em;
 			font-size: 2.5em;
 			text-align: center;
+			word-wrap: break-word;
+			width: 500px;
 		}
 
 		h2 {
 			text-align: center;
 			margin-bottom: 0.4em;
+			word-wrap: break-word;
 		}
 
 		.show-info-dates {
 			text-align: center;
 			font-style: italic;
-    }
-    
-    .show-description {
-      max-width: 100%;
-      word-wrap: break-word;
-    }
+		}
+
+		.show-description {
+			max-width: 100%;
+			word-wrap: break-word;
+		}
 
 		.event-remaining-spots {
 			margin: 0.2em 0 0.4em;
