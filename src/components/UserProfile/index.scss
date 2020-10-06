@@ -9,13 +9,17 @@
 	.profile-talent-profile-name {
 		padding: 0.25em;
 		font-weight: bold;
+		word-wrap: break-word;
 	}
 	.profile-sub-item {
 		margin: 0.25em;
 		padding: 0.25em 0.5em;
 		background-color: lightgrey;
+		word-wrap: break-word;
+
 		.profile-sub-item-title {
 			font-weight: bolder;
+			word-wrap: break-word;
 		}
 	}
 }
