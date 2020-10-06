@@ -22,4 +22,17 @@
 			word-wrap: break-word;
 		}
 	}
+	.profile-error {
+		text-align: center;
+		a {
+			font-weight: bolder;
+			font-size: 1em;
+			margin: 0 0.25em;
+		}
+	}
+	button {
+		p {
+			margin: 2px 2px;
+		}
+	}
 }

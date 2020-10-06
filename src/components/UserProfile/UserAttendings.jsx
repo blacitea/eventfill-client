@@ -1,10 +1,17 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const UserAttendings = ({ attending }) => {
+	console.log(attending);
 	return (
 		<article>
-			<h3>Attending events</h3>
+			{attending.length < 1 && (
+				<p className="profile-error">
+					You don't have any yet!{' \n '}
+					<Link to="/explore/events">Let's change that! </Link>
+				</p>
+			)}
 			{attending &&
 				attending.map(attend => {
 					return (
