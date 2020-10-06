@@ -1,45 +1,46 @@
 .preview-card {
-  display: flex;
-  position: relative;
-  top: 0;
-  flex-direction: column;
+	display: flex;
+	position: relative;
+	top: 0;
+	flex-direction: column;
 	width: 15em;
-  margin: 1em;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-  cursor: pointer;
-  transition: top 0.2s, box-shadow 0.2s;
+	margin: 1em;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+	transition: top 0.2s, box-shadow 0.2s;
 
 	.preview-cover {
-    position: relative;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    width: 15em;
-    height: 15em;
-    object-fit: cover;
+		position: relative;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		width: 15em;
+		height: 15em;
+		object-fit: cover;
 	}
 
 	.preview-info {
-    display: flex;
-    padding: 0 1em 0.2em;
-    flex-direction: column;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background-color: #FFF;
-    word-wrap: break-word;
+		display: flex;
+		padding: 0 1em 0.2em;
+		flex-direction: column;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		background-color: #fff;
+		word-wrap: break-word;
+		height: 130px;
 
-    h3 {
-      margin-top: 0.6em;
-      margin-bottom: 0em;
-    }
+		h3 {
+			margin-top: 0.6em;
+			margin-bottom: 0em;
+		}
 
-    p {
-      height: 38px;
-    }
+		p {
+			height: 38px;
+		}
 	}
 }
 
 .preview-card:hover {
-  top: -5px;
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+	top: -5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }

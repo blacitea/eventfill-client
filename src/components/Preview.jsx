@@ -5,7 +5,7 @@ import './Preview.scss';
 const Preview = props => {
 	const shortenString = (string, maxChars) => {
 		return string.length <= maxChars
-			? string
+			? string.padEnd(maxChars)
 			: string.slice(0, maxChars).trim().concat('...');
 	};
 
@@ -17,7 +17,7 @@ const Preview = props => {
 				alt={props.name}
 			></img>
 			<div className="preview-info">
-				<h3>{props.name}</h3>
+				<h3>{shortenString(props.name, 30)}</h3>
 				<p>{shortenString(props.description, 42)}</p>
 			</div>
 		</article>
