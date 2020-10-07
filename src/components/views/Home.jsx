@@ -26,11 +26,7 @@ const Home = () => {
 				<article className="splash-description">
 					<h1>{'Your Event\nStarts Here'}</h1>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-						faucibus mi et lobortis euismod. Vivamus pellentesque gravida urna,
-						non semper nisi pellentesque in. Nam quis dictum ex. Proin placerat,
-						sapien at consequat scelerisque, nulla turpis sagittis leo, ac
-						iaculis elit urna vitae lorem.
+						Here at Eventfill, we make it easy for event organisers to find suitable talents to bring to their event. We also give talents a place to market their skills and advertise that they are available for attending events. If you're just interested in finding an event to attend, our event browser has you covered too! Join us today and help bring your community together.
 					</p>
 					<Link to="/create/event">
 						<button>Create an event!</button>
@@ -38,7 +34,7 @@ const Home = () => {
 				</article>
 				<aside className="splash-image">
 					<img
-						src="http://www.manaleak.com/mtguk/files/2016/11/Stoneforge-Mystic-1.jpg"
+						src="/images/home.jpg"
 						alt="main poster"
 					/>
 				</aside>
