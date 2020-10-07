@@ -26,7 +26,6 @@ const UserProfile = props => {
 		if (owner !== undefined) {
 			axios.get(`api/users/${owner}`).then(resolve => {
 				let data = resolve.data;
-				console.log(data);
 				setUserData({ ...data });
 			});
 		}

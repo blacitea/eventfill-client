@@ -47,9 +47,7 @@ const Show = ({ genres, locations, openModal }) => {
 	};
 
 	const claimTicket = () => {
-		console.log('user?', user);
 		if (isNaN(user)) {
-			console.log('user is NaN');
 			openModal(loginMessage);
 		} else if (attending) {
 			axios
@@ -76,7 +74,6 @@ const Show = ({ genres, locations, openModal }) => {
 			axios
 				.patch(`/api/events/${id}`, { event: { ...showObj, cancelled: true } })
 				.then(resolve => {
-          console.log(resolve);
           openModal(<p className='modal-success'>Event cancelled!</p>);
 					history.push('/explore/events');
 				});
@@ -116,7 +113,6 @@ const Show = ({ genres, locations, openModal }) => {
 			.get(axiosURL)
 			.then(response => {
 				let data = response.data;
-				console.log(data.events);
 
 				if (resource === 'events') {
 					data.event.user_id === user ? setOwned(true) : setOwned(false);
@@ -167,8 +163,6 @@ const Show = ({ genres, locations, openModal }) => {
 		location_id,
 		genre_id,
   } = showObj;
-  
-  console.log(start,end)
 
 	const location = locations.find(({ id }) => id === parseInt(location_id));
 	const genre = genres.find(({ id }) => id === parseInt(genre_id));

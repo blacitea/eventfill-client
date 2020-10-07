@@ -15,7 +15,6 @@ const InvitationForm = ({ talent, events, openModal }) => {
 
   const successMessage = <p className="modal-success">Invitation sent successfully!</p>
 
-	console.log(talent);
 	return (
 		<section className="talent-invite">
 			<img src={talent.image_url} alt={talent.name} />
@@ -40,7 +39,6 @@ const InvitationForm = ({ talent, events, openModal }) => {
 							gig: { ...values },
 						})
 						.then(resolve => {
-							console.log(resolve.data);
 							const message = `Score! You have an event invitation! ${values.description ? `Note from organizer: ${values.description}` : ''} ref#${values.event_id}`;
 							return axios.post(`/api/messages`, {
 								message: {
