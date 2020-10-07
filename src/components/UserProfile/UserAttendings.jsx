@@ -3,7 +3,6 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const UserAttendings = ({ attending }) => {
-	console.log(attending);
 	return (
 		<article>
 			{attending.length < 1 && (
@@ -13,14 +12,16 @@ const UserAttendings = ({ attending }) => {
 				</p>
 			)}
 			{attending &&
-				attending.map(attend => {
+				attending.map((attend, index) => {
 					return (
-						<article className="profile-sub-item">
-							<p className="profile-sub-item-title">Event: {attend.name}</p>
-							<p>
-								Event period: {moment(attend.start).format('LL')} to{' '}
-								{moment(attend.end).format('LL')}
-							</p>
+						<article key={index} className="profile-sub-item">
+              <Link to={`/events/${attend.event_id}`} >
+                <p className="profile-sub-item-title">Event: {attend.name}</p>
+                <p>
+                  Event period: {moment(attend.start).format('LL')} to{' '}
+                  {moment(attend.end).format('LL')}
+                </p>
+              </Link>
 						</article>
 					);
 				})}
