@@ -8,7 +8,7 @@ const Message = ({ content, timeStamp, sender, owner }) => {
 	const cs =
 		sender === owner ? /*cookie.user_id*/ 'message-me' : 'message-them';
 
-	const eventId = content.includes('Score')
+	const eventId = content.includes('Score! You have a')
 		? content.slice(content.indexOf('#') + 1)
 		: null;
 
@@ -22,7 +22,7 @@ const Message = ({ content, timeStamp, sender, owner }) => {
 		<article className={'message ' + cs}>
 			<div className="message-bubble">
 				<article className="message-content">
-					{content}
+					{content.split(" ref#")[0]}
 					{eventId && link}
 				</article>
 			</div>
