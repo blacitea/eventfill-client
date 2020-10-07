@@ -3,7 +3,6 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const UserGigs = ({ gigs }) => {
-	console.log(gigs);
 	return (
 		<article>
 			{Object.keys(gigs).length < 1 && (

@@ -16,7 +16,6 @@ const Explore = ({ locations, genres }) => {
 
 		// simulating results of api call below
 		let axiosURL = `/api/${id === 'events' ? 'events' : 'talent_profiles'}`;
-		console.log(id);
 		id === 'events'
 			? (document.title = 'EVENTFILL - Find Events')
 			: (document.title = 'EVENTFILL - Find Talents');

@@ -3,7 +3,6 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const UserEvents = ({ events }) => {
-	console.log(events);
 	return (
 		<article>
 			{events.length < 1 && (
@@ -14,7 +13,6 @@ const UserEvents = ({ events }) => {
 			)}
 			{events &&
 				events.map(event => {
-					console.log(event);
 					return (
 						<article className="profile-sub-item" key={event.id}>
 							<Link to={`/events/${event.id}`}>
