@@ -9,6 +9,9 @@ const PreviewsList = ({ array, title, message, resource }) => {
 			<h2 className="previewsList-title">{title}</h2>
 			<h4 className="previewsList-message">{message}</h4>
 			<ul className="previewsList-list">
+        {array.length < 1 && 
+          <p className="no-item-message">No {resource} found!</p>
+        }
 				{array.map(item => (
 					<Link to={`/${resource}/${item.id}`} key={item.id}>
 						<Preview
